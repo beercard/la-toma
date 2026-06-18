@@ -1,4 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
+
+@font-face {
+  font-family: "Mundial";
+  src: url("/fonts/MundialRegular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Mundial";
+  src: url("/fonts/MundialDemibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Mundial";
+  src: url("/fonts/MundialBold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
 
 @tailwind base;
 @tailwind components;
@@ -6,13 +27,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%; /* zinc-950 roughly */
-    --foreground: 0 0% 98%;
-    --primary: 38 92% 50%; /* amber-500 */
-    --primary-foreground: 0 0% 9%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-    --border: 0 0% 20%;
+    --border: 0 0% 85%;
   }
   
   html {
@@ -20,19 +35,29 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-primary-foreground;
+    @apply antialiased;
+    margin: 0;
+    background-color: #F7F4EF;
+    color: #232323;
+    font-family: 'Roboto Serif', serif;
+  }
+
+  ::selection {
+    background-color: #B76856;
+    color: #F7F4EF;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-wide;
+    font-family: "Mundial", system-ui, sans-serif;
+  }
+
+  a {
+    color: inherit;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-  .glass-nav {
-    @apply bg-background/80 backdrop-blur-md border-b border-white/5;
   }
 }

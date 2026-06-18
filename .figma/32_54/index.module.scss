@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+}
+
+.group2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 4415px;
+  height: 1979px;
+
+  .image4 {
+    width: 4096px;
+    height: 909px;
+  }
+
+  .group1 {
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    align-self: stretch;
+    margin-top: 262px;
+    margin-left: 1856px;
+    padding-left: 38px;
+
+    .rectangle13 {
+      position: absolute;
+      top: 541px;
+      left: 0;
+      background: #ffffff;
+      width: 1870px;
+      height: 259px;
+    }
+
+    .autoWrapper8 {
+      display: flex;
+      position: relative;
+      align-items: flex-start;
+      align-self: stretch;
+      justify-content: space-between;
+
+      .autoWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self: stretch;
+        margin-top: 139px;
+
+        .rectangle5 {
+          background: #b76856;
+          width: 319px;
+          height: 521px;
+        }
+
+        .rectangle11 {
+          opacity: 0.5;
+          margin-top: 50px;
+          background: #b76856;
+          width: 319px;
+          height: 98px;
+        }
+      }
+
+      .autoWrapper2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self: stretch;
+        margin-top: 139px;
+
+        .rectangle6 {
+          background: #c3903f;
+          width: 319px;
+          height: 521px;
+        }
+
+        .rectangle12 {
+          opacity: 0.5;
+          margin-top: 50px;
+          background: #c3903f;
+          width: 319px;
+          height: 98px;
+        }
+      }
+
+      .autoWrapper3 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self: stretch;
+        margin-top: 139px;
+
+        .rectangle7 {
+          background: #638488;
+          width: 319px;
+          height: 521px;
+        }
+
+        .rectangle9 {
+          opacity: 0.5;
+          margin-top: 50px;
+          background: #638488;
+          width: 319px;
+          height: 98px;
+        }
+      }
+
+      .autoWrapper7 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        align-self: stretch;
+
+        .autoWrapper4 {
+          position: relative;
+          width: 430px;
+          height: 111px;
+
+          .image8 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 430px;
+            height: 111px;
+          }
+
+          .image9 {
+            position: absolute;
+            top: 3px;
+            right: -304px;
+            width: 405px;
+            height: 108px;
+          }
+        }
+
+        .autoWrapper5 {
+          display: flex;
+          align-items: center;
+          align-self: stretch;
+          justify-content: space-between;
+          margin-top: 28px;
+          padding-right: 0;
+          padding-left: 0;
+
+          .rectangle3 {
+            background: #b5a896;
+            width: 319px;
+            height: 521px;
+          }
+
+          .rectangle4 {
+            background: #5d6849;
+            width: 319px;
+            height: 521px;
+          }
+        }
+
+        .autoWrapper6 {
+          display: flex;
+          align-items: center;
+          align-self: stretch;
+          justify-content: space-between;
+          margin-top: 50px;
+          padding-right: 0;
+          padding-left: 0;
+
+          .rectangle8 {
+            opacity: 0.5;
+            background: #b5a896;
+            width: 319px;
+            height: 98px;
+          }
+
+          .rectangle10 {
+            opacity: 0.5;
+            background: #5d6849;
+            width: 319px;
+            height: 98px;
+          }
+        }
+      }
+
+      .rectangle1 {
+        margin-top: 139px;
+        background: #f7f4ef;
+        width: 319px;
+        height: 669px;
+      }
+
+      .rectangle2 {
+        margin-top: 139px;
+        background: #232323;
+        width: 319px;
+        height: 669px;
+      }
+    }
+  }
+}

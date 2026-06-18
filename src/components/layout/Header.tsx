@@ -1,98 +1,136 @@
-import { useState, useEffect } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import styles from "./Header.module.css";
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [desktopScale, setDesktopScale] = useState(1);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const updateDesktopScale = () => {
+      if (window.innerWidth < 1024) {
+        setDesktopScale(1);
+        return;
+      }
+
+      const availableWidth = window.innerWidth - 48;
+      setDesktopScale(Math.min(1, availableWidth / 1554));
+    };
+
+    updateDesktopScale();
+    window.addEventListener("resize", updateDesktopScale);
+
+    return () => window.removeEventListener("resize", updateDesktopScale);
+  }, []);
+
   const navLinks = [
-    { name: "Inicio", path: "/" },
-    { name: "Menú", path: "/menu" },
+    { name: "Café Bar", path: "/" },
+    { name: "Reservas", path: "/contacto" },
+    { name: "El Proyecto", path: "/proyecto" },
+    { name: "Galería", path: "/galeria" },
     { name: "Eventos", path: "/eventos" },
     { name: "Contacto", path: "/contacto" },
   ];
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
-        isScrolled ? "glass-nav py-4" : "bg-transparent py-6"
-      )}
-    >
-      <div className="container mx-auto flex items-center justify-between">
-        <Link to="/" className="text-2xl font-display font-bold tracking-widest text-primary">
-          LA TOMA
-        </Link>
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className={cn(
-                "text-sm uppercase tracking-widest transition-colors hover:text-primary",
-                location.pathname === link.path ? "text-primary" : "text-foreground"
-              )}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <Link
-            to="/contacto"
-            className="border border-primary text-primary px-6 py-2 uppercase text-sm tracking-widest hover:bg-primary hover:text-primary-foreground transition-colors"
+    <>
+      <header className={styles.desktopHeader}>
+        <div className={styles.desktopInner}>
+          <div
+            className={styles.desktopScale}
+            style={{ "--desktop-scale": desktopScale } as CSSProperties}
           >
-            Reservar
+            <nav className={styles.desktopRow} aria-label="Navegación principal desktop">
+              <Link to="/" className={[styles.desktopTextItem, styles.desktopCafe].join(" ")}>
+                <span className={[styles.desktopNavLabel, styles.desktopCafeLabel].join(" ")}>CAfé bar</span>
+                <span className={[styles.desktopNavUnderline, styles.desktopUnderline30].join(" ")} />
+              </Link>
+
+              <Link to="/contacto" className={[styles.desktopTextItem, styles.desktopReservas].join(" ")}>
+                <span className={[styles.desktopNavLabel, styles.desktopReservasLabel].join(" ")}>RESERVAS</span>
+                <span className={[styles.desktopNavUnderline, styles.desktopUnderline30].join(" ")} />
+              </Link>
+
+              <Link to="/proyecto" className={[styles.desktopTextItem, styles.desktopProyecto].join(" ")}>
+                <span className={[styles.desktopNavLabel, styles.desktopProyectoLabel].join(" ")}>EL PROYECTO</span>
+                <span className={[styles.desktopNavUnderline, styles.desktopUnderline30].join(" ")} />
+              </Link>
+
+              <Link to="/" aria-label="Ir al inicio" className={styles.desktopLogoLink}>
+                <img src="/figma/mqitymz6-fnopbgn.webp" alt="La Toma" className={styles.desktopLogo} />
+                <img src="/figma/mqiu0p6w-csa514q.svg" alt="" className={styles.desktopLogoHover} />
+              </Link>
+
+              <Link to="/galeria" className={[styles.desktopTextItem, styles.desktopGaleria].join(" ")}>
+                <span className={[styles.desktopNavLabel, styles.desktopGaleriaLabel].join(" ")}>galería</span>
+                <span className={[styles.desktopNavUnderline, styles.desktopUnderline33].join(" ")} />
+              </Link>
+
+              <Link to="/eventos" className={[styles.desktopTextItem, styles.desktopEventos].join(" ")}>
+                <span className={[styles.desktopNavLabel, styles.desktopEventosLabel].join(" ")}>eventos</span>
+                <span className={[styles.desktopNavUnderline, styles.desktopUnderline33].join(" ")} />
+              </Link>
+
+              <Link to="/contacto" className={[styles.desktopTextItem, styles.desktopContacto].join(" ")}>
+                <span className={[styles.desktopNavLabel, styles.desktopContactoLabel].join(" ")}>CONTACTO</span>
+                <span className={[styles.desktopNavUnderline, styles.desktopUnderline30].join(" ")} />
+              </Link>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <header className={[styles.mobileHeader, isMobileMenuOpen ? styles.mobileHeaderOpen : ""].join(" ")}>
+        <div className={styles.mobileInner}>
+          <Link to="/" aria-label="Ir al inicio">
+            <img
+              src={isMobileMenuOpen ? "/figma/mqiryjto-xkdx3i0.svg" : "/figma/mqit719o-e5u7cs4.svg"}
+              alt="La Toma"
+              className={styles.mobileLogo}
+            />
           </Link>
-        </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-foreground hover:text-primary transition-colors"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
+          <button
+            type="button"
+            className={styles.burger}
+            onClick={() => setIsMobileMenuOpen((v) => !v)}
+            aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          >
+            <span className={[styles.burgerBar, isMobileMenuOpen ? styles.burgerBarOpen : ""].join(" ")} />
+            <span className={[styles.burgerBar, isMobileMenuOpen ? styles.burgerBarOpen : ""].join(" ")} />
+            <span className={[styles.burgerBar, isMobileMenuOpen ? styles.burgerBarOpen : ""].join(" ")} />
+          </button>
+        </div>
+      </header>
 
-      {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 glass-nav border-t border-white/5 py-4 px-6 flex flex-col space-y-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className={cn(
-                "text-lg uppercase tracking-widest transition-colors py-2",
-                location.pathname === link.path ? "text-primary" : "text-foreground"
-              )}
+        <div className={styles.mobileMenu} role="dialog" aria-label="Menú">
+          <div className={styles.mobileMenuHeader}>
+            <img src="/figma/mqiryjto-xkdx3i0.svg" alt="La Toma" className={styles.mobileLogo} />
+            <button
+              type="button"
+              className={styles.burger}
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Cerrar menú"
             >
-              {link.name}
+              <span className={[styles.burgerBar, styles.burgerBarOpen].join(" ")} />
+              <span className={[styles.burgerBar, styles.burgerBarOpen].join(" ")} />
+              <span className={[styles.burgerBar, styles.burgerBarOpen].join(" ")} />
+            </button>
+          </div>
+
+          {navLinks.map((link) => (
+            <Link key={link.name} to={link.path} className={styles.mobileMenuItem}>
+              <div className={styles.mobileMenuItemLabel}>{link.name}</div>
             </Link>
           ))}
-          <Link
-            to="/contacto"
-            className="inline-block text-center bg-primary text-primary-foreground px-6 py-3 uppercase text-sm tracking-widest font-semibold mt-4"
-          >
-            Reservar
-          </Link>
         </div>
       )}
-    </header>
+    </>
   );
 }

@@ -1,0 +1,391 @@
+* {
+  box-sizing: border-box;
+}
+
+.laTomaHome {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  background: #f7f4ef;
+  width: 1920px;
+  height: 1763px;
+  overflow: hidden;
+
+  .autoWrapper {
+    position: relative;
+    margin-top: -1px;
+    width: 1920px;
+    height: 1041px;
+
+    .rectangle5 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #b76856;
+      width: 1920px;
+      height: 1041px;
+    }
+
+    .rectangle15 {
+      position: absolute;
+      top: 0;
+      left: -17px;
+      background: #b76856;
+      width: 1920px;
+      height: 1041px;
+    }
+
+    .maskGroup {
+      position: absolute;
+      top: 101px;
+      left: 0;
+      width: 1920px;
+      height: 940px;
+    }
+
+    .rectangle3 {
+      display: flex;
+      position: absolute;
+      top: 1px;
+      left: 0;
+      align-items: flex-start;
+      background: #dad4cb;
+      padding: 31px 184px 31px 182px;
+      width: 1920px;
+      height: 100px;
+
+      .cAfBar {
+        margin: 11px 0px 0px;
+        width: 100px;
+        height: 23px;
+        text-align: center;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: UPPERCASE;
+      }
+
+      .rEservas {
+        margin: 11px 0px 0px 109px;
+        width: 107px;
+        height: 23px;
+        text-align: center;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: UPPERCASE;
+      }
+
+      .eLproyecto {
+        margin: 11px 0px 0px 109px;
+        width: 137px;
+        height: 23px;
+        text-align: center;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: UPPERCASE;
+      }
+
+      .image6 {
+        margin-left: 90px;
+        width: 252px;
+        height: 38px;
+      }
+
+      .galerA {
+        margin: 11px 0px 0px 90px;
+        width: 87px;
+        height: 23px;
+        text-align: center;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: UPPERCASE;
+      }
+
+      .eventos {
+        margin: 11px 0px 0px 134px;
+        width: 94px;
+        height: 23px;
+        text-align: center;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: UPPERCASE;
+      }
+
+      .cOntacto {
+        margin: 11px 0px 0px 134px;
+        width: 111px;
+        height: 23px;
+        text-align: center;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: UPPERCASE;
+      }
+    }
+  }
+
+  .unEspacioRecuperadoQ {
+    margin: 104px 0px 0px;
+    width: 549px;
+    text-align: center;
+    line-height: 36px;
+    letter-spacing: 0;
+    color: #232323;
+    font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .rectangle14 {
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+    margin: 27px 882px 0px;
+    border-radius: 2px;
+    box-shadow: 0px 12px 32px -4px #2c30241f;
+    background: #5d6849;
+    padding-top: 14px;
+    padding-bottom: 12px;
+
+    .reservTuMesa {
+      width: 157px;
+      height: 14px;
+      text-align: center;
+      line-height: 12px;
+      letter-spacing: 0.12px;
+      color: #ffffff;
+      font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: UPPERCASE;
+    }
+  }
+
+  .rectangle6 {
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+    justify-content: space-between;
+    margin-top: 96px;
+    background: #dad4cb;
+    padding: 85px 176px 70px 184px;
+    min-width: 1920px;
+
+    .autoWrapper2 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+
+      .image7 {
+        width: 252px;
+        height: 38px;
+      }
+
+      .polTicasDePrivacidad {
+        margin: 104px 0px 0px;
+        width: 232px;
+        height: 14px;
+        letter-spacing: 0.12px;
+        color: #232323;
+        font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: underline;
+      }
+
+      .tRminosYCondiciones {
+        margin: 20px 0px 0px;
+        width: 232px;
+        height: 14px;
+        letter-spacing: 0.12px;
+        color: #232323;
+        font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: underline;
+      }
+
+      .a2026LaTomaMultiespa {
+        opacity: 0.4;
+        margin: 20px 0px 0px;
+        width: 364px;
+        height: 14px;
+        letter-spacing: 0.12px;
+        color: #232323;
+        font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+      }
+    }
+
+    .autoWrapper3 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+
+      .contacto {
+        width: 113px;
+        height: 23px;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: UPPERCASE;
+      }
+
+      .puntaSanSebastiNAvCo3 {
+        margin: 18px 0px 0px;
+        width: 232px;
+        height: 135px;
+        line-height: 21px;
+        letter-spacing: 0;
+        color: #232323;
+        font-size: 14px;
+
+        .puntaSanSebastiNAvCo {
+          line-height: 21px;
+          letter-spacing: 0;
+          color: #232323;
+          font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .puntaSanSebastiNAvCo2 {
+          line-height: 21px;
+          letter-spacing: 0;
+          color: #232323;
+          font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+          font-size: 14px;
+          font-weight: 600;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .autoWrapper4 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+
+      .reserasYHorarios {
+        width: 226px;
+        height: 23px;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: UPPERCASE;
+      }
+
+      .juevesYViernes180002 {
+        margin: 18px 0px 0px;
+        width: 232px;
+        height: 188px;
+        line-height: 21px;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+
+    .autoWrapper5 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+
+      .comunidad {
+        width: 232px;
+        height: 23px;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: UPPERCASE;
+      }
+
+      .instagramWhatsAppCor {
+        margin: 18px 0px 0px;
+        width: 239px;
+        height: 112px;
+        line-height: 21px;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .autoWrapper6 {
+    position: absolute;
+    top: 340px;
+    left: 290px;
+    width: 1314px;
+    height: 571px;
+
+    .elRitualDelAtardecer {
+      position: absolute;
+      top: 419px;
+      left: 779px;
+      width: 535px;
+      height: 152px;
+      text-align: right;
+      line-height: 48px;
+      letter-spacing: 0;
+      color: #f7f4ef;
+      font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 48px;
+    }
+
+    .recurso144X1 {
+      position: absolute;
+      top: 0;
+      left: 9px;
+      width: 892px;
+      height: 153px;
+    }
+
+    .multiespacio {
+      position: absolute;
+      top: 157px;
+      left: 0;
+      width: 576px;
+      height: 84px;
+      text-align: center;
+      line-height: 80px;
+      letter-spacing: 0;
+      color: #ffffff;
+      font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 80px;
+      text-transform: UPPERCASE;
+    }
+  }
+}

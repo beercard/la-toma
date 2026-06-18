@@ -5,38 +5,40 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: "20px",
+        md: "24px",
+      },
       screens: {
-        "2xl": "1400px",
+        "2xl": "1440px",
       },
     },
     extend: {
       colors: {
+        rust: "#B76856",
+        gold: "#C3903F",
+        teal: "#638488",
+        sand: "#B5A896",
+        olive: "#5D6849",
+        cream: "#F7F4EF",
+        charcoal: "#232323",
+        "header-bg": "#DAD4CB",
+        
         border: "hsl(var(--border))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        background: "#F7F4EF",
+        foreground: "#232323",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#B76856",
+          foreground: "#F7F4EF",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "#B5A896",
+          foreground: "#638488",
         },
       },
       fontFamily: {
-        sans: ["Montserrat", "sans-serif"],
-        display: ["Cinzel", "serif"],
-      },
-      animation: {
-        "fade-in-up": "fadeInUp 0.8s ease-out forwards",
-        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-      },
-      keyframes: {
-        fadeInUp: {
-          "0%": { opacity: 0, transform: "translateY(20px)" },
-          "100%": { opacity: 1, transform: "translateY(0)" },
-        },
+        mundial: ["Mundial", "system-ui", "sans-serif"],
+        "roboto-serif": ['"Roboto Serif"', "serif"],
       },
     },
   },

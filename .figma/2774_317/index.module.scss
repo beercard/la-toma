@@ -1,0 +1,168 @@
+* {
+  box-sizing: border-box;
+}
+
+.rectangle6 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: #dad4cb;
+  padding: 85px 176px 70px 184px;
+  width: 1920px;
+  height: 384px;
+
+  .autoWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+
+    .image7 {
+      width: 252px;
+      height: 38px;
+    }
+
+    .polTicasDePrivacidad {
+      margin: 104px 0px 0px;
+      width: 232px;
+      height: 14px;
+      letter-spacing: 0.12px;
+      color: #232323;
+      font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    .tRminosYCondiciones {
+      margin: 20px 0px 0px;
+      width: 232px;
+      height: 14px;
+      letter-spacing: 0.12px;
+      color: #232323;
+      font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    .a2026LaTomaMultiespa {
+      opacity: 0.4;
+      margin: 20px 0px 0px;
+      width: 364px;
+      height: 14px;
+      letter-spacing: 0.12px;
+      color: #232323;
+      font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+
+  .autoWrapper2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+
+    .contacto {
+      width: 113px;
+      height: 23px;
+      letter-spacing: 0;
+      color: #232323;
+      font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      text-transform: UPPERCASE;
+    }
+
+    .puntaSanSebastiNAvCo3 {
+      margin: 18px 0px 0px;
+      width: 232px;
+      height: 135px;
+      line-height: 21px;
+      letter-spacing: 0;
+      color: #232323;
+      font-size: 14px;
+
+      .puntaSanSebastiNAvCo {
+        line-height: 21px;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .puntaSanSebastiNAvCo2 {
+        line-height: 21px;
+        letter-spacing: 0;
+        color: #232323;
+        font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .autoWrapper3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+
+    .reserasYHorarios {
+      width: 226px;
+      height: 23px;
+      letter-spacing: 0;
+      color: #232323;
+      font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      text-transform: UPPERCASE;
+    }
+
+    .juevesYViernes180002 {
+      margin: 18px 0px 0px;
+      width: 232px;
+      height: 188px;
+      line-height: 21px;
+      letter-spacing: 0;
+      color: #232323;
+      font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+
+  .autoWrapper4 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+
+    .comunidad {
+      width: 232px;
+      height: 23px;
+      letter-spacing: 0;
+      color: #232323;
+      font-family: Mundial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      text-transform: UPPERCASE;
+    }
+
+    .instagramWhatsAppCor {
+      margin: 18px 0px 0px;
+      width: 239px;
+      height: 112px;
+      line-height: 21px;
+      letter-spacing: 0;
+      color: #232323;
+      font-family: "Roboto Serif", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}
