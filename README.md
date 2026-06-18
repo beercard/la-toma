@@ -1,57 +1,43 @@
-# React + TypeScript + Vite
+# La Toma Bar - Web Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto ha sido desarrollado siguiendo las mejores prácticas de UI/UX y SEO, implementando un diseño "pixel perfect" con temática oscura y elegante ideal para un bar.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologías Utilizadas
+- **React + Vite**: Para una carga ultra rápida y un entorno de desarrollo eficiente.
+- **Tailwind CSS**: Estilos modulares, diseño *responsive* (Desktop-first a Mobile), y personalización avanzada.
+- **React Router**: Para navegación "Single Page Application" que emula una experiencia Multi-page fluida.
+- **Lucide React**: Iconografía moderna y ligera.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📸 Optimización de Imágenes (WebP)
+Para garantizar una excelente puntuación en SEO y un rendimiento óptimo de carga:
+Se ha configurado `vite-plugin-image-optimizer`. 
+- Cualquier imagen (`.jpg`, `.png`) que agregues localmente en `src/assets` o en la carpeta `public` será **automáticamente comprimida y optimizada** durante el proceso de *build*.
+- Las imágenes de demostración actuales se sirven a través de URLs externas, pero cuando incorpores las fotos reales del bar (de Figma o producción), asegúrate de que sean de alta calidad; el sistema se encargará de optimizarlas o puedes subirlas directamente en formato `.webp` para máxima eficiencia.
 
-## Expanding the ESLint configuration
+## 💻 Comandos de Desarrollo
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Instalar dependencias:
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  extends: [
-    // other configs...
-    // Enable lint rules for React
-    reactX.configs['recommended-typescript'],
-    // Enable lint rules for React DOM
-    reactDom.configs.recommended,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Iniciar servidor local:
+```bash
+npm run dev
 ```
+
+Construir para producción (aquí se optimizarán las imágenes):
+```bash
+npm run build
+```
+
+## 🐙 Control de Versiones (Git)
+
+El repositorio local ya está inicializado y se ha hecho el primer *commit* (arquitectura, componentes, diseño base). 
+También se ha configurado el control remoto a: `git@github.com:beercard/la-toma.git`.
+
+Para subir los cambios a tu repositorio remoto, simplemente ejecuta:
+```bash
+git push -u origin main
+```
+*(Nota: Asegúrate de tener tus claves SSH configuradas en tu cuenta de GitHub para que el comando funcione correctamente).*
