@@ -1,5 +1,7 @@
 # La Toma Bar - Web Project
 
+`la-toma` - Sitio Web La Toma
+
 Este proyecto ha sido desarrollado siguiendo las mejores prácticas de UI/UX y SEO, implementando un diseño "pixel perfect" con temática oscura y elegante ideal para un bar.
 
 ## 🚀 Tecnologías Utilizadas
