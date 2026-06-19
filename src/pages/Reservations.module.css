@@ -1,0 +1,472 @@
+.desktopPage,
+.mobilePage {
+  width: 100%;
+}
+
+.desktopPage {
+  display: none;
+}
+
+.desktopHero {
+  width: 100%;
+}
+
+.desktopHeroFrame {
+  position: relative;
+  width: min(1921px, 100%);
+  height: 603px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #638488;
+}
+
+.desktopHeroImage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1924px;
+  min-width: 100%;
+  height: 603px;
+  transform: translateX(-50%);
+  object-fit: cover;
+  opacity: 1;
+}
+
+.desktopHeroTitle {
+  position: absolute;
+  top: 238px;
+  left: 50%;
+  width: min(576px, calc(100% - 48px));
+  height: 40px;
+  margin: 0;
+  transform: translateX(-50%);
+  color: #f7f4ef;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 48px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.desktopHeroBand {
+  position: absolute;
+  top: 320px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(1920px, 100%);
+  height: 102px;
+  padding: 25px 24px;
+  background: #638488;
+  box-sizing: border-box;
+  transform: translateX(-50%);
+}
+
+.desktopHeroText {
+  width: min(530px, 100%);
+  min-height: 52px;
+  margin: 0;
+  color: #f7f4ef;
+  font-family: "Roboto Serif", serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
+
+.desktopFormSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 92px 24px;
+  box-sizing: border-box;
+}
+
+.desktopFormTitle {
+  width: min(594px, 100%);
+  margin: 0;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
+}
+
+.desktopForm {
+  width: min(1025px, calc(100% - 48px));
+  margin-top: 61px;
+}
+
+.desktopFieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 496px));
+  align-items: start;
+  justify-content: center;
+  column-gap: 33px;
+  row-gap: 27px;
+}
+
+.desktopField {
+  display: flex;
+  flex-direction: column;
+}
+
+.desktopLabel {
+  margin-bottom: 9px;
+  color: #232323;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.desktopInput {
+  width: 100%;
+  height: 38px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background: transparent;
+  padding: 0 12px;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.desktopInput:focus-visible,
+.mobileInput:focus-visible,
+.desktopButton:focus-visible,
+.mobileButton:focus-visible {
+  outline: 2px solid #232323;
+  outline-offset: 2px;
+}
+
+.desktopButtonRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 27px;
+}
+
+.desktopButton {
+  width: 152px;
+  height: 40px;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 5px 5px 5px -2px #2c30241f;
+  background: #638488;
+  color: #ffffff;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 12px;
+  letter-spacing: 0.12px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.mobilePage {
+  display: block;
+  overflow-x: hidden;
+}
+
+.mobileHero {
+  --mobile-hero-scale: 1;
+  width: 100%;
+  height: calc(561px * var(--mobile-hero-scale));
+  overflow: hidden;
+  background: #638488;
+}
+
+.mobileHeroCanvas {
+  position: relative;
+  left: 50%;
+  width: 390px;
+  height: 561px;
+  margin: 0;
+  transform: translateX(-50%) scale(var(--mobile-hero-scale));
+  transform-origin: top center;
+  background: #638488;
+}
+
+.mobileHeroImage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 390px;
+  height: 344px;
+  transform: translateX(-50%);
+  object-fit: cover;
+  opacity: 1;
+}
+
+.mobileHeroTitle {
+  position: absolute;
+  top: 156px;
+  left: calc(50% - 255px / 2 - 0.5px);
+  width: 255px;
+  height: 24px;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mobileHeroEyebrow {
+  position: absolute;
+  top: 388px;
+  left: calc(50% - 195px / 2 + 0.5px);
+  width: 195px;
+  height: 27px;
+  margin: 0;
+  color: #f7f4ef;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mobileHeroText {
+  position: absolute;
+  top: 423px;
+  left: calc(50% - 195px / 2 + 0.5px);
+  width: 195px;
+  height: 84px;
+  margin: 0;
+  color: #f7f4ef;
+  font-family: "Roboto Serif", serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: center;
+}
+
+.mobileFormSection {
+  position: relative;
+  width: min(390px, 100%);
+  min-height: 308px;
+  margin: 0 auto;
+  padding: 49px 0;
+  box-sizing: border-box;
+}
+
+.mobileFormTitle {
+  width: 195px;
+  height: 21px;
+  margin: 0;
+  margin-left: calc(50% - 195px / 2 - 73.5px);
+  color: #232323;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-transform: uppercase;
+}
+
+.mobileForm {
+  position: relative;
+  width: 100%;
+  height: 178px;
+  margin-top: 11px;
+}
+
+.mobileFieldLayer {
+  position: relative;
+  width: 100%;
+  height: 165px;
+}
+
+.mobileField {
+  position: absolute;
+  width: 163px;
+  display: block;
+}
+
+.mobileLabel {
+  display: block;
+  margin: 0;
+  color: #232323;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+.mobileInput {
+  width: 100%;
+  height: 28px;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  background: transparent;
+  margin-top: 11px;
+  padding: 0 8px;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.mobileFieldName {
+  top: 0;
+  left: calc(50% - 163px / 2 - 89.5px);
+}
+
+.mobileFieldGuests {
+  top: 0;
+  left: calc(50% - 163px / 2 + 89.5px);
+}
+
+.mobileFieldDate {
+  top: 68px;
+  left: calc(50% - 163px / 2 - 89.5px);
+}
+
+.mobileFieldTime {
+  top: 68px;
+  left: calc(50% - 163px / 2 + 89.5px);
+}
+
+.mobileButtonRow {
+  position: absolute;
+  top: 134px;
+  left: calc(50% - 134px / 2 + 104px);
+}
+
+.mobileButton {
+  width: 134px;
+  height: 44px;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 5px 5px 5px -2px #2c30241a;
+  background: #638488;
+  color: #ffffff;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 10px;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mobileFormSection {
+    width: 390px;
+  }
+
+  .mobileHero {
+    height: calc(561px * var(--mobile-hero-scale));
+  }
+
+  .mobileHeroCanvas {
+    left: auto;
+    margin: 0 auto;
+    transform: scale(var(--mobile-hero-scale));
+  }
+}
+
+@media (max-width: 359px) {
+  .mobileFormSection {
+    width: 100%;
+  }
+
+  .mobileHero {
+    height: 561px;
+  }
+
+  .mobileHeroCanvas {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@media (min-width: 1024px) {
+  .desktopPage {
+    display: block;
+  }
+
+  .mobilePage {
+    display: none;
+  }
+}
+
+@media (max-width: 1279px) {
+  .desktopHeroFrame {
+    height: 540px;
+  }
+
+  .desktopHeroImage {
+    width: 1721px;
+    height: 540px;
+  }
+
+  .desktopHeroTitle {
+    top: 208px;
+    font-size: 42px;
+    line-height: 42px;
+  }
+
+  .desktopHeroBand {
+    top: 284px;
+    height: 92px;
+  }
+
+  .desktopHeroText {
+    font-size: 21px;
+    line-height: 22px;
+  }
+
+  .desktopFormSection {
+    padding-top: 76px;
+  }
+
+  .desktopForm {
+    width: min(1025px, calc(100% - 48px));
+  }
+
+  .desktopFieldGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+
+  .desktopLabel {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1599px) {
+  .desktopHeroFrame {
+    height: 572px;
+  }
+
+  .desktopHeroImage {
+    width: 1824px;
+    height: 572px;
+  }
+
+  .desktopHeroTitle {
+    top: 224px;
+    font-size: 44px;
+    line-height: 44px;
+  }
+
+  .desktopHeroBand {
+    top: 300px;
+    height: 96px;
+  }
+
+  .desktopHeroText {
+    font-size: 22px;
+    line-height: 22px;
+  }
+}

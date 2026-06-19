@@ -1,0 +1,625 @@
+.desktopPage,
+.mobilePage {
+  width: 100%;
+}
+
+.desktopPage {
+  display: none;
+}
+
+.desktopHeroFrame {
+  position: relative;
+  width: min(1920px, 100%);
+  height: 603px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #b5a896;
+}
+
+.desktopHeroImage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1925px;
+  min-width: 100%;
+  height: 603px;
+  transform: translateX(-50%);
+  object-fit: cover;
+  opacity: 1;
+}
+
+.desktopHeroTitle {
+  position: absolute;
+  top: 238px;
+  left: 50%;
+  width: 576px;
+  height: 40px;
+  margin: 0;
+  transform: translateX(-50%);
+  color: #f7f4ef;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 48px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.desktopHeroBand {
+  position: absolute;
+  top: 320px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1920px;
+  height: 102px;
+  background: #b5a896;
+  transform: translateX(-50%);
+}
+
+.desktopHeroText {
+  width: 376px;
+  height: 52px;
+  margin: 0;
+  color: #f7f4ef;
+  font-family: "Roboto Serif", serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
+
+.desktopContentSection {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding-top: 113px;
+  padding-bottom: 0;
+}
+
+.desktopContentInner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 132px;
+  width: 1074px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.desktopCopy {
+  width: 446px;
+  margin-top: 33px;
+  min-height: 191px;
+}
+
+.desktopSectionTitle {
+  width: 412px;
+  margin: 0;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+.desktopSectionBody {
+  width: 446px;
+  margin: 35px 0 0;
+  color: #232323;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.desktopGallery {
+  position: relative;
+  width: 496px;
+  height: 284px;
+}
+
+.desktopCarouselColumn {
+  width: 496px;
+}
+
+.desktopArrowButton {
+  position: absolute;
+  top: 133px;
+  width: 30px;
+  height: 18px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.desktopArrowButton:focus-visible,
+.dotButton:focus-visible,
+.mobileArrowButton:focus-visible {
+  outline: 2px solid #232323;
+  outline-offset: 4px;
+}
+
+.desktopArrow {
+  width: 30px;
+  height: 18px;
+  display: block;
+}
+
+.desktopArrowButtonLeft {
+  left: -50px;
+}
+
+.desktopArrowButtonRight {
+  right: -32px;
+}
+
+.desktopArrowLeft {
+  transform: rotate(-90deg);
+}
+
+.desktopArrowRight {
+  transform: rotate(90deg);
+}
+
+.desktopGalleryImage {
+  width: 496px;
+  height: 284px;
+  object-fit: cover;
+}
+
+.desktopGalleryImageAnimated,
+.mobileGalleryImageAnimated {
+  animation: carouselFadeIn 320ms ease;
+}
+
+.desktopDots {
+  display: flex;
+  justify-content: center;
+  gap: 11px;
+  margin-top: 24px;
+  width: 496px;
+  padding-left: 0;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgb(35 35 35 / 50%);
+}
+
+.dotButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.dotButton.dotActive .dot {
+  background: #232323;
+}
+
+.desktopInstagramStrip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% + 34px);
+  margin: 73px -17px 30px;
+  padding: 9px 24px 8px;
+  box-sizing: border-box;
+  background: rgb(218 212 203 / 20%);
+}
+
+.desktopInstagramText {
+  width: 322px;
+  margin: 0;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+  text-align: center;
+}
+
+.instagramLink {
+  text-decoration: underline;
+}
+
+.mobilePage {
+  display: block;
+  overflow-x: hidden;
+}
+
+.mobileHero {
+  --mobile-hero-scale: 1;
+  width: 100%;
+  height: calc(462px * var(--mobile-hero-scale));
+  overflow: hidden;
+}
+
+.mobileHeroCanvas {
+  position: relative;
+  left: 50%;
+  width: 390px;
+  height: 462px;
+  margin: 0;
+  transform: translateX(-50%) scale(var(--mobile-hero-scale));
+  transform-origin: top center;
+}
+
+.mobileHeroBackground {
+  position: absolute;
+  inset: 0;
+  background: #b5a896;
+}
+
+.mobileHeroImage {
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  width: 389px;
+  height: 344px;
+  transform: translateX(-50%);
+  object-fit: cover;
+  opacity: 1;
+}
+
+.mobileHeroTitle {
+  position: absolute;
+  top: 156px;
+  left: calc(50% - 255px / 2 - 0.5px);
+  width: 255px;
+  height: 24px;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mobileHeroText {
+  position: absolute;
+  top: 383px;
+  left: calc(50% - 240px / 2);
+  width: 240px;
+  height: 41px;
+  margin: 0;
+  color: #f7f4ef;
+  font-family: "Roboto Serif", serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: center;
+}
+
+.mobileContentSection {
+  position: relative;
+  width: min(390px, 100%);
+  margin: 0 auto;
+  padding: 43px 0 59px;
+  box-sizing: border-box;
+}
+
+.mobileSectionTitle {
+  width: 253px;
+  margin: 0 0 0 calc(50% - 253px / 2 - 44.5px);
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+}
+
+.mobileSectionBody {
+  width: 253px;
+  margin: 15px 0 0 calc(50% - 253px / 2 - 44.5px);
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.mobileGallery {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  height: 158px;
+  margin-top: 29px;
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+
+.mobileGalleryImage {
+  position: absolute;
+  top: 0;
+  object-fit: cover;
+  flex: none;
+}
+
+.mobileGallerySide {
+  width: 225px;
+  height: 158px;
+  opacity: 0.2;
+}
+
+.mobileGalleryCenter {
+  top: 19px;
+  left: calc(50% - 195px / 2 + 0.5px);
+  width: 195px;
+  height: 120px;
+  opacity: 1;
+  z-index: 1;
+}
+
+.mobileGalleryCenterActive {
+  opacity: 1;
+}
+
+.mobileInstagramText {
+  width: 207px;
+  margin: 28px 0 0 calc(50% - 207px / 2 - 0.5px);
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: center;
+}
+
+.mobileGalleryLeft {
+  left: calc(50% - 225px / 2 - 246.5px);
+}
+
+.mobileGalleryRight {
+  left: calc(50% - 225px / 2 + 246.5px);
+}
+
+.mobileArrowButton {
+  position: absolute;
+  top: 67px;
+  z-index: 2;
+  width: 18px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.mobileArrowLeft {
+  left: 23px;
+}
+
+.mobileArrowRight {
+  right: 23px;
+}
+
+.mobileChevron {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid #b5a896;
+  border-right: 2px solid #b5a896;
+}
+
+.mobileChevronLeft {
+  transform: rotate(-135deg);
+}
+
+.mobileChevronRight {
+  transform: rotate(45deg);
+}
+
+@keyframes carouselFadeIn {
+  0% {
+    transform: translateY(8px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 1024px) {
+  .desktopPage {
+    display: block;
+  }
+
+  .mobilePage {
+    display: none;
+  }
+}
+
+@media (max-width: 1499px) {
+  .desktopContentInner {
+    gap: 72px;
+    width: min(1014px, calc(100% - 120px));
+  }
+}
+
+@media (max-width: 1279px) {
+  .desktopHeroFrame {
+    height: 540px;
+  }
+
+  .desktopHeroImage {
+    width: 1725px;
+    height: 540px;
+  }
+
+  .desktopHeroTitle {
+    top: 208px;
+    font-size: 42px;
+    line-height: 42px;
+  }
+
+  .desktopHeroBand {
+    top: 284px;
+    height: 92px;
+    width: 100%;
+  }
+
+  .desktopHeroText {
+    font-size: 21px;
+    line-height: 22px;
+  }
+
+  .desktopContentSection {
+    padding-top: 84px;
+  }
+
+  .desktopContentInner {
+    gap: 36px;
+    width: min(816px, calc(100% - 96px));
+  }
+
+  .desktopCopy {
+    width: 360px;
+  }
+
+  .desktopSectionTitle {
+    width: auto;
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  .desktopSectionBody {
+    width: auto;
+    font-size: 20px;
+    line-height: 22px;
+  }
+
+  .desktopGallery {
+    width: 420px;
+    height: 240px;
+  }
+
+  .desktopGalleryImage {
+    width: 420px;
+    height: 240px;
+  }
+
+  .desktopCarouselColumn {
+    width: 420px;
+  }
+
+  .desktopArrowButton {
+    top: 120px;
+  }
+
+  .desktopArrowButtonLeft {
+    left: -36px;
+  }
+
+  .desktopArrowButtonRight {
+    right: -28px;
+  }
+
+  .desktopDots {
+    width: 420px;
+  }
+
+  .desktopInstagramStrip {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1599px) {
+  .desktopHeroFrame {
+    height: 572px;
+  }
+
+  .desktopHeroImage {
+    width: 1824px;
+    height: 572px;
+  }
+
+  .desktopHeroTitle {
+    top: 224px;
+    font-size: 44px;
+    line-height: 44px;
+  }
+
+  .desktopHeroBand {
+    top: 300px;
+    height: 96px;
+  }
+
+  .desktopHeroText {
+    font-size: 22px;
+    line-height: 22px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mobilePage {
+    background: #f7f4ef;
+  }
+
+  .mobileHero {
+    margin: 0 auto;
+  }
+
+  .mobileHeroCanvas {
+    left: auto;
+    margin: 0 auto;
+    transform: scale(var(--mobile-hero-scale));
+  }
+
+  .mobileContentSection {
+    width: min(680px, 100%);
+    padding-top: 56px;
+    padding-bottom: 72px;
+  }
+
+  .mobileSectionTitle,
+  .mobileSectionBody,
+  .mobileInstagramText {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mobileGallery {
+    margin-top: 36px;
+  }
+
+  .mobileArrowLeft {
+    left: 48px;
+  }
+
+  .mobileArrowRight {
+    right: 48px;
+  }
+}
+
+@media (max-width: 359px) {
+  .mobileHero {
+    height: 462px;
+  }
+
+  .mobileHeroCanvas {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@media (max-width: 1919px) {
+  .desktopHeroBand {
+    width: 100%;
+  }
+}

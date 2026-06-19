@@ -126,6 +126,7 @@
   display: none;
   background: #f7f4ef;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .mobileHero {
@@ -141,10 +142,11 @@
 
 .mobileHeroCanvas {
   position: relative;
+  left: 50%;
   width: 390px;
   height: 594px;
-  margin: 0 auto;
-  transform: scale(var(--mobile-hero-scale));
+  margin: 0;
+  transform: translateX(-50%) scale(var(--mobile-hero-scale));
   transform-origin: top center;
 }
 
@@ -162,7 +164,7 @@
 .mobileHeroOverlay {
   position: absolute;
   top: 148px;
-  left: 22px;
+  left: calc(50% - 344px / 2);
   width: 344px;
   height: 371px;
   pointer-events: none;
@@ -315,6 +317,46 @@
   }
 }
 
+@media (max-width: 359px) {
+  .mobileHero {
+    height: calc(594px * min(100vw / 390, 1));
+  }
+
+  .mobileHeroOverlay {
+    top: 154px;
+    left: calc(50% - 320px / 2);
+    width: 320px;
+  }
+
+  .mobileHeroWordmark {
+    left: 0;
+    width: 236px;
+  }
+
+  .mobileHeroSubbrand {
+    width: 252px;
+    font-size: 26px;
+  }
+
+  .mobileHeroText {
+    top: 158px;
+    left: auto;
+    right: 0;
+    width: 150px;
+    line-height: 31px;
+    font-size: 21px;
+  }
+
+  .mobileIntro {
+    padding-top: 40px;
+    padding-bottom: 44px;
+  }
+
+  .mobileIntroText {
+    width: min(240px, calc(100vw - 32px));
+  }
+}
+
 @media (max-width: 1023px) {
   .desktopHome {
     display: none;
@@ -332,6 +374,7 @@
   }
 
   .mobileHeroCanvas {
+    left: auto;
     transform: none;
     margin: 0 auto;
   }

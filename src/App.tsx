@@ -6,6 +6,7 @@ import Events from "@/pages/Events";
 import Contact from "@/pages/Contact";
 import Project from "@/pages/Project";
 import Gallery from "@/pages/Gallery";
+import Reservations from "@/pages/Reservations";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/proyecto" element={<Project />} />
           <Route path="/galeria" element={<Gallery />} />
           <Route path="/eventos" element={<Events />} />
+          <Route path="/reservas" element={<Reservations />} />
           <Route path="/contacto" element={<Contact />} />
         </Routes>
       </Layout>

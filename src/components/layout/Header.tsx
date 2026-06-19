@@ -30,7 +30,7 @@ export default function Header() {
 
   const navLinks = [
     { name: "Café Bar", path: "/" },
-    { name: "Reservas", path: "/contacto" },
+    { name: "Reservas", path: "/reservas" },
     { name: "El Proyecto", path: "/proyecto" },
     { name: "Galería", path: "/galeria" },
     { name: "Eventos", path: "/eventos" },
@@ -51,7 +51,7 @@ export default function Header() {
                 <span className={[styles.desktopNavUnderline, styles.desktopUnderline30].join(" ")} />
               </Link>
 
-              <Link to="/contacto" className={[styles.desktopTextItem, styles.desktopReservas].join(" ")}>
+              <Link to="/reservas" className={[styles.desktopTextItem, styles.desktopReservas].join(" ")}>
                 <span className={[styles.desktopNavLabel, styles.desktopReservasLabel].join(" ")}>RESERVAS</span>
                 <span className={[styles.desktopNavUnderline, styles.desktopUnderline30].join(" ")} />
               </Link>

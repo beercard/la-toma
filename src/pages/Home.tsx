@@ -56,7 +56,7 @@ export default function Home() {
             <br />
             gastronomía, diseño y la presencia del río.
           </p>
-          <Link to="/contacto" className={styles.desktopButton}>
+          <Link to="/reservas" className={styles.desktopButton}>
             <span className={styles.desktopButtonLabel}>Reservá tu mesa</span>
           </Link>
         </section>
@@ -104,7 +104,7 @@ export default function Home() {
             <br />
             presencia del río.
           </p>
-          <Link to="/contacto" className={styles.mobileButton}>
+          <Link to="/reservas" className={styles.mobileButton}>
             <span className={styles.mobileButtonLabel}>Reservá tu mesa</span>
           </Link>
         </section>
