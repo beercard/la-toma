@@ -1,5 +1,6 @@
 import { MEDIA_BUCKET, isSupabaseConfigured, supabase } from "../supabaseClient";
 import { fallbackCarta, fallbackEvents, fallbackGallery } from "./fallback";
+import { optimizeImageToWebp } from "./image";
 import type { CartaCategory, CartaItem, EventItem, GalleryItem } from "./types";
 
 // ----------------------------------------------------------------------------
@@ -140,18 +141,31 @@ export const adminUpdateGalleryImage = (id: string, patch: Record<string, unknow
 export const adminDeleteGalleryImage = (id: string) =>
   run(requireClient().from("gallery_images").delete().eq("id", id).select());
 
-// Storage — subida de imágenes
+// Storage — subida de imágenes (optimizadas a WebP + resize en el navegador)
 export async function uploadMedia(file: File, folder = "gallery"): Promise<string> {
   const client = requireClient();
-  const ext = file.name.split(".").pop() ?? "jpg";
+  const { blob, ext, contentType } = await optimizeImageToWebp(file);
   const path = `${folder}/${crypto.randomUUID()}.${ext}`;
 
-  const { error } = await client.storage.from(MEDIA_BUCKET).upload(path, file, {
-    cacheControl: "3600",
+  const { error } = await client.storage.from(MEDIA_BUCKET).upload(path, blob, {
+    cacheControl: "31536000",
     upsert: false,
+    contentType,
   });
   if (error) throw new Error(error.message);
 
   const { data } = client.storage.from(MEDIA_BUCKET).getPublicUrl(path);
   return data.publicUrl;
+}
+
+// Elimina del Storage el archivo correspondiente a una URL pública del bucket.
+// Ignora URLs que no sean del bucket (ej. imágenes de respaldo en /figma/...).
+export async function removeMediaByUrl(url: string): Promise<void> {
+  if (!supabase) return;
+  const marker = `/object/public/${MEDIA_BUCKET}/`;
+  const idx = url.indexOf(marker);
+  if (idx === -1) return;
+  const path = url.slice(idx + marker.length);
+  if (!path) return;
+  await supabase.storage.from(MEDIA_BUCKET).remove([path]);
 }

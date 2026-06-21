@@ -4,6 +4,7 @@ import {
   adminDeleteGalleryImage,
   adminListGallery,
   adminUpdateGalleryImage,
+  removeMediaByUrl,
   uploadMedia,
 } from "../../lib/content/api";
 import styles from "./Admin.module.css";
@@ -64,9 +65,11 @@ export default function GalleryManager() {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string, imageUrl: string) => {
     if (!window.confirm("¿Eliminar esta imagen?")) return;
     try {
+      // Borra primero el archivo del Storage (best-effort), luego la fila.
+      await removeMediaByUrl(imageUrl).catch(() => undefined);
       await adminDeleteGalleryImage(id);
       await load();
     } catch (err) {
@@ -122,7 +125,7 @@ export default function GalleryManager() {
                   </label>
                   <button
                     className={`${styles.btn} ${styles.btnDanger} ${styles.btnSmall}`}
-                    onClick={() => handleDelete(row.id)}
+                    onClick={() => handleDelete(row.id, row.image_url)}
                   >
                     Eliminar
                   </button>
