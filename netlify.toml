@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Fallback SPA: Netlify sirve primero los archivos estáticos (incluido el
+# HTML por ruta de SEO) y, para rutas sin archivo (ej. /admin), entrega index.html.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
