@@ -9,6 +9,7 @@ import {
   SEO_SITE_URL,
   buildStructuredData,
   getSeoForPath,
+  routeSeoMap,
 } from "../../lib/seo";
 
 const upsertMetaTag = (selector: string, attributes: Record<string, string>, content: string) => {
@@ -44,6 +45,23 @@ export default function RouteSeo() {
   useEffect(() => {
     // El panel /admin no se indexa ni gestiona meta pública.
     if (location.pathname.startsWith("/admin")) {
+      return;
+    }
+
+    // Ruta desconocida (404): título propio + noindex, sin datos estructurados.
+    if (!(location.pathname in routeSeoMap)) {
+      document.documentElement.lang = SEO_LANGUAGE;
+      document.title = "Página no encontrada | La Toma Multiespacio";
+      upsertMetaTag(
+        'meta[name="description"]',
+        { name: "description" },
+        "La página que buscás no existe o cambió de lugar en La Toma Multiespacio.",
+      );
+      upsertMetaTag('meta[name="robots"]', { name: "robots" }, "noindex,follow");
+      const staleStructuredData = document.head.querySelector<HTMLScriptElement>("script#route-structured-data");
+      if (staleStructuredData) {
+        staleStructuredData.textContent = "[]";
+      }
       return;
     }
 

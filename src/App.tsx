@@ -11,6 +11,7 @@ import Gallery from "@/pages/Gallery";
 import Reservations from "@/pages/Reservations";
 import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
+import NotFound from "@/pages/NotFound";
 
 const AdminApp = lazy(() => import("@/pages/admin/AdminApp"));
 
@@ -27,6 +28,7 @@ function PublicSite() {
         <Route path="/contacto" element={<Contact />} />
         <Route path="/privacidad" element={<Privacy />} />
         <Route path="/terminos" element={<Terms />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
   );

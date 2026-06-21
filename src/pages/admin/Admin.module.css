@@ -132,6 +132,40 @@
   .row { grid-template-columns: 1fr 1fr; }
 }
 
+.itemRow {
+  display: grid;
+  grid-template-columns: 1.2fr 1.6fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid rgba(35, 35, 35, 0.08);
+}
+
+.itemActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.savedTag {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5d6849;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .itemRow {
+    grid-template-columns: 1fr 1fr;
+  }
+  .itemActions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
 /* ---------- Form controls ---------- */
 .field {
   display: flex;

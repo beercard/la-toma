@@ -24,6 +24,110 @@ interface ItemRow {
   sort_order: number;
 }
 
+function ItemEditor({
+  item,
+  onSaved,
+  onDelete,
+}: {
+  item: ItemRow;
+  onSaved: (id: string, patch: { name: string; description: string | null; price: string | null }) => void;
+  onDelete: (id: string) => void;
+}) {
+  const [name, setName] = useState(item.name);
+  const [description, setDescription] = useState(item.description ?? "");
+  const [price, setPrice] = useState(item.price ?? "");
+  const [saving, setSaving] = useState(false);
+  const [justSaved, setJustSaved] = useState(false);
+
+  // Si el ítem cambia desde afuera (recarga), sincronizamos el borrador.
+  useEffect(() => {
+    setName(item.name);
+    setDescription(item.description ?? "");
+    setPrice(item.price ?? "");
+  }, [item.id, item.name, item.description, item.price]);
+
+  const dirty =
+    name !== item.name ||
+    description !== (item.description ?? "") ||
+    price !== (item.price ?? "");
+
+  const save = async () => {
+    if (!dirty) return;
+    setSaving(true);
+    try {
+      const patch = { name, description: description || null, price: price || null };
+      await adminUpdateItem(item.id, patch);
+      onSaved(item.id, patch);
+      setJustSaved(true);
+      window.setTimeout(() => setJustSaved(false), 1800);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const reset = () => {
+    setName(item.name);
+    setDescription(item.description ?? "");
+    setPrice(item.price ?? "");
+  };
+
+  return (
+    <div className={styles.itemRow}>
+      <input
+        className={styles.input}
+        value={name}
+        placeholder="Nombre"
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        className={styles.input}
+        value={description}
+        placeholder="Descripción"
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <input
+        className={styles.input}
+        style={{ maxWidth: 110 }}
+        value={price}
+        placeholder="$"
+        onChange={(e) => setPrice(e.target.value)}
+      />
+      <div className={styles.itemActions}>
+        {dirty ? (
+          <>
+            <button
+              type="button"
+              className={`${styles.btn} ${styles.btnPrimary} ${styles.btnSmall}`}
+              onClick={save}
+              disabled={saving}
+            >
+              {saving ? "Guardando…" : "Guardar"}
+            </button>
+            <button
+              type="button"
+              className={`${styles.btn} ${styles.btnGhost} ${styles.btnSmall}`}
+              onClick={reset}
+              disabled={saving}
+            >
+              Deshacer
+            </button>
+          </>
+        ) : justSaved ? (
+          <span className={styles.savedTag}>✓ Guardado</span>
+        ) : null}
+        <button
+          type="button"
+          className={`${styles.btn} ${styles.btnDanger} ${styles.btnSmall}`}
+          onClick={() => onDelete(item.id)}
+          aria-label={`Eliminar ${item.name}`}
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function CartaManager() {
   const [categories, setCategories] = useState<CategoryRow[]>([]);
   const [items, setItems] = useState<ItemRow[]>([]);
@@ -76,18 +180,18 @@ export default function CartaManager() {
     }
   };
 
-  const saveItem = async (id: string, patch: Record<string, unknown>) => {
-    try {
-      await adminUpdateItem(id, patch);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "No se pudo guardar el ítem.");
-    }
+  const handleItemSaved = (
+    id: string,
+    patch: { name: string; description: string | null; price: string | null },
+  ) => {
+    setItems((prev) => prev.map((i) => (i.id === id ? { ...i, ...patch } : i)));
   };
 
   const removeItem = async (id: string) => {
+    if (!window.confirm("¿Eliminar este ítem?")) return;
     try {
       await adminDeleteItem(id);
-      await load();
+      setItems((prev) => prev.filter((i) => i.id !== id));
     } catch (err) {
       setError(err instanceof Error ? err.message : "No se pudo eliminar el ítem.");
     }
@@ -99,8 +203,8 @@ export default function CartaManager() {
         <h2 className={styles.sectionTitle}>Carta</h2>
       </div>
       <p className={styles.hint}>
-        Organizá la carta por categorías. Editá nombre, descripción y precio de cada ítem; los cambios se
-        guardan al salir del campo.
+        Organizá la carta por categorías. Editá nombre, descripción y precio de cada ítem; cuando hagas un
+        cambio aparece el botón <strong>Guardar</strong> para confirmarlo.
       </p>
 
       {error ? <div className={`${styles.notice} ${styles.noticeError}`}>{error}</div> : null}
@@ -143,30 +247,7 @@ export default function CartaManager() {
             {items
               .filter((item) => item.category_id === category.id)
               .map((item) => (
-                <div className={styles.row} key={item.id}>
-                  <input
-                    className={styles.input}
-                    defaultValue={item.name}
-                    placeholder="Nombre"
-                    onBlur={(e) => e.target.value !== item.name && saveItem(item.id, { name: e.target.value })}
-                  />
-                  <input
-                    className={styles.input}
-                    defaultValue={item.description ?? ""}
-                    placeholder="Descripción"
-                    onBlur={(e) => e.target.value !== (item.description ?? "") && saveItem(item.id, { description: e.target.value || null })}
-                  />
-                  <input
-                    className={styles.input}
-                    style={{ maxWidth: 110 }}
-                    defaultValue={item.price ?? ""}
-                    placeholder="$"
-                    onBlur={(e) => e.target.value !== (item.price ?? "") && saveItem(item.id, { price: e.target.value || null })}
-                  />
-                  <button className={`${styles.btn} ${styles.btnDanger} ${styles.btnSmall}`} onClick={() => removeItem(item.id)}>
-                    ✕
-                  </button>
-                </div>
+                <ItemEditor key={item.id} item={item} onSaved={handleItemSaved} onDelete={removeItem} />
               ))}
           </div>
         ))
