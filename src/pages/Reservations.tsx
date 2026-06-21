@@ -1,4 +1,6 @@
-import { CSSProperties, FormEvent, useEffect, useState } from "react";
+import { CSSProperties, FormEvent, useEffect, useMemo, useState } from "react";
+import { getAvailableTimeOptions } from "../lib/businessHours";
+import { SITE_WHATSAPP_NUMBER } from "../lib/siteConfig";
 import styles from "./Reservations.module.css";
 
 interface ReservationFormData {
@@ -15,11 +17,16 @@ const initialFormData: ReservationFormData = {
   time: "",
 };
 
-const WHATSAPP_PHONE = "5493624101277";
+const getTodayDateValue = () => {
+  const today = new Date();
+  const timezoneOffset = today.getTimezoneOffset() * 60000;
+  return new Date(today.getTime() - timezoneOffset).toISOString().split("T")[0];
+};
 
 export default function Reservations() {
   const [formData, setFormData] = useState<ReservationFormData>(initialFormData);
   const [mobileHeroScale, setMobileHeroScale] = useState(1);
+  const availableTimeOptions = useMemo(() => getAvailableTimeOptions(formData.date), [formData.date]);
 
   useEffect(() => {
     const updateMobileHeroScale = () => {
@@ -39,6 +46,12 @@ export default function Reservations() {
     return () => window.removeEventListener("resize", updateMobileHeroScale);
   }, []);
 
+  useEffect(() => {
+    if (formData.time && !availableTimeOptions.includes(formData.time)) {
+      setFormData((current) => ({ ...current, time: "" }));
+    }
+  }, [availableTimeOptions, formData.time]);
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -51,18 +64,23 @@ export default function Reservations() {
       `Horario: ${formData.time}`,
     ].join("\n");
 
-    const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${SITE_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
     <>
+      <p className="sr-only">
+        Reservá tu mesa en La Toma, restobar ubicado en la Costanera de Corrientes Capital con atención
+        personalizada y horarios disponibles para cenas y encuentros frente al río.
+      </p>
+
       <div className={styles.desktopPage}>
         <section className={styles.desktopHero} aria-labelledby="reservas-heading-desktop">
           <div className={styles.desktopHeroFrame}>
             <img
               src="/figma/mqjy0b1r-16uejlf.png"
-              alt="Mesa servida en La Toma"
+              alt="Mesa servida en La Toma, restobar en Corrientes Capital"
               className={styles.desktopHeroImage}
             />
 
@@ -74,7 +92,9 @@ export default function Reservations() {
               <p className={styles.desktopHeroText}>
                 Estamos a disposición para gestionar tu
                 <br />
-                reserva de manera directa y personalizada.
+                reserva en nuestro restobar de manera
+                <br />
+                directa y personalizada.
               </p>
             </div>
           </div>
@@ -113,23 +133,37 @@ export default function Reservations() {
               <label className={styles.desktopField}>
                 <span className={styles.desktopLabel}>Fecha</span>
                 <input
-                  type="text"
+                  type="date"
                   required
                   value={formData.date}
                   onChange={(event) => setFormData((prev) => ({ ...prev, date: event.target.value }))}
                   className={styles.desktopInput}
+                  min={getTodayDateValue()}
                 />
               </label>
 
               <label className={styles.desktopField}>
                 <span className={styles.desktopLabel}>Horario</span>
-                <input
-                  type="text"
+                <select
                   required
+                  disabled={availableTimeOptions.length === 0}
                   value={formData.time}
                   onChange={(event) => setFormData((prev) => ({ ...prev, time: event.target.value }))}
                   className={styles.desktopInput}
-                />
+                >
+                  <option value="">
+                    {formData.date
+                      ? availableTimeOptions.length > 0
+                        ? "Seleccionar"
+                        : "Sin horarios disponibles"
+                      : "Seleccionar fecha primero"}
+                  </option>
+                  {availableTimeOptions.map((time) => (
+                    <option key={time} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </select>
               </label>
             </div>
 
@@ -151,7 +185,7 @@ export default function Reservations() {
           <div className={styles.mobileHeroCanvas}>
             <img
               src="/figma/mqjybg8o-4ennzii.png"
-              alt="Mesa servida en La Toma"
+              alt="Mesa servida en La Toma, restobar en Corrientes Capital"
               className={styles.mobileHeroImage}
             />
 
@@ -205,23 +239,37 @@ export default function Reservations() {
               <label className={[styles.mobileField, styles.mobileFieldDate].join(" ")}>
                 <span className={styles.mobileLabel}>Fecha</span>
                 <input
-                  type="text"
+                  type="date"
                   required
                   value={formData.date}
                   onChange={(event) => setFormData((prev) => ({ ...prev, date: event.target.value }))}
                   className={styles.mobileInput}
+                  min={getTodayDateValue()}
                 />
               </label>
 
               <label className={[styles.mobileField, styles.mobileFieldTime].join(" ")}>
                 <span className={styles.mobileLabel}>Horario</span>
-                <input
-                  type="text"
+                <select
                   required
+                  disabled={availableTimeOptions.length === 0}
                   value={formData.time}
                   onChange={(event) => setFormData((prev) => ({ ...prev, time: event.target.value }))}
                   className={styles.mobileInput}
-                />
+                >
+                  <option value="">
+                    {formData.date
+                      ? availableTimeOptions.length > 0
+                        ? "Seleccionar"
+                        : "Sin horarios disponibles"
+                      : "Seleccionar fecha primero"}
+                  </option>
+                  {availableTimeOptions.map((time) => (
+                    <option key={time} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </select>
               </label>
             </div>
 

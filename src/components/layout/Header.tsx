@@ -1,93 +1,54 @@
-import { CSSProperties, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { SITE_NAV_LINKS } from "../../lib/siteConfig";
 import styles from "./Header.module.css";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [desktopScale, setDesktopScale] = useState(1);
   const location = useLocation();
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
-
-  useEffect(() => {
-    const updateDesktopScale = () => {
-      if (window.innerWidth < 1024) {
-        setDesktopScale(1);
-        return;
-      }
-
-      const availableWidth = window.innerWidth - 48;
-      setDesktopScale(Math.min(1, availableWidth / 1554));
-    };
-
-    updateDesktopScale();
-    window.addEventListener("resize", updateDesktopScale);
-
-    return () => window.removeEventListener("resize", updateDesktopScale);
-  }, []);
-
-  const navLinks = [
-    { name: "Café Bar", path: "/" },
-    { name: "Reservas", path: "/reservas" },
-    { name: "El Proyecto", path: "/proyecto" },
-    { name: "Galería", path: "/galeria" },
-    { name: "Eventos", path: "/eventos" },
-    { name: "Contacto", path: "/contacto" },
+  const desktopNavItems = [
+    { label: "CAfé bar", path: SITE_NAV_LINKS[0].path, itemClass: styles.desktopCafe },
+    { label: "RESERVAS", path: SITE_NAV_LINKS[1].path, itemClass: styles.desktopReservas },
+    { label: "EL PROYECTO", path: SITE_NAV_LINKS[2].path, itemClass: styles.desktopProyecto },
+    { label: "galería", path: SITE_NAV_LINKS[3].path, itemClass: styles.desktopGaleria },
+    { label: "eventos", path: SITE_NAV_LINKS[4].path, itemClass: styles.desktopEventos },
+    { label: "CONTACTO", path: SITE_NAV_LINKS[5].path, itemClass: styles.desktopContacto },
   ];
 
   return (
     <>
       <header className={styles.desktopHeader}>
         <div className={styles.desktopInner}>
-          <div
-            className={styles.desktopScale}
-            style={{ "--desktop-scale": desktopScale } as CSSProperties}
-          >
-            <nav className={styles.desktopRow} aria-label="Navegación principal desktop">
-              <Link to="/" className={[styles.desktopTextItem, styles.desktopCafe].join(" ")}>
-                <span className={[styles.desktopNavLabel, styles.desktopCafeLabel].join(" ")}>CAfé bar</span>
-                <span className={[styles.desktopNavUnderline, styles.desktopUnderline30].join(" ")} />
-              </Link>
+          <nav className={styles.desktopNav} aria-label="Navegación principal desktop">
+            {desktopNavItems.map((link) => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                end
+                className={({ isActive }) =>
+                  [styles.desktopTextItem, link.itemClass, isActive ? styles.desktopTextItemActive : ""].join(" ")
+                }
+              >
+                <span className={styles.desktopNavLabel}>{link.label}</span>
+                <span className={styles.desktopNavUnderline} />
+              </NavLink>
+            ))}
 
-              <Link to="/reservas" className={[styles.desktopTextItem, styles.desktopReservas].join(" ")}>
-                <span className={[styles.desktopNavLabel, styles.desktopReservasLabel].join(" ")}>RESERVAS</span>
-                <span className={[styles.desktopNavUnderline, styles.desktopUnderline30].join(" ")} />
-              </Link>
-
-              <Link to="/proyecto" className={[styles.desktopTextItem, styles.desktopProyecto].join(" ")}>
-                <span className={[styles.desktopNavLabel, styles.desktopProyectoLabel].join(" ")}>EL PROYECTO</span>
-                <span className={[styles.desktopNavUnderline, styles.desktopUnderline30].join(" ")} />
-              </Link>
-
-              <Link to="/" aria-label="Ir al inicio" className={styles.desktopLogoLink}>
-                <img src="/figma/mqitymz6-fnopbgn.webp" alt="La Toma" className={styles.desktopLogo} />
-                <img src="/figma/mqiu0p6w-csa514q.svg" alt="" className={styles.desktopLogoHover} />
-              </Link>
-
-              <Link to="/galeria" className={[styles.desktopTextItem, styles.desktopGaleria].join(" ")}>
-                <span className={[styles.desktopNavLabel, styles.desktopGaleriaLabel].join(" ")}>galería</span>
-                <span className={[styles.desktopNavUnderline, styles.desktopUnderline33].join(" ")} />
-              </Link>
-
-              <Link to="/eventos" className={[styles.desktopTextItem, styles.desktopEventos].join(" ")}>
-                <span className={[styles.desktopNavLabel, styles.desktopEventosLabel].join(" ")}>eventos</span>
-                <span className={[styles.desktopNavUnderline, styles.desktopUnderline33].join(" ")} />
-              </Link>
-
-              <Link to="/contacto" className={[styles.desktopTextItem, styles.desktopContacto].join(" ")}>
-                <span className={[styles.desktopNavLabel, styles.desktopContactoLabel].join(" ")}>CONTACTO</span>
-                <span className={[styles.desktopNavUnderline, styles.desktopUnderline30].join(" ")} />
-              </Link>
-            </nav>
-          </div>
+            <Link to="/" aria-label="Ir al inicio" className={styles.desktopLogoLink}>
+              <img src="/figma/mqitymz6-fnopbgn.webp" alt="La Toma" className={styles.desktopLogo} />
+              <img src="/figma/mqiu0p6w-csa514q.svg" alt="" className={styles.desktopLogoHover} />
+            </Link>
+          </nav>
         </div>
       </header>
 
       <header className={[styles.mobileHeader, isMobileMenuOpen ? styles.mobileHeaderOpen : ""].join(" ")}>
         <div className={styles.mobileInner}>
-          <Link to="/" aria-label="Ir al inicio">
+          <Link to="/" aria-label="Ir al inicio" className={styles.mobileLogoLink}>
             <img
               src={isMobileMenuOpen ? "/figma/mqiryjto-xkdx3i0.svg" : "/figma/mqit719o-e5u7cs4.svg"}
               alt="La Toma"
@@ -111,7 +72,9 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className={styles.mobileMenu} role="dialog" aria-label="Menú">
           <div className={styles.mobileMenuHeader}>
-            <img src="/figma/mqiryjto-xkdx3i0.svg" alt="La Toma" className={styles.mobileLogo} />
+            <Link to="/" aria-label="Ir al inicio" className={styles.mobileLogoLink}>
+              <img src="/figma/mqiryjto-xkdx3i0.svg" alt="La Toma" className={styles.mobileLogo} />
+            </Link>
             <button
               type="button"
               className={styles.burger}
@@ -124,10 +87,17 @@ export default function Header() {
             </button>
           </div>
 
-          {navLinks.map((link) => (
-            <Link key={link.name} to={link.path} className={styles.mobileMenuItem}>
+          {SITE_NAV_LINKS.map((link) => (
+            <NavLink
+              key={link.name}
+              to={link.path}
+              end
+              className={({ isActive }) =>
+                [styles.mobileMenuItem, isActive ? styles.mobileMenuItemActive : ""].join(" ")
+              }
+            >
               <div className={styles.mobileMenuItemLabel}>{link.name}</div>
-            </Link>
+            </NavLink>
           ))}
         </div>
       )}

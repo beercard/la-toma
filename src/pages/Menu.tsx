@@ -1,77 +1,119 @@
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-
-const menuData = {
-  cocteles: [
-    { name: "El Alquimista", description: "Gin infusionado con romero, tónica artesanal, pepino y bayas de enebro.", price: "$12" },
-    { name: "Humo y Fuego", description: "Mezcal, licor de chile ancho, jarabe de agave y borde de sal de gusano.", price: "$14" },
-    { name: "La Toma Clásico", description: "Bourbon, vermouth dulce, campari y un toque de bitter de naranja.", price: "$13" },
-    { name: "Noche de Verano", description: "Vodka, puré de maracuyá, jugo de limón y hojas de menta fresca.", price: "$11" },
-  ],
-  tapas: [
-    { name: "Tabla de Quesos", description: "Selección de quesos curados, miel de trufa, nueces y pan artesanal.", price: "$18" },
-    { name: "Croquetas de Jamón", description: "Croquetas crujientes de jamón ibérico con alioli de ajo asado.", price: "$10" },
-    { name: "Ceviche Nikkei", description: "Pescado blanco fresco, leche de tigre, maíz chulpi y boniato.", price: "$16" },
-    { name: "Papas Bravas", description: "Papas rústicas con salsa brava casera y alioli.", price: "$8" },
-  ],
-  vinos: [
-    { name: "Malbec Reserva", description: "Valle de Uco, Mendoza. Notas de ciruela y roble.", price: "$9 / copa" },
-    { name: "Sauvignon Blanc", description: "Marlborough. Fresco, cítrico y vibrante.", price: "$8 / copa" },
-    { name: "Pinot Noir", description: "Valle de Leyda. Elegante, con notas a frutos rojos.", price: "$10 / copa" },
-  ]
-};
+import { CSSProperties, useEffect, useState } from "react";
+import { useCarta } from "../hooks/useContent";
+import styles from "./Menu.module.css";
 
 export default function Menu() {
-  const [activeTab, setActiveTab] = useState<keyof typeof menuData>("cocteles");
+  const menuCategories = useCarta();
+  const [mobileHeroScale, setMobileHeroScale] = useState(1);
+
+  useEffect(() => {
+    const updateMobileHeroScale = () => {
+      const width = window.innerWidth;
+
+      if (width >= 1024) {
+        setMobileHeroScale(1);
+        return;
+      }
+
+      setMobileHeroScale(Math.min(width / 390, 1.18));
+    };
+
+    updateMobileHeroScale();
+    window.addEventListener("resize", updateMobileHeroScale);
+
+    return () => window.removeEventListener("resize", updateMobileHeroScale);
+  }, []);
 
   return (
-    <div className="pt-32 pb-24 min-h-screen bg-background">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="text-center mb-16 animate-fade-in-up">
-          <h1 className="text-4xl md:text-5xl font-display text-white mb-4 uppercase tracking-widest">Nuestra Carta</h1>
-          <div className="w-24 h-1 bg-primary/30 mx-auto mb-6" />
-          <p className="text-muted-foreground font-light max-w-lg mx-auto">
-            Descubre nuestra selección de bebidas y platillos elaborados con pasión y los mejores ingredientes.
+    <>
+      <p className="sr-only">
+        Café Bar La Toma en la Costanera de Corrientes Capital, un espacio frente al río para desayunos,
+        meriendas, encuentros y experiencias gastronómicas.
+      </p>
+
+      <div className={styles.desktopPage}>
+        <section className={styles.desktopHero} aria-labelledby="cafe-bar-desktop-title">
+          <div className={styles.desktopHeroFrame}>
+            <div className={styles.desktopHeroBackground} />
+            <img
+              src="/figma/mqmruuq4-02y5vq5.png"
+              alt=""
+              className={styles.desktopHeroImage}
+            />
+            <img
+              src="/figma/mqmruuq4-a2xv23f.png"
+              alt="La Toma"
+              className={styles.desktopHeroLogo}
+            />
+            <h1 id="cafe-bar-desktop-title" className={styles.desktopHeroTitle}>
+              CAFÉ BAR
+            </h1>
+          </div>
+        </section>
+      </div>
+
+      <div className={styles.mobilePage}>
+        <section
+          className={styles.mobileHero}
+          aria-labelledby="cafe-bar-mobile-title"
+          style={{ "--mobile-hero-scale": mobileHeroScale } as CSSProperties}
+        >
+          <div className={styles.mobileHeroCanvas}>
+            <div className={styles.mobileHeroBackground} />
+            <img
+              src="/figma/mqmrvea4-vn3fpu8.png"
+              alt=""
+              className={styles.mobileHeroImage}
+            />
+            <img
+              src="/figma/mqmrvea4-vrqjny0.png"
+              alt="La Toma"
+              className={styles.mobileHeroLogo}
+            />
+            <h1 id="cafe-bar-mobile-title" className={styles.mobileHeroTitle}>
+              CAFÉ BAR
+            </h1>
+          </div>
+        </section>
+      </div>
+
+      <section className={styles.carta} aria-labelledby="carta-title">
+        <div className={styles.cartaInner}>
+          <p className={styles.cartaEyebrow}>Café Bar · Costanera de Corrientes</p>
+          <h2 id="carta-title" className={styles.cartaTitle}>
+            Nuestra Carta
+          </h2>
+          <p className={styles.cartaIntro}>
+            Una selección pensada para acompañar cada momento del día, del primer café al brindis del
+            atardecer.
+          </p>
+
+          <div className={styles.cartaGrid}>
+            {menuCategories.map((category) => (
+              <div key={category.title} className={styles.cartaCategory}>
+                <h3 className={styles.cartaCategoryTitle}>{category.title}</h3>
+                <ul className={styles.cartaItems}>
+                  {category.items.map((item) => (
+                    <li key={item.name} className={styles.cartaItem}>
+                      <div className={styles.cartaItemHead}>
+                        <span className={styles.cartaItemName}>{item.name}</span>
+                        {item.price ? <span className={styles.cartaItemPrice}>{item.price}</span> : null}
+                      </div>
+                      {item.description ? (
+                        <p className={styles.cartaItemDescription}>{item.description}</p>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <p className={styles.cartaNote}>
+            * Carta sujeta a disponibilidad. Los precios pueden variar.
           </p>
         </div>
-
-        {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12 border-b border-white/10 pb-4">
-          {Object.keys(menuData).map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveTab(category as keyof typeof menuData)}
-              className={cn(
-                "uppercase tracking-widest text-sm font-semibold px-6 py-2 transition-colors",
-                activeTab === category 
-                  ? "text-primary border-b-2 border-primary" 
-                  : "text-muted-foreground hover:text-white"
-              )}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        {/* Menu Items */}
-        <div className="grid gap-8 animate-fade-in-up" key={activeTab}>
-          {menuData[activeTab].map((item, index) => (
-            <div key={index} className="flex flex-col sm:flex-row justify-between sm:items-baseline border-b border-white/5 pb-6 last:border-0 group">
-              <div className="sm:pr-8 mb-2 sm:mb-0">
-                <h3 className="text-xl font-display text-white uppercase tracking-wider mb-2 group-hover:text-primary transition-colors">
-                  {item.name}
-                </h3>
-                <p className="text-muted-foreground font-light text-sm">
-                  {item.description}
-                </p>
-              </div>
-              <div className="text-primary font-display text-xl whitespace-nowrap">
-                {item.price}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }

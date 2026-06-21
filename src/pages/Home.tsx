@@ -25,12 +25,19 @@ export default function Home() {
 
   return (
     <>
+      <h1 className={styles.visuallyHidden}>La Toma Multiespacio, restobar en la Costanera de Corrientes Capital</h1>
+      <p className="sr-only">
+        La Toma es un restobar en la Costanera de Corrientes Capital con café bar, reservas, eventos y una
+        experiencia gastronómica frente al río.
+      </p>
+
       <div className={styles.desktopHome}>
         <section className={styles.desktopHero}>
           <img
             src="/figma/mqiuwd26-732cdi8.webp"
-            alt="Atardecer en La Toma"
+            alt="Atardecer en La Toma sobre la Costanera de Corrientes Capital"
             className={styles.desktopHeroImage}
+            decoding="async"
           />
 
           <div className={styles.desktopHeroOverlay}>
@@ -52,9 +59,9 @@ export default function Home() {
 
         <section className={styles.desktopIntro}>
           <p className={styles.desktopIntroText}>
-            Un espacio recuperado que fusiona
+            Un restobar en la Costanera correntina
             <br />
-            gastronomía, diseño y la presencia del río.
+            que fusiona gastronomía, diseño y río.
           </p>
           <Link to="/reservas" className={styles.desktopButton}>
             <span className={styles.desktopButtonLabel}>Reservá tu mesa</span>
@@ -70,8 +77,9 @@ export default function Home() {
           <div className={styles.mobileHeroCanvas}>
             <img
               src="/figma/mqiuzhmp-lbbiz0u.webp"
-              alt="Atardecer en La Toma"
+              alt="Atardecer en La Toma sobre la Costanera de Corrientes Capital"
               className={styles.mobileHeroImage}
+              decoding="async"
             />
 
             <div className={styles.mobileHeroOverlay}>
@@ -98,11 +106,11 @@ export default function Home() {
 
         <section className={styles.mobileIntro}>
           <p className={styles.mobileIntroText}>
-            Un espacio recuperado que
+            Un restobar en la Costanera
             <br />
-            fusiona gastronomía, diseño y la
+            correntina que fusiona
             <br />
-            presencia del río.
+            gastronomía, diseño y río.
           </p>
           <Link to="/reservas" className={styles.mobileButton}>
             <span className={styles.mobileButtonLabel}>Reservá tu mesa</span>

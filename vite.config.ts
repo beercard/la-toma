@@ -1,8 +1,73 @@
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin, type ResolvedConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from "vite-tsconfig-paths";
-import { traeBadgePlugin } from 'vite-plugin-trae-solo-badge';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import { writeFileSync, readFileSync, mkdirSync } from 'node:fs'
+import { resolve, dirname } from 'node:path'
+import {
+  routeSeoMap,
+  buildStructuredData,
+  SEO_SITE_URL,
+} from './src/lib/seo'
+
+const escapeAttr = (value: string) =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+const replaceMetaContent = (html: string, attr: 'name' | 'property', key: string, content: string) => {
+  const re = new RegExp(`(<meta\\b[^>]*\\b${attr}="${key}"[^>]*\\bcontent=")[^"]*(")`)
+  return html.replace(re, `$1${escapeAttr(content)}$2`)
+}
+
+// Generates a static index.html per route with route-specific meta + JSON-LD,
+// so crawlers that do not execute JavaScript (WhatsApp, Facebook, Twitter) read
+// the correct title, description, canonical and structured data for each page.
+const staticRouteSeoPlugin = (): Plugin => {
+  let config: ResolvedConfig
+  return {
+    name: 'static-route-seo',
+    apply: 'build',
+    configResolved(resolved) {
+      config = resolved
+    },
+    closeBundle() {
+      const distDir = resolve(config.root, config.build.outDir)
+      const baseHtmlPath = resolve(distDir, 'index.html')
+      let baseHtml: string
+      try {
+        baseHtml = readFileSync(baseHtmlPath, 'utf-8')
+      } catch {
+        return
+      }
+
+      for (const page of Object.values(routeSeoMap)) {
+        const canonicalUrl = new URL(page.path, SEO_SITE_URL).toString()
+        const jsonLd = JSON.stringify(buildStructuredData(SEO_SITE_URL, page)).replace(/</g, '\\u003c')
+
+        let html = baseHtml
+        html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeAttr(page.title)}</title>`)
+        html = replaceMetaContent(html, 'name', 'description', page.description)
+        html = replaceMetaContent(html, 'name', 'keywords', page.keywords.join(', '))
+        html = replaceMetaContent(html, 'property', 'og:title', page.title)
+        html = replaceMetaContent(html, 'property', 'og:description', page.description)
+        html = replaceMetaContent(html, 'property', 'og:url', canonicalUrl)
+        html = replaceMetaContent(html, 'name', 'twitter:title', page.title)
+        html = replaceMetaContent(html, 'name', 'twitter:description', page.description)
+        html = html.replace(/(<link\b[^>]*\brel="canonical"[^>]*\bhref=")[^"]*(")/, `$1${canonicalUrl}$2`)
+        html = html.replace(
+          /<\/head>/,
+          `  <script type="application/ld+json" id="route-structured-data">${jsonLd}</script>\n  </head>`,
+        )
+
+        const outPath =
+          page.path === '/'
+            ? baseHtmlPath
+            : resolve(distDir, `${page.path.replace(/^\//, '')}/index.html`)
+        mkdirSync(dirname(outPath), { recursive: true })
+        writeFileSync(outPath, html)
+      }
+    },
+  }
+}
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -10,13 +75,7 @@ export default defineConfig({
     sourcemap: 'hidden',
   },
   plugins: [
-    react({
-      babel: {
-        plugins: [
-          'react-dev-locator',
-        ],
-      },
-    }),
+    react(),
     ViteImageOptimizer({
       png: {
         quality: 80,
@@ -31,15 +90,7 @@ export default defineConfig({
         lossless: true,
       },
     }),
-    traeBadgePlugin({
-      variant: 'dark',
-      position: 'bottom-right',
-      prodOnly: true,
-      clickable: true,
-      clickUrl: 'https://www.trae.ai/solo?showJoin=1',
-      autoTheme: true,
-      autoThemeTarget: '#root'
-    }), 
-    tsconfigPaths()
+    tsconfigPaths(),
+    staticRouteSeoPlugin(),
   ],
 })

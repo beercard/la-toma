@@ -1,10 +1,15 @@
-/** WARNING: DON'T EDIT THIS FILE */
-/** WARNING: DON'T EDIT THIS FILE */
-/** WARNING: DON'T EDIT THIS FILE */
+import postcssGlobalData from "@csstools/postcss-global-data";
+import postcssCustomMedia from "postcss-custom-media";
+import tailwindcss from "tailwindcss";
+import autoprefixer from "autoprefixer";
 
 export default {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
+  plugins: [
+    postcssGlobalData({
+      files: ["./src/styles/breakpoints.css"],
+    }),
+    postcssCustomMedia(),
+    tailwindcss,
+    autoprefixer,
+  ],
 };

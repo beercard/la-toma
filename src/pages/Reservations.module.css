@@ -9,11 +9,12 @@
 
 .desktopHero {
   width: 100%;
+  background: #638488;
 }
 
 .desktopHeroFrame {
   position: relative;
-  width: min(1921px, 100%);
+  width: 100%;
   height: 603px;
   margin: 0 auto;
   overflow: hidden;
@@ -24,8 +25,7 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 1924px;
-  min-width: 100%;
+  width: max(1924px, 100%);
   height: 603px;
   transform: translateX(-50%);
   object-fit: cover;
@@ -56,7 +56,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: min(1920px, 100%);
+  width: 100%;
   height: 102px;
   padding: 25px 24px;
   background: #638488;
@@ -137,6 +137,18 @@
   font-family: "Roboto Serif", serif;
   font-size: 16px;
   box-sizing: border-box;
+}
+
+.desktopInput[type="date"],
+.desktopInput[type="date"]::-webkit-calendar-picker-indicator,
+.mobileInput[type="date"],
+.mobileInput[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+.desktopInput:where(select),
+.mobileInput:where(select) {
+  appearance: none;
 }
 
 .desktopInput:focus-visible,
@@ -255,17 +267,16 @@
 .mobileFormSection {
   position: relative;
   width: min(390px, 100%);
-  min-height: 308px;
+  min-height: auto;
   margin: 0 auto;
-  padding: 49px 0;
+  padding: 49px 24px;
   box-sizing: border-box;
 }
 
 .mobileFormTitle {
-  width: 195px;
-  height: 21px;
+  width: auto;
+  min-height: 21px;
   margin: 0;
-  margin-left: calc(50% - 195px / 2 - 73.5px);
   color: #232323;
   font-family: "Mundial", system-ui, sans-serif;
   font-size: 14px;
@@ -275,21 +286,22 @@
 }
 
 .mobileForm {
-  position: relative;
   width: 100%;
-  height: 178px;
   margin-top: 11px;
 }
 
 .mobileFieldLayer {
-  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   width: 100%;
-  height: 165px;
+  height: auto;
+  column-gap: 16px;
+  row-gap: 12px;
 }
 
 .mobileField {
-  position: absolute;
-  width: 163px;
+  position: static;
+  width: auto;
   display: block;
 }
 
@@ -317,30 +329,10 @@
   box-sizing: border-box;
 }
 
-.mobileFieldName {
-  top: 0;
-  left: calc(50% - 163px / 2 - 89.5px);
-}
-
-.mobileFieldGuests {
-  top: 0;
-  left: calc(50% - 163px / 2 + 89.5px);
-}
-
-.mobileFieldDate {
-  top: 68px;
-  left: calc(50% - 163px / 2 - 89.5px);
-}
-
-.mobileFieldTime {
-  top: 68px;
-  left: calc(50% - 163px / 2 + 89.5px);
-}
-
 .mobileButtonRow {
-  position: absolute;
-  top: 134px;
-  left: calc(50% - 134px / 2 + 104px);
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
 }
 
 .mobileButton {
@@ -360,23 +352,51 @@
   cursor: pointer;
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (--bp-tablet) {
   .mobileFormSection {
-    width: 390px;
+    width: 100%;
+    padding-right: 32px;
+    padding-left: 32px;
   }
 
   .mobileHero {
-    height: calc(561px * var(--mobile-hero-scale));
+    height: 608px;
+    background: #638488;
   }
 
   .mobileHeroCanvas {
-    left: auto;
-    margin: 0 auto;
-    transform: scale(var(--mobile-hero-scale));
+    left: 0;
+    width: 100%;
+    height: 608px;
+    margin: 0;
+    transform: none;
+  }
+
+  .mobileHeroImage {
+    left: 0;
+    width: 100%;
+    height: 392px;
+    transform: none;
+  }
+
+  .mobileFormTitle,
+  .mobileForm {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .mobileForm {
+    width: min(520px, 100%);
+    margin-top: 11px;
+  }
+
+  .mobileFieldLayer {
+    column-gap: 20px;
+    row-gap: 16px;
   }
 }
 
-@media (max-width: 359px) {
+@media (--bp-xs) {
   .mobileFormSection {
     width: 100%;
   }
@@ -390,7 +410,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (--bp-desktop) {
   .desktopPage {
     display: block;
   }
@@ -406,7 +426,7 @@
   }
 
   .desktopHeroImage {
-    width: 1721px;
+    width: max(1721px, 100%);
     height: 540px;
   }
 
@@ -444,13 +464,13 @@
   }
 }
 
-@media (min-width: 1280px) and (max-width: 1599px) {
+@media (--bp-desktop-md) {
   .desktopHeroFrame {
     height: 572px;
   }
 
   .desktopHeroImage {
-    width: 1824px;
+    width: max(1824px, 100%);
     height: 572px;
   }
 

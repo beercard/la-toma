@@ -1,0 +1,17 @@
+{
+  "name": "La Toma Multiespacio",
+  "short_name": "La Toma",
+  "lang": "es-AR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#dad4cb",
+  "theme_color": "#dad4cb",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+/**
+ * Sistema de breakpoints unificado — La Toma Multiespacio
+ *
+ * Anclado al diseño de Figma: referencia mobile 390px / desktop 1440px.
+ * Todas las hojas de estilo deben usar estos tokens (vía postcss-custom-media)
+ * en lugar de valores de pixel sueltos, para evitar desfasajes entre páginas.
+ *
+ *   320 ──── 540 ────────── 768 ──── 1024 ──── 1280 ──── 1440 ──── ∞
+ *   │  xs  │     tablet (DOM mobile)    │   desktop fluido   │  desktop nativo
+ *
+ * El sitio cambia de layout (DOM mobile ↔ DOM desktop) en 1024px.
+ */
+
+/* --- Rango MOBILE (DOM mobile, < 1024px) --- */
+@custom-media --bp-xs (max-width: 359px);            /* teléfonos muy chicos */
+@custom-media --bp-phone (max-width: 389px);          /* teléfonos estándar */
+@custom-media --bp-mobile (max-width: 767px);         /* mobile angosto */
+@custom-media --bp-mobile-max (max-width: 1023px);    /* todo el DOM mobile */
+@custom-media --bp-tablet (min-width: 540px) and (max-width: 1023px);  /* tablet */
+@custom-media --bp-tablet-wide (min-width: 768px) and (max-width: 1023px);
+
+/* --- Rango DESKTOP (DOM desktop, >= 1024px) --- */
+@custom-media --bp-desktop (min-width: 1024px);       /* switch a layout desktop */
+@custom-media --bp-desktop-down (min-width: 1024px) and (max-width: 1439px); /* escala fluida del diseño 1440 */
+@custom-media --bp-desktop-sm (min-width: 1024px) and (max-width: 1279px);   /* sub-tier angosto */
+@custom-media --bp-desktop-md (min-width: 1280px) and (max-width: 1439px);   /* sub-tier medio */
+@custom-media --bp-desktop-up (min-width: 1440px);    /* diseño nativo, centrado */

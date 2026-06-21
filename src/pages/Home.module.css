@@ -1,3 +1,15 @@
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .desktopHome {
   display: block;
   background: #f7f4ef;
@@ -257,7 +269,7 @@
   text-transform: uppercase;
 }
 
-@media (min-width: 1024px) and (max-width: 1439px) {
+@media (--bp-desktop-down) {
   .desktopHero {
     height: 760px;
     margin-top: 100px;
@@ -270,24 +282,24 @@
   }
 
   .desktopHeroSubbrand {
-    top: calc(157px * (min(1314px, calc(100vw - 96px)) / 1314));
-    width: calc(576px * (min(1314px, calc(100vw - 96px)) / 1314));
+    top: calc(157px * (min(1314px, calc(100vw - 96px)) / 1314px));
+    width: calc(576px * (min(1314px, calc(100vw - 96px)) / 1314px));
     height: auto;
     line-height: 1;
     font-size: clamp(54px, 4.4vw, 80px);
   }
 
   .desktopHeroText {
-    top: calc(419px * (min(1314px, calc(100vw - 96px)) / 1314));
-    left: calc(779px * (min(1314px, calc(100vw - 96px)) / 1314));
-    width: calc(535px * (min(1314px, calc(100vw - 96px)) / 1314));
+    top: calc(419px * (min(1314px, calc(100vw - 96px)) / 1314px));
+    left: calc(779px * (min(1314px, calc(100vw - 96px)) / 1314px));
+    width: calc(535px * (min(1314px, calc(100vw - 96px)) / 1314px));
     line-height: 1.08;
     font-size: clamp(40px, 3.25vw, 48px);
   }
 
   .desktopHeroWordmark {
-    left: calc(9px * (min(1314px, calc(100vw - 96px)) / 1314));
-    width: calc(892px * (min(1314px, calc(100vw - 96px)) / 1314));
+    left: calc(9px * (min(1314px, calc(100vw - 96px)) / 1314px));
+    width: calc(892px * (min(1314px, calc(100vw - 96px)) / 1314px));
     height: auto;
   }
 
@@ -307,7 +319,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (--bp-mobile) {
   .mobileHero {
     height: calc(594px * min(100vw / 390, 1.08));
   }
@@ -317,7 +329,7 @@
   }
 }
 
-@media (max-width: 359px) {
+@media (--bp-xs) {
   .mobileHero {
     height: calc(594px * min(100vw / 390, 1));
   }
@@ -357,7 +369,7 @@
   }
 }
 
-@media (max-width: 1023px) {
+@media (--bp-mobile-max) {
   .desktopHome {
     display: none;
   }
@@ -367,26 +379,41 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (--bp-tablet) {
   .mobileHero {
-    height: 594px;
+    height: 640px;
     background: #b76856;
   }
 
   .mobileHeroCanvas {
-    left: auto;
+    left: 0;
+    width: 100%;
+    height: 640px;
+    margin: 0;
     transform: none;
-    margin: 0 auto;
+  }
+
+  .mobileHeroImage {
+    left: 0;
+    width: 100%;
+    height: 640px;
+    transform: none;
+  }
+
+  .mobileHeroOverlay {
+    top: 164px;
+    left: calc(50% - 420px / 2);
+    width: 420px;
+    height: 384px;
   }
 
   .mobileIntro {
-    padding-top: 56px;
-    padding-bottom: 56px;
+    padding: 64px 32px 64px;
   }
 
   .mobileIntroText {
-    width: 320px;
-    max-width: 320px;
+    width: 360px;
+    max-width: min(360px, 100%);
     font-size: 16px;
     line-height: 24px;
   }

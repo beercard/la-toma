@@ -1,0 +1,1306 @@
+.desktopPage,
+.mobilePage {
+  width: 100%;
+}
+
+.desktopPage {
+  display: none;
+}
+
+.desktopHeroFrame {
+  position: relative;
+  width: 100%;
+  height: 603px;
+  overflow: hidden;
+  background: #b76856;
+}
+
+.desktopHeroImage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: max(1920px, 100%);
+  height: 603px;
+  transform: translateX(-50%);
+  object-fit: cover;
+  opacity: 1;
+}
+
+.desktopHeroTitle {
+  position: absolute;
+  top: 277px;
+  left: 50%;
+  width: min(576px, calc(100% - 48px));
+  margin: 0;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 50px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.desktopEventsSection {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 93px 24px 0;
+  box-sizing: border-box;
+}
+
+.desktopSectionTitle {
+  width: min(594px, 100%);
+  margin: 0 auto;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: center;
+}
+
+.desktopCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 232px);
+  justify-content: center;
+  gap: 32px;
+  width: min(1024px, calc(100vw - 96px));
+  margin: 69px auto 0;
+}
+
+.desktopCard {
+  position: relative;
+  width: 232px;
+  min-height: 315px;
+  border: 0;
+  border-radius: 15px;
+  background-color: #b76856;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: left;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.desktopCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(35 35 35 / 4%) 0%, rgb(35 35 35 / 44%) 100%);
+}
+
+.desktopCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 30px rgb(0 0 0 / 12%);
+  filter: saturate(1.02);
+}
+
+.desktopCardTrigger {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.desktopCardTrigger:disabled {
+  display: none;
+}
+
+.desktopCardFront {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  width: 100%;
+  min-height: 315px;
+  padding: 127px 18px 26px 21px;
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+.desktopCard:focus-visible,
+.mobileCard:focus-visible,
+.desktopInput:focus-visible,
+.desktopSelect:focus-visible,
+.desktopTextarea:focus-visible,
+.desktopButton:focus-visible,
+.mobileInput:focus-visible,
+.mobileSelect:focus-visible,
+.mobileTextarea:focus-visible,
+.mobileButton:focus-visible {
+  outline: 2px solid #232323;
+  outline-offset: 3px;
+}
+
+.desktopCardDate,
+.desktopCardTitle,
+.desktopCardInfo,
+.desktopCardDescription,
+.desktopCardClose,
+.mobileCardDate,
+.mobileCardTitle,
+.mobileCardInfo {
+  position: relative;
+  z-index: 1;
+}
+
+.desktopCardDate {
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: clamp(32px, 2.4vw, 40px);
+  font-weight: 100;
+  line-height: 1;
+}
+
+.desktopCardTitle {
+  display: flex;
+  flex-direction: column;
+  margin-top: 7px;
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: clamp(32px, 2.5vw, 40px);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.desktopCardTitleLine + .desktopCardTitleLine {
+  margin-top: 2px;
+}
+
+.desktopCardInfo {
+  margin-top: 11px;
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 25px;
+  line-height: 25px;
+  text-decoration: underline;
+}
+
+.desktopCardDetails {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 15px;
+  background: #b76856;
+  width: 232px;
+  height: 315px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.985);
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease,
+    visibility 0s linear 300ms;
+}
+
+.desktopCardOpen .desktopCardFront {
+  opacity: 0;
+  transform: scale(0.985);
+}
+
+.desktopCardOpen .desktopCardDetails {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease,
+    visibility 0s linear 0s;
+}
+
+.desktopCardDescription {
+  position: absolute;
+  top: 27px;
+  left: 21px;
+  right: 22px;
+  bottom: 88px;
+  margin: 0;
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.desktopCardClose {
+  position: absolute;
+  left: 21px;
+  bottom: 29px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.desktopCardClose:hover {
+  opacity: 0.92;
+}
+
+.desktopCardVinilos {
+  background-image: url("/figma/mqmo4e5z-hk22slb.png");
+  background-position: center top;
+  background-size: 111.64% 100.11%;
+}
+
+.desktopCardFiltrados {
+  background-image: url("/figma/mqmo4e5z-t1vj83r.png");
+  background-position: center top;
+  background-size: 101.83% 100%;
+}
+
+.desktopCardAfterOffice {
+  background-image: url("/figma/mqmo4e5z-q1p619u.png");
+  background-position: center 38%;
+  background-size: 148.12% 163.34%;
+}
+
+.desktopCardCeramica {
+  background-image: url("/figma/mqmo4e5z-54fuz1b.png");
+  background-position: center top;
+  background-size: 100% 110.85%;
+}
+
+.desktopExperienceSection {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 134px 24px 0;
+  box-sizing: border-box;
+}
+
+.desktopDivider {
+  width: min(760px, calc(100vw - 96px));
+  height: 3px;
+  margin: 0 auto;
+  background: #b76856;
+}
+
+.desktopExperienceTitle {
+  width: min(594px, 100%);
+  margin: 51px auto 0;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: center;
+}
+
+.desktopExperienceText {
+  width: min(496px, calc(100vw - 96px));
+  min-height: 175px;
+  margin: 27px auto 0;
+  color: #232323;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 25px;
+  text-align: center;
+}
+
+.desktopExperienceSection .desktopDivider:last-child {
+  margin-top: 59px;
+}
+
+.desktopFormSection {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 103px 24px 85px;
+  box-sizing: border-box;
+}
+
+.desktopFormTitle {
+  width: min(594px, 100%);
+  margin: 0 auto;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
+}
+
+.desktopForm {
+  width: min(1025px, calc(100vw - 96px));
+  margin: 61px auto 0;
+}
+
+.desktopFieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 496px));
+  column-gap: 33px;
+  row-gap: 27px;
+}
+
+.desktopFieldGridCompact {
+  display: grid;
+  grid-template-columns: 496px 232px 232px;
+  column-gap: 33px;
+  margin-top: 27px;
+}
+
+.desktopField,
+.desktopCommentsField {
+  display: flex;
+  flex-direction: column;
+}
+
+.desktopLabel {
+  margin-bottom: 9px;
+  color: #232323;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.desktopInput,
+.desktopSelect,
+.desktopTextarea {
+  width: 100%;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background: transparent;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.desktopInput {
+  height: 38px;
+  padding: 0 12px;
+}
+
+.desktopSelect {
+  height: 38px;
+  padding: 0 36px 0 12px;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #232323 50%),
+    linear-gradient(135deg, #232323 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 2px),
+    calc(100% - 12px) calc(50% - 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.desktopTextarea {
+  min-height: 185px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.desktopCommentsField {
+  margin-top: 27px;
+}
+
+.desktopButtonRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 27px;
+}
+
+.desktopButton {
+  width: 152px;
+  height: 40px;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 5px 5px 5px -2px rgb(44 48 36 / 12%);
+  background: #b76856;
+  color: #ffffff;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 12px;
+  letter-spacing: 0.12px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.desktopButton:disabled,
+.mobileButton:disabled {
+  opacity: 0.75;
+  cursor: wait;
+}
+
+.formFeedback {
+  margin: 18px 0 0;
+  font-family: "Roboto Serif", serif;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.formFeedbackSuccess {
+  color: #5d6849;
+}
+
+.formFeedbackError {
+  color: #9c5444;
+}
+
+.mobilePage {
+  display: block;
+  overflow-x: hidden;
+}
+
+.mobileHero {
+  --mobile-hero-scale: 1;
+  width: 100%;
+  height: calc(344px * var(--mobile-hero-scale));
+  overflow: hidden;
+}
+
+.mobileHeroCanvas {
+  position: relative;
+  left: 50%;
+  width: 390px;
+  height: 344px;
+  margin: 0;
+  transform: translateX(-50%) scale(var(--mobile-hero-scale));
+  transform-origin: top center;
+}
+
+.mobileHeroBackground {
+  position: absolute;
+  inset: 0;
+  background: #b76856;
+}
+
+.mobileHeroImage {
+  position: absolute;
+  top: 0;
+  left: 1px;
+  width: 389px;
+  height: 344px;
+  object-fit: cover;
+  opacity: 1;
+}
+
+.mobileHeroTitle {
+  position: absolute;
+  top: 156px;
+  left: calc(50% - 255px / 2);
+  width: 255px;
+  margin: 0;
+  color: #ffffff;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mobileEventsSection {
+  width: min(390px, 100%);
+  margin: 0 auto;
+  padding: 27px 24px 0;
+  box-sizing: border-box;
+}
+
+.mobileSectionTitle {
+  width: 228px;
+  margin: 0 auto;
+  color: #9c5444;
+  font-family: "Roboto Serif", serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  text-align: center;
+}
+
+.mobileCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 163px));
+  column-gap: 16px;
+  row-gap: 16px;
+  justify-content: space-between;
+  margin-top: 22px;
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+.mobileCardsStage {
+  position: relative;
+  width: 100%;
+}
+
+.mobileCardsGridHidden {
+  opacity: 0;
+  transform: scale(0.985);
+  pointer-events: none;
+}
+
+.mobileCard {
+  position: relative;
+  width: 100%;
+  max-width: 163px;
+  justify-self: center;
+  min-height: 218px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #b76856;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: left;
+}
+
+.mobileCardTrigger {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mobileCardFront {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  width: 100%;
+  min-height: 218px;
+  padding: 88px 13px 17px 17px;
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+.mobileCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(35 35 35 / 6%) 0%, rgb(35 35 35 / 40%) 100%);
+}
+
+.mobileCardDate {
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 28px;
+  font-weight: 100;
+  line-height: 28px;
+}
+
+.mobileCardTitle {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.mobileCardInfo {
+  margin-top: 5px;
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 17px;
+  text-decoration: underline;
+}
+
+.mobileExpandedCard {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  z-index: 4;
+  width: 343px;
+  max-width: 100%;
+  height: 454px;
+  border-radius: 10px;
+  background: #b76856;
+  box-sizing: border-box;
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  animation: mobileExpandedCardIn 300ms ease;
+}
+
+.mobileExpandedDescription {
+  position: absolute;
+  top: 9.03%;
+  left: 8.45%;
+  right: 8.16%;
+  bottom: 24.01%;
+  width: auto;
+  max-width: none;
+  height: auto;
+  margin: 0;
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 20px;
+  white-space: pre-line;
+}
+
+.mobileExpandedActions {
+  position: absolute;
+  inset: 0;
+}
+
+.mobileExpandedButton {
+  position: absolute;
+  width: 30.9%;
+  min-width: 96px;
+  max-width: 106px;
+  height: 9.69%;
+  min-height: 42px;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 5px 5px 5px -2px rgb(44 48 36 / 10%);
+  background: #9c5444;
+  padding: 0;
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 10px;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.mobileExpandedButton:first-child {
+  left: 8.45%;
+  top: 84.14%;
+}
+
+.mobileExpandedButton:last-child {
+  right: 8.16%;
+  top: 83.92%;
+}
+
+@keyframes mobileExpandedCardIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.mobileCardVinilos {
+  background-image: url("/figma/mqmo4t3p-778eb4p.png");
+  background-position: center top;
+  background-size: 111.64% 101.02%;
+}
+
+.mobileCardFiltrados {
+  background-image: url("/figma/mqmo4t3p-63eq9jj.png");
+  background-position: center top;
+  background-size: 102.46% 101.83%;
+}
+
+.mobileCardAfterOffice {
+  background-image: url("/figma/mqmo4t3p-er12kx7.png");
+  background-position: center 38%;
+  background-size: 148.14% 164.82%;
+}
+
+.mobileCardCeramica {
+  background-image: url("/figma/mqmo4t3p-gs6n8mr.png");
+  background-position: center top;
+  background-size: 100% 110.85%;
+}
+
+.mobileCardAfterOffice,
+.mobileCardCeramica {
+  min-height: 220px;
+}
+
+.mobileCardAfterOffice .mobileCardFront,
+.mobileCardCeramica .mobileCardFront {
+  min-height: 220px;
+  padding-top: 89px;
+}
+
+.mobileExperienceSection {
+  width: min(390px, 100%);
+  margin: 0 auto;
+  padding: 68px 24px 0;
+  box-sizing: border-box;
+}
+
+.mobileDivider {
+  width: 271px;
+  height: 3px;
+  margin: 0 auto;
+  background: #b76856;
+}
+
+.mobileExperienceTitle {
+  width: 228px;
+  margin: 25px auto 0;
+  color: #9c5444;
+  font-family: "Roboto Serif", serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  text-align: center;
+}
+
+.mobileExperienceText {
+  width: min(269px, 100%);
+  min-height: 126px;
+  margin: 16px auto 0;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: center;
+}
+
+.mobileExperienceSection .mobileDivider:last-child {
+  margin-top: 30px;
+}
+
+.mobileFormSection {
+  width: min(390px, 100%);
+  margin: 0 auto;
+  padding: 40px 24px 34px;
+  box-sizing: border-box;
+}
+
+.mobileFormTitle {
+  width: 306px;
+  margin: 0;
+  color: #232323;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+.mobileForm {
+  margin-top: 40px;
+}
+
+.mobileFieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 163px));
+  gap: 18px 16px;
+}
+
+.mobileField,
+.mobileCommentsField {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileLabel {
+  margin-bottom: 5px;
+  color: #232323;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+.mobileInput,
+.mobileSelect,
+.mobileTextarea {
+  width: 100%;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  background: transparent;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.mobileInput {
+  height: 28px;
+  padding: 0 8px;
+}
+
+.mobileSelect {
+  height: 28px;
+  padding: 0 26px 0 8px;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #232323 50%),
+    linear-gradient(135deg, #232323 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) calc(50% - 2px),
+    calc(100% - 9px) calc(50% - 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.mobileCommentsField {
+  margin-top: 18px;
+}
+
+.mobileTextarea {
+  min-height: 72px;
+  padding: 8px;
+  resize: vertical;
+}
+
+.mobileButtonRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.mobileButton {
+  width: 134px;
+  height: 44px;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 5px 5px 5px -2px rgb(44 48 36 / 10%);
+  background: #b76856;
+  color: #ffffff;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 10px;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.mobileFormFeedback {
+  width: min(260px, 100%);
+  margin-left: auto;
+}
+
+@media (--bp-desktop) {
+  .desktopPage {
+    display: block;
+  }
+
+  .mobilePage {
+    display: none;
+  }
+}
+
+@media (--bp-desktop-down) {
+  .desktopHeroFrame {
+    height: 540px;
+  }
+
+  .desktopHeroImage {
+    height: 540px;
+  }
+
+  .desktopHeroTitle {
+    top: 248px;
+    font-size: 42px;
+    line-height: 42px;
+  }
+
+  .desktopSectionTitle,
+  .desktopExperienceTitle {
+    font-size: 34px;
+    line-height: 34px;
+  }
+
+  .desktopCardsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    width: min(1024px, calc(100vw - 72px));
+    margin-top: 56px;
+  }
+
+  .desktopCard {
+    width: 100%;
+    min-height: 290px;
+  }
+
+  .desktopCardFront {
+    min-height: 290px;
+    padding: 116px 16px 22px 17px;
+  }
+
+  .desktopCardInfo {
+    font-size: 21px;
+    line-height: 21px;
+  }
+
+  .desktopCardDetails {
+    width: 100%;
+    height: 290px;
+  }
+
+  .desktopCardDescription {
+    top: 24px;
+    left: 18px;
+    right: 18px;
+    bottom: 72px;
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .desktopCardClose {
+    left: 18px;
+    bottom: 24px;
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .desktopExperienceSection {
+    padding-top: 104px;
+  }
+
+  .desktopDivider {
+    width: min(720px, calc(100vw - 96px));
+  }
+
+  .desktopExperienceText {
+    font-size: 22px;
+    line-height: 22px;
+  }
+
+  .desktopForm {
+    width: min(1025px, calc(100vw - 72px));
+  }
+
+  .desktopFieldGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+
+  .desktopFieldGridCompact {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 24px;
+  }
+}
+
+@media (--bp-desktop-sm) {
+  .desktopHeroFrame {
+    height: 468px;
+  }
+
+  .desktopHeroImage {
+    height: 468px;
+  }
+
+  .desktopHeroTitle {
+    top: 214px;
+    font-size: 36px;
+    line-height: 36px;
+  }
+
+  .desktopEventsSection {
+    padding-top: 72px;
+  }
+
+  .desktopSectionTitle,
+  .desktopExperienceTitle {
+    font-size: 30px;
+    line-height: 30px;
+  }
+
+  .desktopCardsGrid {
+    gap: 16px;
+  }
+
+  .desktopCard {
+    min-height: 256px;
+  }
+
+  .desktopCardFront {
+    min-height: 256px;
+    padding: 102px 14px 18px 15px;
+  }
+
+  .desktopCardDate {
+    font-size: 28px;
+  }
+
+  .desktopCardTitle {
+    font-size: 30px;
+  }
+
+  .desktopCardInfo {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .desktopCardDetails {
+    width: 100%;
+    height: 256px;
+  }
+
+  .desktopCardDescription {
+    top: 18px;
+    left: 15px;
+    right: 15px;
+    bottom: 54px;
+    width: auto;
+    font-size: 16px;
+    line-height: 17px;
+  }
+
+  .desktopCardClose {
+    left: 15px;
+    bottom: 18px;
+    width: auto;
+    font-size: 16px;
+    line-height: 17px;
+  }
+
+  .desktopExperienceSection {
+    padding-top: 84px;
+  }
+
+  .desktopDivider {
+    width: min(620px, calc(100vw - 96px));
+  }
+
+  .desktopExperienceText {
+    width: min(460px, calc(100vw - 96px));
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .desktopFormSection {
+    padding-top: 84px;
+  }
+
+  .desktopLabel {
+    font-size: 18px;
+    line-height: 18px;
+  }
+}
+
+@media (--bp-tablet) {
+  .mobileHero {
+    height: 420px;
+  }
+
+  .mobileHeroCanvas {
+    left: 0;
+    width: 100%;
+    height: 420px;
+    transform: none;
+  }
+
+  .mobileHeroImage {
+    left: 0;
+    width: 100%;
+    height: 420px;
+    transform: none;
+  }
+
+  .mobileHeroTitle {
+    top: 194px;
+    left: 50%;
+    width: 320px;
+    transform: translateX(-50%);
+    font-size: 36px;
+    line-height: 36px;
+  }
+
+  .mobileEventsSection,
+  .mobileExperienceSection,
+  .mobileFormSection {
+    width: 100%;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .mobileSectionTitle,
+  .mobileExperienceTitle,
+  .mobileExperienceText,
+  .mobileDivider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mobileDivider {
+    width: min(360px, 100%);
+  }
+
+  .mobileExperienceTitle {
+    width: min(228px, 100%);
+  }
+
+  .mobileExperienceText {
+    width: min(420px, 100%);
+    min-height: auto;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .mobileCardsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+
+  .mobileCard {
+    max-width: 220px;
+    min-height: 240px;
+  }
+
+  .mobileCardFront {
+    min-height: 240px;
+    padding: 110px 18px 20px 18px;
+  }
+
+  .mobileCardDate {
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  .mobileCardTitle {
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  .mobileCardInfo {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .mobileCardDescription {
+    top: 20px;
+    left: 18px;
+    right: 18px;
+    bottom: 58px;
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .mobileCardClose {
+    left: 18px;
+    bottom: 20px;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .mobileCardAfterOffice,
+  .mobileCardCeramica {
+    min-height: 240px;
+  }
+
+  .mobileCardAfterOffice .mobileCardFront,
+  .mobileCardCeramica .mobileCardFront {
+    min-height: 240px;
+    padding-top: 110px;
+  }
+
+  .mobileExpandedCard {
+    width: min(420px, 100%);
+    height: 500px;
+  }
+
+  .mobileExpandedDescription {
+    font-size: 22px;
+    line-height: 22px;
+  }
+
+  .mobileFormTitle {
+    width: 100%;
+    text-align: left;
+  }
+
+  .mobileFieldGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+
+  .mobileFormFeedback {
+    width: 100%;
+  }
+}
+
+@media (--bp-xs) {
+  .mobileHero {
+    height: 344px;
+  }
+
+  .mobileHeroCanvas {
+    transform: translateX(-50%) scale(1);
+  }
+
+  .mobileHeroTitle {
+    width: 235px;
+    left: calc(50% - 235px / 2);
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+  .mobileEventsSection,
+  .mobileExperienceSection,
+  .mobileFormSection {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .mobileCardsGrid,
+  .mobileFieldGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+    row-gap: 16px;
+  }
+
+  .mobileDivider {
+    width: min(271px, 100%);
+  }
+
+  .mobileExperienceText,
+  .mobileSectionTitle,
+  .mobileExperienceTitle,
+  .mobileFormTitle {
+    width: 100%;
+  }
+
+  .mobileExperienceText {
+    min-height: auto;
+  }
+
+  .mobileExpandedCard {
+    top: 18px;
+    width: 100%;
+    height: 430px;
+  }
+
+  .mobileExpandedDescription {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .mobileExpandedButton {
+    min-width: 88px;
+    min-height: 40px;
+  }
+}

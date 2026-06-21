@@ -9,7 +9,7 @@
 
 .desktopHeroFrame {
   position: relative;
-  width: min(1920px, 100%);
+  width: 100%;
   height: 603px;
   margin: 0 auto;
   overflow: hidden;
@@ -20,8 +20,7 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 1925px;
-  min-width: 100%;
+  width: max(1925px, 100%);
   height: 603px;
   transform: translateX(-50%);
   object-fit: cover;
@@ -52,7 +51,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1920px;
+  width: 100%;
   height: 102px;
   background: #b5a896;
   transform: translateX(-50%);
@@ -213,8 +212,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(100% + 34px);
-  margin: 73px -17px 30px;
+  width: 100%;
+  margin: 73px 0 30px;
   padding: 9px 24px 8px;
   box-sizing: border-box;
   background: rgb(218 212 203 / 20%);
@@ -434,7 +433,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (--bp-desktop) {
   .desktopPage {
     display: block;
   }
@@ -457,7 +456,7 @@
   }
 
   .desktopHeroImage {
-    width: 1725px;
+    width: max(1725px, 100%);
     height: 540px;
   }
 
@@ -540,13 +539,13 @@
   }
 }
 
-@media (min-width: 1280px) and (max-width: 1599px) {
+@media (--bp-desktop-md) {
   .desktopHeroFrame {
     height: 572px;
   }
 
   .desktopHeroImage {
-    width: 1824px;
+    width: max(1824px, 100%);
     height: 572px;
   }
 
@@ -567,23 +566,37 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (--bp-tablet) {
   .mobilePage {
     background: #f7f4ef;
   }
 
   .mobileHero {
+    height: 520px;
     margin: 0 auto;
   }
 
   .mobileHeroCanvas {
-    left: auto;
-    margin: 0 auto;
-    transform: scale(var(--mobile-hero-scale));
+    left: 0;
+    width: 100%;
+    height: 520px;
+    margin: 0;
+    transform: none;
+  }
+
+  .mobileHeroImage {
+    left: 50%;
+    width: 100%;
+    min-width: 520px;
+    height: 390px;
+    transform: translateX(-50%);
   }
 
   .mobileContentSection {
-    width: min(680px, 100%);
+    width: 100%;
+    padding-right: 32px;
+    padding-left: 32px;
+    box-sizing: border-box;
     padding-top: 56px;
     padding-bottom: 72px;
   }
@@ -597,6 +610,7 @@
 
   .mobileGallery {
     margin-top: 36px;
+    height: 180px;
   }
 
   .mobileArrowLeft {
@@ -608,7 +622,7 @@
   }
 }
 
-@media (max-width: 359px) {
+@media (--bp-xs) {
   .mobileHero {
     height: 462px;
   }

@@ -9,9 +9,6 @@
 }
 
 .desktopInner {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
   width: 100%;
   height: 100px;
   margin: 0 auto;
@@ -19,47 +16,36 @@
   box-sizing: border-box;
 }
 
-.desktopScale {
-  --desktop-scale: 1;
-  width: 1554px;
-  height: calc(58px * var(--desktop-scale));
-  margin-top: calc(31px * var(--desktop-scale));
-  transform: scale(var(--desktop-scale));
-  transform-origin: top center;
-}
-
-.desktopRow {
-  display: grid;
-  align-items: flex-start;
-  justify-content: center;
-  grid-template-columns: 100px 109px 107px 109px 137px 90px 252px 90px 87px 134px 94px 134px 111px;
-  width: 1554px;
-  min-width: 0;
+.desktopNav {
+  position: relative;
+  width: min(1920px, 100%);
+  height: 100px;
+  margin: 0 auto;
   white-space: nowrap;
-  overflow: visible;
 }
 
 .desktopLogoLink {
   position: relative;
   display: block;
-  grid-column: 7;
-  justify-self: center;
+  position: absolute;
+  top: 31px;
+  left: 50%;
   width: 252px;
   height: 38px;
-  flex: 0 0 auto;
+  transform: translateX(-50%);
 }
 
 .desktopLogo {
   display: block;
-  width: 252px;
-  height: 38px;
+  width: 100%;
+  height: 100%;
 }
 
 .desktopLogoHover {
   position: absolute;
   inset: 0;
-  width: 252px;
-  height: 38px;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   transition: opacity 180ms ease;
 }
@@ -70,51 +56,45 @@
 }
 
 .desktopTextItem {
+  position: absolute;
+  top: 42px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   height: 58px;
   text-decoration: none;
-  flex: 0 0 auto;
   overflow: visible;
-  justify-self: center;
-  width: 178px;
-  margin-top: 11px;
+  transform: translateX(-50%);
 }
 
 .desktopCafe {
-  grid-column: 1;
-  width: 100px;
+  left: 12.0833%;
 }
 
 .desktopReservas {
-  grid-column: 3;
-  width: 107px;
+  left: 23.151%;
 }
 
 .desktopProyecto {
-  grid-column: 5;
-  width: 137px;
+  left: 35.1823%;
 }
 
 .desktopGaleria {
-  grid-column: 9;
-  width: 87px;
+  left: 63.5156%;
 }
 
 .desktopEventos {
-  grid-column: 11;
-  width: 94px;
+  left: 75.2083%;
 }
 
 .desktopContacto {
-  grid-column: 13;
-  width: 111px;
+  left: 87.526%;
 }
 
 .desktopNavLabel {
-  height: 23px;
+  min-width: max-content;
+  min-height: 23px;
   text-align: center;
   letter-spacing: 0;
   color: #232323;
@@ -126,53 +106,25 @@
   white-space: nowrap;
 }
 
-.desktopCafeLabel {
-  width: 100px;
-}
-
-.desktopReservasLabel {
-  width: 107px;
-}
-
-.desktopProyectoLabel {
-  width: 137px;
-}
-
-.desktopGaleriaLabel {
-  width: 87px;
-}
-
-.desktopEventosLabel {
-  width: 94px;
-}
-
-.desktopContactoLabel {
-  width: 111px;
-}
-
 .desktopNavUnderline {
-  width: 178px;
+  width: 100%;
+  min-width: 100%;
   height: 5px;
   background: #b76856;
   opacity: 0;
   transition: opacity 180ms ease;
-}
-
-.desktopUnderline30 {
   margin-top: 30px;
 }
 
-.desktopUnderline33 {
-  margin-top: 33px;
-}
-
 .desktopTextItem:hover .desktopNavLabel,
-.desktopTextItem:focus-visible .desktopNavLabel {
+.desktopTextItem:focus-visible .desktopNavLabel,
+.desktopTextItemActive .desktopNavLabel {
   color: #b76856;
 }
 
 .desktopTextItem:hover .desktopNavUnderline,
-.desktopTextItem:focus-visible .desktopNavUnderline {
+.desktopTextItem:focus-visible .desktopNavUnderline,
+.desktopTextItemActive .desktopNavUnderline {
   opacity: 1;
 }
 
@@ -201,17 +153,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100vw;
+  width: 100%;
   height: 64px;
   margin: 0 auto;
   padding: 22px 45px 22px 24px;
   box-sizing: border-box;
 }
 
+.mobileLogoLink {
+  display: block;
+  flex: 0 0 auto;
+  width: 90px;
+  height: 14px;
+}
+
 .mobileLogo {
   display: block;
   width: 90px;
   height: 14px;
+  object-fit: contain;
 }
 
 .burger {
@@ -256,6 +216,7 @@
   justify-content: flex-start;
   padding-top: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
   animation: mobileMenuOverlayIn 220ms ease-out;
 }
 
@@ -263,7 +224,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100vw;
+  width: 100%;
   height: 65px;
   padding: 23px 45px 22px 24px;
   box-sizing: border-box;
@@ -275,7 +236,7 @@
 .mobileMenuItem {
   display: flex;
   align-items: flex-start;
-  width: 100vw;
+  width: 100%;
   min-height: 65px;
   padding: 20px 29px 15px 30px;
   box-sizing: border-box;
@@ -342,6 +303,10 @@
   background: #afa18d;
 }
 
+.mobileMenuItemActive {
+  background: #afa18d;
+}
+
 .mobileMenuItem:focus-visible {
   outline: 2px solid #f7f4ef;
   outline-offset: -2px;
@@ -381,7 +346,7 @@
   }
 }
 
-@media (max-width: 389px) {
+@media (--bp-phone) {
   .mobileInner,
   .mobileMenuHeader {
     padding-right: 20px;
@@ -398,19 +363,67 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (--bp-desktop-down) {
+  .desktopLogoLink {
+    top: 33px;
+    width: 220px;
+    height: 33px;
+  }
+
+  .desktopTextItem {
+    top: 42px;
+  }
+
+  .desktopNavLabel {
+    min-height: 21px;
+    font-size: 18px;
+    line-height: 21px;
+  }
+
+  .desktopNavUnderline {
+    margin-top: 26px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1180px) {
+  .desktopInner {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .desktopLogoLink {
+    top: 35px;
+    width: 196px;
+    height: 30px;
+  }
+
+  .desktopTextItem {
+    top: 42px;
+  }
+
+  .desktopNavLabel {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .desktopNavUnderline {
+    margin-top: 24px;
+  }
+}
+
+@media (--bp-tablet-wide) {
   .mobileMenuItemLabel {
     max-width: none;
   }
 }
 
-@media (max-width: 1023px) {
+@media (--bp-mobile-max) {
   .desktopHeader {
     display: none;
   }
 }
 
-@media (min-width: 1024px) {
+@media (--bp-desktop) {
   .mobileHeader,
   .mobileMenu {
     display: none;

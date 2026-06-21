@@ -71,6 +71,18 @@
   font-weight: 500;
 }
 
+.addressLinkBlock {
+  width: 232px;
+  margin: 18px 0 0;
+  line-height: 21px;
+  letter-spacing: 0;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
 .mapLink {
   line-height: 21px;
   letter-spacing: 0;
@@ -85,6 +97,13 @@
 .footerMenuLink {
   color: inherit;
   text-decoration: none;
+}
+
+.addressLinkBlock:hover,
+.mapLink:hover,
+.footerMenuLink:hover,
+.mobileAddressLink:hover {
+  text-decoration: underline;
 }
 
 .stack20 {
@@ -175,7 +194,8 @@
 .mobileIconLink:focus-visible,
 .footerMenuLink:focus-visible,
 .legalLink:focus-visible,
-.mapLink:focus-visible {
+.mapLink:focus-visible,
+.addressLinkBlock:focus-visible {
   outline: 2px solid #232323;
   outline-offset: 2px;
 }
@@ -206,7 +226,55 @@
   font-size: 10px;
 }
 
-@media (min-width: 1024px) and (max-width: 1439px) {
+.credit {
+  margin: 10px 0 0;
+  letter-spacing: 0.12px;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.55;
+}
+
+.creditLink {
+  color: #5d6849;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mobileLegalLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.mobileLegalLink {
+  opacity: 0.7;
+  letter-spacing: 0.1px;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 11px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mobileCredit {
+  opacity: 0.55;
+  margin: 8px auto 0;
+  width: 299px;
+  max-width: 100%;
+  text-align: center;
+  letter-spacing: 0.1px;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 10px;
+}
+
+@media (--bp-desktop-down) {
   .desktopInner {
     grid-template-columns: minmax(260px, 1.2fr) repeat(3, minmax(180px, 1fr));
     gap: 32px;
@@ -229,6 +297,7 @@
   }
 
   .bodyText,
+  .addressLinkBlock,
   .mapLink {
     width: auto;
     font-size: 13px;
@@ -236,13 +305,13 @@
   }
 }
 
-@media (max-width: 1023px) {
+@media (--bp-mobile-max) {
   .desktopFooter {
     display: none;
   }
 }
 
-@media (max-width: 389px) {
+@media (--bp-phone) {
   .mobileFooter {
     padding-right: 16px;
     padding-left: 16px;
@@ -265,7 +334,7 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (--bp-tablet-wide) {
   .mobileFooter {
     padding-top: 56px;
     padding-bottom: 36px;
@@ -290,7 +359,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (--bp-desktop) {
   .mobileFooter {
     display: none;
   }

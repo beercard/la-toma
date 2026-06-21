@@ -1,0 +1,722 @@
+.desktopPage,
+.mobilePage {
+  width: 100%;
+}
+
+.desktopPage {
+  display: none;
+}
+
+.desktopHero {
+  width: 100%;
+}
+
+.desktopHeroFrame {
+  position: relative;
+  width: 100%;
+  height: 603px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #e1c89f;
+}
+
+.desktopHeroImage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: max(1920px, 100%);
+  height: 603px;
+  transform: translateX(-50%);
+  object-fit: cover;
+  opacity: 1;
+}
+
+.desktopHeroTitle {
+  position: absolute;
+  top: 238px;
+  left: 50%;
+  width: min(576px, calc(100% - 48px));
+  height: 40px;
+  margin: 0;
+  transform: translateX(-50%);
+  color: #232323;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 48px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.desktopHeroBand {
+  position: absolute;
+  top: 320px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 102px;
+  padding: 25px 24px;
+  box-sizing: border-box;
+  background: #e1c89f;
+  transform: translateX(-50%);
+}
+
+.desktopHeroText {
+  width: min(476px, 100%);
+  min-height: 52px;
+  margin: 0;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
+
+.desktopContentSection {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 72px 24px 60px;
+  box-sizing: border-box;
+}
+
+.desktopIntro {
+  width: min(892px, 100%);
+  margin: 0 0 0 max(0px, calc(50% - 576px));
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  text-align: left;
+}
+
+.desktopTagStrip {
+  width: calc(100% + 41px);
+  margin: 61px -4px 0 -37px;
+  background: #c3903f;
+}
+
+.desktopTag {
+  width: 342px;
+  margin: 0 0 0 max(0px, calc(50% - 576px));
+  color: #f7f4ef;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 40px;
+}
+
+.desktopGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 360.71px);
+  justify-content: center;
+  gap: 35.4px 35.17px;
+  margin-top: 56px;
+}
+
+.desktopGridButton {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    filter 220ms ease;
+}
+
+.desktopGridButton:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.05);
+}
+
+.desktopGridButton:focus-visible {
+  outline: 2px solid #232323;
+  outline-offset: 4px;
+}
+
+.desktopGridImage {
+  display: block;
+  width: 360.71px;
+  height: 221.3px;
+  object-fit: cover;
+}
+
+.desktopMoreLink {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  margin-top: 29px;
+  margin-left: max(0px, calc(50% - 576px));
+  color: #232323;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.desktopMoreLink:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.desktopMoreLink:focus-visible {
+  outline: 2px solid #232323;
+  outline-offset: 4px;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+}
+
+.lightboxBackdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgb(16 16 16 / 82%);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+.lightboxContent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 48px;
+  box-sizing: border-box;
+}
+
+.lightboxFigure {
+  position: relative;
+  max-width: min(1120px, calc(100vw - 192px));
+  max-height: calc(100vh - 120px);
+  animation: lightboxFadeIn 260ms ease;
+}
+
+.lightboxImage {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 120px);
+  border-radius: 6px;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 38%);
+  object-fit: contain;
+}
+
+.lightboxArrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  width: 54px;
+  height: 54px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(247 244 239 / 88%);
+  color: #232323;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.lightboxArrow:hover {
+  background: #f7f4ef;
+  transform: translateY(-50%) scale(1.04);
+}
+
+.lightboxArrow:focus-visible,
+.lightboxClose:focus-visible {
+  outline: 2px solid #f7f4ef;
+  outline-offset: 3px;
+}
+
+.lightboxArrowLeft {
+  left: 32px;
+}
+
+.lightboxArrowRight {
+  right: 32px;
+}
+
+.lightboxArrowIcon {
+  display: block;
+  font-size: 40px;
+  line-height: 1;
+}
+
+.lightboxClose {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(247 244 239 / 88%);
+  color: #232323;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.mobilePage {
+  display: block;
+  overflow-x: hidden;
+}
+
+.mobileHero {
+  --mobile-hero-scale: 1;
+  width: 100%;
+  height: calc(462px * var(--mobile-hero-scale));
+  overflow: hidden;
+}
+
+.mobileHeroCanvas {
+  position: relative;
+  left: 50%;
+  width: 390px;
+  height: 462px;
+  margin: 0;
+  transform: translateX(-50%) scale(var(--mobile-hero-scale));
+  transform-origin: top center;
+}
+
+.mobileHeroBackground {
+  position: absolute;
+  inset: 0;
+  background: #e1c89f;
+}
+
+.mobileHeroImage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 390px;
+  height: 344px;
+  transform: translateX(-50%);
+  object-fit: cover;
+  opacity: 1;
+}
+
+.mobileHeroTitle {
+  position: absolute;
+  top: 156px;
+  left: calc(50% - 255px / 2);
+  width: 255px;
+  height: 24px;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mobileHeroText {
+  position: absolute;
+  top: 374px;
+  left: calc(50% - 242px / 2);
+  width: 242px;
+  height: 63px;
+  margin: 0;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: center;
+}
+
+.mobileContentSection {
+  width: min(390px, 100%);
+  margin: 0 auto;
+  padding: 28px 0 30px;
+  box-sizing: border-box;
+}
+
+.mobileIntro {
+  width: 228px;
+  margin: 0 auto;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: center;
+}
+
+.mobileTagStrip {
+  width: 100%;
+  margin-top: 25px;
+  background: #c3903f;
+}
+
+.mobileTag {
+  width: 163px;
+  margin: 0 0 0 calc(50% - 171px);
+  padding: 4px 0 2px;
+  color: #f7f4ef;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.mobileGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 163px);
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.mobileGridButton {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    transform 200ms ease,
+    filter 200ms ease;
+}
+
+.mobileGridButton:hover {
+  transform: translateY(-1px);
+}
+
+.mobileGridButton:focus-visible,
+.mobileMoreLink:focus-visible {
+  outline: 2px solid #232323;
+  outline-offset: 3px;
+}
+
+.mobileGridImage {
+  display: block;
+  width: 163px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.mobileMoreLink {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  margin-top: 11px;
+  margin-left: calc(50% - 171px);
+  color: #232323;
+  font-family: "Mundial", system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 15px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mobileMoreLink:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (--bp-desktop) {
+  .desktopPage {
+    display: block;
+  }
+
+  .mobilePage {
+    display: none;
+  }
+}
+
+@media (--bp-desktop-down) {
+  .desktopHeroFrame {
+    height: 520px;
+  }
+
+  .desktopHeroImage {
+    width: max(1920px, 100%);
+    height: 520px;
+  }
+
+  .desktopHeroTitle {
+    top: 206px;
+    width: min(520px, calc(100% - 48px));
+    font-size: 42px;
+    line-height: 42px;
+  }
+
+  .desktopHeroBand {
+    top: 276px;
+    height: 92px;
+  }
+
+  .desktopHeroText {
+    width: min(430px, 100%);
+    font-size: 21px;
+    line-height: 21px;
+  }
+
+  .desktopContentSection {
+    padding-right: 48px;
+    padding-left: 48px;
+  }
+
+  .desktopIntro {
+    width: min(892px, 100%);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .desktopTagStrip {
+    width: 100%;
+    margin: 48px 0 0;
+  }
+
+  .desktopTag {
+    margin-left: 0;
+    padding-left: 48px;
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .desktopGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .desktopGridButton {
+    width: 100%;
+  }
+
+  .desktopGridImage {
+    width: 100%;
+    height: 19vw;
+    max-height: 221px;
+  }
+
+  .desktopMoreLink {
+    margin-left: 0;
+  }
+
+  .lightboxContent {
+    padding: 32px;
+  }
+
+  .lightboxFigure {
+    max-width: min(960px, calc(100vw - 160px));
+  }
+}
+
+@media (--bp-desktop-sm) {
+  .desktopHeroFrame {
+    height: 468px;
+  }
+
+  .desktopHeroImage {
+    width: max(1920px, 100%);
+    height: 468px;
+  }
+
+  .desktopHeroTitle {
+    top: 182px;
+    width: min(460px, calc(100% - 64px));
+    font-size: 36px;
+    line-height: 36px;
+  }
+
+  .desktopHeroBand {
+    top: 244px;
+    height: 84px;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .desktopHeroText {
+    width: min(370px, 100%);
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .desktopTag {
+    font-size: 24px;
+    line-height: 40px;
+  }
+
+  .lightboxArrowLeft {
+    left: 20px;
+  }
+
+  .lightboxArrowRight {
+    right: 20px;
+  }
+}
+
+@media (--bp-tablet) {
+  .mobileHero {
+    height: 520px;
+    background: #e1c89f;
+  }
+
+  .mobileHeroCanvas {
+    left: 0;
+    width: 100%;
+    height: 520px;
+    margin: 0;
+    transform: none;
+  }
+
+  .mobileHeroImage {
+    left: 0;
+    width: 100%;
+    height: 390px;
+    transform: none;
+  }
+
+  .mobileHeroText {
+    top: 402px;
+    left: calc(50% - 242px / 2);
+  }
+
+  .mobileContentSection {
+    width: 100%;
+    padding-right: 32px;
+    padding-left: 32px;
+    box-sizing: border-box;
+  }
+
+  .mobileIntro {
+    width: 260px;
+  }
+
+  .mobileTagStrip {
+    width: calc(100% + 64px);
+    margin: 32px -32px 0;
+  }
+
+  .mobileTag {
+    margin-left: 0;
+    padding-left: 32px;
+    box-sizing: border-box;
+  }
+
+  .mobileGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .mobileGridButton {
+    width: 100%;
+  }
+
+  .mobileGridImage {
+    width: 100%;
+    height: 196px;
+  }
+
+  .mobileMoreLink {
+    margin-left: 0;
+    margin-top: 16px;
+  }
+}
+
+@media (--bp-xs) {
+  .mobileHero {
+    height: 462px;
+  }
+
+  .mobileHeroCanvas {
+    transform: translateX(-50%) scale(1);
+  }
+
+  .mobileHeroTitle {
+    left: calc(50% - 235px / 2);
+    width: 235px;
+    font-size: 22px;
+  }
+
+  .mobileHeroText {
+    left: calc(50% - 220px / 2);
+    width: 220px;
+  }
+
+  .mobileGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-right: 20px;
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+
+  .mobileGridImage {
+    width: 100%;
+    height: 96px;
+  }
+
+  .mobileTag {
+    margin-left: calc(50% - 151px);
+    width: 150px;
+  }
+
+  .mobileMoreLink {
+    margin-left: calc(50% - 151px);
+  }
+}
+
+@media (--bp-mobile) {
+  .lightboxContent {
+    padding: 20px;
+  }
+
+  .lightboxFigure {
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 120px);
+  }
+
+  .lightboxArrow {
+    width: 42px;
+    height: 42px;
+  }
+
+  .lightboxArrowLeft {
+    left: 10px;
+  }
+
+  .lightboxArrowRight {
+    right: 10px;
+  }
+
+  .lightboxArrowIcon {
+    font-size: 30px;
+  }
+
+  .lightboxClose {
+    top: 14px;
+    right: 14px;
+  }
+}
