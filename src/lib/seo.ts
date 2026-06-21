@@ -11,7 +11,7 @@ import {
 
 export const SEO_SITE_NAME = "La Toma Multiespacio";
 export const SEO_SITE_URL = "https://latoma.com.ar";
-export const SEO_DEFAULT_IMAGE = "/figma/mqmr107o-mtd2kux.png";
+export const SEO_DEFAULT_IMAGE = "/og-image.jpg";
 export const SEO_LOCALE = "es_AR";
 export const SEO_LANGUAGE = "es-AR";
 export const SEO_ROBOTS = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";

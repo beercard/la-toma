@@ -18,6 +18,109 @@ interface GalleryRow {
   is_published: boolean;
 }
 
+function GalleryItemEditor({
+  row,
+  onSavedMeta,
+  onToggleVisible,
+  onDelete,
+}: {
+  row: GalleryRow;
+  onSavedMeta: (id: string, patch: { alt: string; tag: string | null }) => void;
+  onToggleVisible: (id: string, value: boolean) => void;
+  onDelete: (id: string, imageUrl: string) => void;
+}) {
+  const [alt, setAlt] = useState(row.alt);
+  const [tag, setTag] = useState(row.tag ?? "");
+  const [saving, setSaving] = useState(false);
+  const [justSaved, setJustSaved] = useState(false);
+
+  useEffect(() => {
+    setAlt(row.alt);
+    setTag(row.tag ?? "");
+  }, [row.id, row.alt, row.tag]);
+
+  const dirty = alt !== row.alt || tag !== (row.tag ?? "");
+
+  const save = async () => {
+    if (!dirty) return;
+    setSaving(true);
+    try {
+      const patch = { alt, tag: tag || null };
+      await adminUpdateGalleryImage(row.id, patch);
+      onSavedMeta(row.id, patch);
+      setJustSaved(true);
+      window.setTimeout(() => setJustSaved(false), 1800);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const reset = () => {
+    setAlt(row.alt);
+    setTag(row.tag ?? "");
+  };
+
+  return (
+    <div className={styles.thumb}>
+      <img src={row.image_url} alt={row.alt} className={styles.thumbImg} loading="lazy" />
+      <div style={{ padding: "8px 10px", display: "flex", flexDirection: "column", gap: 8 }}>
+        <input
+          className={styles.input}
+          value={alt}
+          placeholder="Texto alternativo"
+          onChange={(e) => setAlt(e.target.value)}
+        />
+        <input
+          className={styles.input}
+          value={tag}
+          placeholder="Etiqueta (ej. APERTURA 11.07)"
+          onChange={(e) => setTag(e.target.value)}
+        />
+
+        {dirty ? (
+          <div className={styles.actions}>
+            <button
+              type="button"
+              className={`${styles.btn} ${styles.btnPrimary} ${styles.btnSmall}`}
+              onClick={save}
+              disabled={saving}
+            >
+              {saving ? "Guardando…" : "Guardar"}
+            </button>
+            <button
+              type="button"
+              className={`${styles.btn} ${styles.btnGhost} ${styles.btnSmall}`}
+              onClick={reset}
+              disabled={saving}
+            >
+              Deshacer
+            </button>
+          </div>
+        ) : justSaved ? (
+          <span className={styles.savedTag}>✓ Guardado</span>
+        ) : null}
+
+        <div className={styles.thumbBar}>
+          <label className={styles.thumbTag}>
+            <input
+              type="checkbox"
+              checked={row.is_published}
+              onChange={(e) => onToggleVisible(row.id, e.target.checked)}
+            />{" "}
+            Visible
+          </label>
+          <button
+            className={`${styles.btn} ${styles.btnDanger} ${styles.btnSmall}`}
+            onClick={() => onDelete(row.id, row.image_url)}
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function GalleryManager() {
   const [rows, setRows] = useState<GalleryRow[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -56,22 +159,26 @@ export default function GalleryManager() {
     }
   };
 
-  const saveField = async (id: string, patch: Record<string, unknown>) => {
+  const handleSavedMeta = (id: string, patch: { alt: string; tag: string | null }) => {
+    setRows((prev) => prev.map((r) => (r.id === id ? { ...r, ...patch } : r)));
+  };
+
+  const handleToggleVisible = async (id: string, value: boolean) => {
+    setRows((prev) => prev.map((r) => (r.id === id ? { ...r, is_published: value } : r)));
     try {
-      await adminUpdateGalleryImage(id, patch);
-      await load();
+      await adminUpdateGalleryImage(id, { is_published: value });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "No se pudo guardar.");
+      setError(err instanceof Error ? err.message : "No se pudo actualizar la visibilidad.");
+      await load();
     }
   };
 
   const handleDelete = async (id: string, imageUrl: string) => {
     if (!window.confirm("¿Eliminar esta imagen?")) return;
     try {
-      // Borra primero el archivo del Storage (best-effort), luego la fila.
       await removeMediaByUrl(imageUrl).catch(() => undefined);
       await adminDeleteGalleryImage(id);
-      await load();
+      setRows((prev) => prev.filter((r) => r.id !== id));
     } catch (err) {
       setError(err instanceof Error ? err.message : "No se pudo eliminar.");
     }
@@ -88,8 +195,9 @@ export default function GalleryManager() {
       </div>
 
       <p className={styles.hint}>
-        Subí fotos (se guardan en Supabase Storage). Agregá un texto alternativo descriptivo para SEO y
-        accesibilidad. El orden controla cómo aparecen en la galería pública.
+        Subí fotos (se optimizan a WebP automáticamente). Agregá un texto alternativo descriptivo para SEO y
+        accesibilidad; al modificar alguno aparece el botón <strong>Guardar</strong> para confirmar. El
+        orden controla cómo aparecen en la galería pública.
       </p>
 
       {error ? <div className={`${styles.notice} ${styles.noticeError}`}>{error}</div> : null}
@@ -99,39 +207,13 @@ export default function GalleryManager() {
       ) : (
         <div className={styles.galleryGrid}>
           {rows.map((row) => (
-            <div className={styles.thumb} key={row.id}>
-              <img src={row.image_url} alt={row.alt} className={styles.thumbImg} loading="lazy" />
-              <div style={{ padding: "8px 10px", display: "flex", flexDirection: "column", gap: 8 }}>
-                <input
-                  className={styles.input}
-                  defaultValue={row.alt}
-                  placeholder="Texto alternativo"
-                  onBlur={(e) => e.target.value !== row.alt && saveField(row.id, { alt: e.target.value })}
-                />
-                <input
-                  className={styles.input}
-                  defaultValue={row.tag ?? ""}
-                  placeholder="Etiqueta (ej. APERTURA 11.07)"
-                  onBlur={(e) => e.target.value !== (row.tag ?? "") && saveField(row.id, { tag: e.target.value || null })}
-                />
-                <div className={styles.thumbBar}>
-                  <label className={styles.thumbTag}>
-                    <input
-                      type="checkbox"
-                      checked={row.is_published}
-                      onChange={(e) => saveField(row.id, { is_published: e.target.checked })}
-                    />{" "}
-                    Visible
-                  </label>
-                  <button
-                    className={`${styles.btn} ${styles.btnDanger} ${styles.btnSmall}`}
-                    onClick={() => handleDelete(row.id, row.image_url)}
-                  >
-                    Eliminar
-                  </button>
-                </div>
-              </div>
-            </div>
+            <GalleryItemEditor
+              key={row.id}
+              row={row}
+              onSavedMeta={handleSavedMeta}
+              onToggleVisible={handleToggleVisible}
+              onDelete={handleDelete}
+            />
           ))}
         </div>
       )}
