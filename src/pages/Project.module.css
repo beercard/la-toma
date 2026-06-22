@@ -167,10 +167,24 @@
   transform: rotate(90deg);
 }
 
+.desktopGalleryButton {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+  display: block;
+  line-height: 0;
+  cursor: zoom-in;
+}
+
 .desktopGalleryImage {
   width: 496px;
   height: 284px;
   object-fit: cover;
+}
+
+.mobileGalleryClickable {
+  cursor: zoom-in;
 }
 
 .desktopGalleryImageAnimated,

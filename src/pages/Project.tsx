@@ -1,6 +1,9 @@
 import { CSSProperties, useEffect, useState } from "react";
 import { SITE_INSTAGRAM_LINK } from "../lib/siteConfig";
+import Lightbox from "../components/Lightbox";
 import styles from "./Project.module.css";
+
+const PROJECT_IMAGE_ALT = "Vista del proyecto gastronómico de La Toma en Corrientes Capital";
 
 const desktopSlides = [
   "/figma/mqk7ns47-64iua53.png",
@@ -14,10 +17,14 @@ const mobileSlides = [
   "/figma/mqk7o90b-ft3rc1l.png",
 ];
 
+const desktopLightboxImages = desktopSlides.map((src) => ({ src, alt: PROJECT_IMAGE_ALT }));
+const mobileLightboxImages = mobileSlides.map((src) => ({ src, alt: PROJECT_IMAGE_ALT }));
+
 export default function Project() {
   const [mobileHeroScale, setMobileHeroScale] = useState(1);
   const [desktopSlideIndex, setDesktopSlideIndex] = useState(0);
   const [mobileSlideIndex, setMobileSlideIndex] = useState(1);
+  const [lightbox, setLightbox] = useState<{ gallery: "desktop" | "mobile"; index: number } | null>(null);
 
   useEffect(() => {
     const updateMobileHeroScale = () => {
@@ -37,13 +44,17 @@ export default function Project() {
     return () => window.removeEventListener("resize", updateMobileHeroScale);
   }, []);
 
+  // Auto-avance en desktop y mobile; se pausa mientras el visor está abierto.
   useEffect(() => {
+    if (lightbox) return;
+
     const intervalId = window.setInterval(() => {
       setDesktopSlideIndex((current) => (current + 1) % desktopSlides.length);
+      setMobileSlideIndex((current) => (current + 1) % mobileSlides.length);
     }, 4500);
 
     return () => window.clearInterval(intervalId);
-  }, []);
+  }, [lightbox]);
 
   const previousDesktopSlide = () => {
     setDesktopSlideIndex((current) => (current - 1 + desktopSlides.length) % desktopSlides.length);
@@ -126,12 +137,19 @@ export default function Project() {
                   />
                 </button>
 
-                <img
-                  key={`desktop-slide-${desktopSlideIndex}`}
-                  src={desktopSlides[desktopSlideIndex]}
-                  alt="Vista del proyecto gastronómico de La Toma en Corrientes Capital"
-                  className={[styles.desktopGalleryImage, styles.desktopGalleryImageAnimated].join(" ")}
-                />
+                <button
+                  type="button"
+                  className={styles.desktopGalleryButton}
+                  onClick={() => setLightbox({ gallery: "desktop", index: desktopSlideIndex })}
+                  aria-label="Ampliar imagen del proyecto"
+                >
+                  <img
+                    key={`desktop-slide-${desktopSlideIndex}`}
+                    src={desktopSlides[desktopSlideIndex]}
+                    alt={PROJECT_IMAGE_ALT}
+                    className={[styles.desktopGalleryImage, styles.desktopGalleryImageAnimated].join(" ")}
+                  />
+                </button>
 
                 <button
                   type="button"
@@ -239,12 +257,22 @@ export default function Project() {
             <img
               key={`mobile-center-${mobileCurrentSlide}`}
               src={mobileCurrentSlide}
-              alt="Vista del proyecto gastronómico de La Toma en Corrientes Capital"
+              alt={PROJECT_IMAGE_ALT}
+              role="button"
+              tabIndex={0}
+              onClick={() => setLightbox({ gallery: "mobile", index: mobileSlideIndex })}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setLightbox({ gallery: "mobile", index: mobileSlideIndex });
+                }
+              }}
               className={[
                 styles.mobileGalleryImage,
                 styles.mobileGalleryCenter,
                 styles.mobileGalleryCenterActive,
                 styles.mobileGalleryImageAnimated,
+                styles.mobileGalleryClickable,
               ].join(" ")}
             />
             <img
@@ -279,6 +307,13 @@ export default function Project() {
           </p>
         </section>
       </div>
+
+      <Lightbox
+        images={lightbox?.gallery === "mobile" ? mobileLightboxImages : desktopLightboxImages}
+        index={lightbox ? lightbox.index : null}
+        onClose={() => setLightbox(null)}
+        onChange={(nextIndex) => setLightbox((current) => (current ? { ...current, index: nextIndex } : current))}
+      />
     </>
   );
 }
