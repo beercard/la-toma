@@ -70,7 +70,12 @@ export default function Header() {
       </header>
 
       {isMobileMenuOpen && (
-        <div className={styles.mobileMenu} role="dialog" aria-label="Menú">
+        <div
+          className={styles.mobileMenu}
+          role="dialog"
+          aria-label="Menú"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
           <div className={styles.mobileMenuHeader}>
             <Link to="/" aria-label="Ir al inicio" className={styles.mobileLogoLink}>
               <img src="/figma/mqiryjto-xkdx3i0.svg" alt="La Toma" className={styles.mobileLogo} />

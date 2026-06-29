@@ -66,8 +66,19 @@
   grid-template-columns: repeat(4, 232px);
   justify-content: center;
   gap: 32px;
-  width: min(1024px, calc(100vw - 96px));
+  width: min(1025px, calc(100vw - 96px));
   margin: 69px auto 0;
+}
+
+.desktopCardsStage {
+  position: relative;
+  width: min(1025px, calc(100vw - 96px));
+  margin: 69px auto 0;
+}
+
+.desktopCardsStage .desktopCardsGrid {
+  width: 100%;
+  margin-top: 0;
 }
 
 .desktopCard {
@@ -188,69 +199,143 @@
   text-decoration: underline;
 }
 
-.desktopCardDetails {
+.desktopExpandedPanel {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 5;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
   border-radius: 15px;
   background: #b76856;
-  width: 232px;
-  height: 315px;
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(0.985);
-  transition:
-    opacity 300ms ease,
-    transform 300ms ease,
-    visibility 0s linear 300ms;
+  box-shadow: 0 18px 30px rgb(0 0 0 / 12%);
+  overflow: hidden;
+  animation: desktopExpandedPanelIn 300ms ease both;
 }
 
 .desktopCardOpen .desktopCardFront {
-  opacity: 0;
-  transform: scale(0.985);
+  opacity: 0.16;
+  transform: scale(0.99);
 }
 
-.desktopCardOpen .desktopCardDetails {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1);
-  transition:
-    opacity 300ms ease,
-    transform 300ms ease,
-    visibility 0s linear 0s;
+.desktopExpandedPanelClosing {
+  animation: desktopExpandedPanelOut 300ms ease both;
 }
 
-.desktopCardDescription {
+.desktopExpandedMedia {
+  position: relative;
+  flex: 0 0 232px;
+  width: 232px;
+  background-color: #9c5444;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+}
+
+.desktopExpandedMedia::before {
+  content: "";
   position: absolute;
-  top: 27px;
-  left: 21px;
-  right: 22px;
-  bottom: 88px;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(35 35 35 / 4%) 0%, rgb(35 35 35 / 44%) 100%);
+}
+
+.desktopExpandedMediaContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100%;
+  padding: 104px 25px 23px;
+  box-sizing: border-box;
+}
+
+.desktopExpandedDate {
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 40px;
+  font-weight: 100;
+  line-height: 40px;
+}
+
+.desktopExpandedTitle {
+  display: flex;
+  flex-direction: column;
+  margin-top: 7px;
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 40px;
+}
+
+.desktopExpandedTitleLine + .desktopExpandedTitleLine {
+  margin-top: 2px;
+}
+
+.desktopExpandedCloseButton,
+.desktopExpandedReserveButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 106px;
+  height: 41px;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 5px 5px 5px -2px rgb(44 48 36 / 10%);
+  background: #9c5444;
+  padding: 0;
+  color: #f7f4ef;
+  font-family: Mundial, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 10px;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.desktopExpandedCloseButton {
+  margin-top: auto;
+}
+
+.desktopExpandedBody {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 61px 28px 23px 52px;
+  box-sizing: border-box;
+}
+
+.desktopExpandedCopy {
+  width: 100%;
+  max-width: 663px;
+}
+
+.desktopExpandedLead,
+.desktopExpandedParagraph {
   margin: 0;
   color: #f7f4ef;
   font-family: Mundial, system-ui, sans-serif;
   font-size: 20px;
-  font-weight: 400;
   line-height: 20px;
 }
 
-.desktopCardClose {
-  position: absolute;
-  left: 21px;
-  bottom: 29px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #f7f4ef;
-  font-family: Mundial, system-ui, sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 20px;
-  cursor: pointer;
+.desktopExpandedLead {
+  font-weight: 700;
 }
 
-.desktopCardClose:hover {
-  opacity: 0.92;
+.desktopExpandedParagraph {
+  margin-top: 20px;
+  font-weight: 400;
+}
+
+.desktopExpandedReserveButton {
+  align-self: flex-end;
+  margin-top: auto;
 }
 
 .desktopCardVinilos {
@@ -819,6 +904,7 @@
 .mobileCommentsField {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .mobileLabel {
@@ -834,6 +920,7 @@
 .mobileSelect,
 .mobileTextarea {
   width: 100%;
+  min-width: 0;
   border: 1px solid #000000;
   border-radius: 2px;
   background: transparent;
@@ -931,11 +1018,14 @@
     line-height: 34px;
   }
 
+  .desktopCardsStage {
+    width: min(1025px, calc(100vw - 72px));
+    margin-top: 56px;
+  }
+
   .desktopCardsGrid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 20px;
-    width: min(1024px, calc(100vw - 72px));
-    margin-top: 56px;
   }
 
   .desktopCard {
@@ -953,25 +1043,51 @@
     line-height: 21px;
   }
 
-  .desktopCardDetails {
+  .desktopExpandedPanel {
     width: 100%;
-    height: 290px;
   }
 
-  .desktopCardDescription {
-    top: 24px;
-    left: 18px;
-    right: 18px;
-    bottom: 72px;
+  .desktopExpandedMedia {
+    flex-basis: min(232px, 26%);
+    width: min(232px, 26%);
+  }
+
+  .desktopExpandedMediaContent {
+    padding: 96px 18px 20px;
+  }
+
+  .desktopExpandedDate {
+    font-size: 34px;
+    line-height: 34px;
+  }
+
+  .desktopExpandedTitle {
+    font-size: 34px;
+    line-height: 34px;
+  }
+
+  .desktopExpandedCloseButton,
+  .desktopExpandedReserveButton {
+    min-width: 96px;
+    height: 38px;
+  }
+
+  .desktopExpandedBody {
+    padding: 46px 24px 20px 32px;
+  }
+
+  .desktopExpandedCopy {
+    max-width: 100%;
+  }
+
+  .desktopExpandedLead,
+  .desktopExpandedParagraph {
     font-size: 18px;
     line-height: 18px;
   }
 
-  .desktopCardClose {
-    left: 18px;
-    bottom: 24px;
-    font-size: 18px;
-    line-height: 18px;
+  .desktopExpandedParagraph {
+    margin-top: 18px;
   }
 
   .desktopExperienceSection {
@@ -1053,27 +1169,47 @@
     line-height: 18px;
   }
 
-  .desktopCardDetails {
+  .desktopExpandedPanel {
     width: 100%;
-    height: 256px;
   }
 
-  .desktopCardDescription {
-    top: 18px;
-    left: 15px;
-    right: 15px;
-    bottom: 54px;
-    width: auto;
+  .desktopExpandedMedia {
+    flex-basis: min(208px, 26.5%);
+    width: min(208px, 26.5%);
+  }
+
+  .desktopExpandedMediaContent {
+    padding: 84px 15px 18px;
+  }
+
+  .desktopExpandedDate {
+    font-size: 28px;
+    line-height: 28px;
+  }
+
+  .desktopExpandedTitle {
+    font-size: 30px;
+    line-height: 30px;
+  }
+
+  .desktopExpandedCloseButton,
+  .desktopExpandedReserveButton {
+    min-width: 90px;
+    height: 34px;
+  }
+
+  .desktopExpandedBody {
+    padding: 30px 18px 18px 22px;
+  }
+
+  .desktopExpandedLead,
+  .desktopExpandedParagraph {
     font-size: 16px;
     line-height: 17px;
   }
 
-  .desktopCardClose {
-    left: 15px;
-    bottom: 18px;
-    width: auto;
-    font-size: 16px;
-    line-height: 17px;
+  .desktopExpandedParagraph {
+    margin-top: 15px;
   }
 
   .desktopExperienceSection {
@@ -1097,6 +1233,26 @@
   .desktopLabel {
     font-size: 18px;
     line-height: 18px;
+  }
+}
+
+@keyframes desktopExpandedPanelIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes desktopExpandedPanelOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }
 

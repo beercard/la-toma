@@ -53,6 +53,7 @@ export const fallbackEvents: EventItem[] = [
     id: "vinilos-rio",
     slug: "vinilos-rio",
     title: "Vinilos & Río",
+    createdAt: "2026-06-28T20:00:00-03:00",
     dateLabel: "11|07",
     startsAt: "2026-07-11T19:00:00-03:00",
     description:
@@ -64,6 +65,7 @@ export const fallbackEvents: EventItem[] = [
     id: "taller-filtrados",
     slug: "taller-filtrados",
     title: "Taller de Filtrados",
+    createdAt: "2026-06-27T20:00:00-03:00",
     dateLabel: "11|07",
     startsAt: "2026-07-11T17:00:00-03:00",
     description:
@@ -73,6 +75,7 @@ export const fallbackEvents: EventItem[] = [
     id: "after-office",
     slug: "after-office",
     title: "After Office",
+    createdAt: "2026-06-26T20:00:00-03:00",
     dateLabel: "11|07",
     startsAt: "2026-07-11T20:00:00-03:00",
     description:
@@ -82,6 +85,7 @@ export const fallbackEvents: EventItem[] = [
     id: "ceramica-de-autor",
     slug: "ceramica-de-autor",
     title: "Cerámica de Autor",
+    createdAt: "2026-06-25T20:00:00-03:00",
     dateLabel: "11|07",
     startsAt: "2026-07-11T18:00:00-03:00",
     description:

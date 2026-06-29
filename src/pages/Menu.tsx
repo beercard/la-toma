@@ -1,9 +1,12 @@
 import { CSSProperties, useEffect, useState } from "react";
-import { useCarta } from "../hooks/useContent";
 import styles from "./Menu.module.css";
 
+// URL del menú digital de FUDO para incrustar.
+// Pegá acá el enlace que te da FUDO (ej. https://menu.fu.do/la-toma) y el iframe
+// se muestra automáticamente. Mientras esté vacío se ve un aviso de "próximamente".
+const FUDO_MENU_URL = "";
+
 export default function Menu() {
-  const menuCategories = useCarta();
   const [mobileHeroScale, setMobileHeroScale] = useState(1);
 
   useEffect(() => {
@@ -77,41 +80,28 @@ export default function Menu() {
         </section>
       </div>
 
-      <section className={styles.carta} aria-labelledby="carta-title">
-        <div className={styles.cartaInner}>
-          <p className={styles.cartaEyebrow}>Café Bar · Costanera de Corrientes</p>
-          <h2 id="carta-title" className={styles.cartaTitle}>
+      <section className={styles.menuSection} aria-labelledby="menu-title">
+        <div className={styles.menuInner}>
+          <p className={styles.menuEyebrow}>Café Bar · Costanera de Corrientes</p>
+          <h2 id="menu-title" className={styles.menuTitle}>
             Nuestra Carta
           </h2>
-          <p className={styles.cartaIntro}>
-            Una selección pensada para acompañar cada momento del día, del primer café al brindis del
-            atardecer.
-          </p>
 
-          <div className={styles.cartaGrid}>
-            {menuCategories.map((category) => (
-              <div key={category.title} className={styles.cartaCategory}>
-                <h3 className={styles.cartaCategoryTitle}>{category.title}</h3>
-                <ul className={styles.cartaItems}>
-                  {category.items.map((item) => (
-                    <li key={item.name} className={styles.cartaItem}>
-                      <div className={styles.cartaItemHead}>
-                        <span className={styles.cartaItemName}>{item.name}</span>
-                        {item.price ? <span className={styles.cartaItemPrice}>{item.price}</span> : null}
-                      </div>
-                      {item.description ? (
-                        <p className={styles.cartaItemDescription}>{item.description}</p>
-                      ) : null}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          <p className={styles.cartaNote}>
-            * Carta sujeta a disponibilidad. Los precios pueden variar.
-          </p>
+          {FUDO_MENU_URL ? (
+            <div className={styles.menuFrameWrap}>
+              <iframe
+                src={FUDO_MENU_URL}
+                title="Menú de La Toma"
+                className={styles.menuFrame}
+                loading="lazy"
+              />
+            </div>
+          ) : (
+            <div className={styles.menuPlaceholder} role="status">
+              <p className={styles.menuPlaceholderText}>Estamos preparando nuestra carta digital.</p>
+              <p className={styles.menuPlaceholderHint}>Muy pronto vas a poder verla acá.</p>
+            </div>
+          )}
         </div>
       </section>
     </>

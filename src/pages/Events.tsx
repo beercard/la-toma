@@ -16,7 +16,7 @@ type EventCard = {
   date: string;
   titleLines: string[];
   description: string;
-  mobileExpandedDescription?: string;
+  expandedDescription?: string;
   desktopClassName: string;
   mobileClassName: string;
 };
@@ -85,31 +85,84 @@ const formatDateForDisplay = (dateValue: string) => {
   return `${day}/${month}/${year}`;
 };
 
+const splitExpandedDescription = (text: string) => {
+  const normalizedParagraphs = text
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+
+  const firstParagraph = normalizedParagraphs[0] ?? text.trim();
+  const leadMatch = firstParagraph.match(/^[^.?!]+[.?!]/);
+  const lead = leadMatch?.[0]?.trim() ?? firstParagraph;
+  const firstParagraphRemainder = firstParagraph.slice(lead.length).trim();
+  const paragraphs = [firstParagraphRemainder, ...normalizedParagraphs.slice(1)].filter(Boolean);
+
+  return {
+    lead,
+    paragraphs,
+  };
+};
+
+const getCreatedAtValue = (createdAt?: string | null) => {
+  if (!createdAt) return Number.NEGATIVE_INFINITY;
+  const timestamp = Date.parse(createdAt);
+  return Number.isNaN(timestamp) ? Number.NEGATIVE_INFINITY : timestamp;
+};
+
 export default function Events() {
   const [formData, setFormData] = useState<EventFormData>(initialFormData);
   const [mobileHeroScale, setMobileHeroScale] = useState(1);
   const [activeDesktopCardId, setActiveDesktopCardId] = useState<string | null>(null);
+  const [closingDesktopCardId, setClosingDesktopCardId] = useState<string | null>(null);
   const [activeMobileCardId, setActiveMobileCardId] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formFeedback, setFormFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const desktopCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const desktopFormSectionRef = useRef<HTMLElement | null>(null);
   const mobileFormSectionRef = useRef<HTMLElement | null>(null);
   const availableTimeOptions = useMemo(() => getAvailableTimeOptions(formData.date), [formData.date]);
 
   const events = useEvents();
+  const featuredEvents = useMemo(
+    () =>
+      events
+        .map((event, index) => ({
+          event,
+          index,
+          createdAtValue: getCreatedAtValue(event.createdAt),
+        }))
+        .sort((left, right) => {
+          const createdAtDiff = right.createdAtValue - left.createdAtValue;
+          if (createdAtDiff !== 0) return createdAtDiff;
+          return left.index - right.index;
+        })
+        .slice(0, 4)
+        .map(({ event }) => event),
+    [events],
+  );
   const eventCards = useMemo<EventCard[]>(
     () =>
-      events.map((event, index) => ({
+      // Desktop y mobile comparten siempre los mismos 4 destacados.
+      featuredEvents.map((event, index) => ({
         id: event.id,
         date: event.dateLabel ?? "",
         titleLines: splitTitleLines(event.title),
         description: event.description,
-        mobileExpandedDescription: event.expandedDescription,
+        expandedDescription: event.expandedDescription,
         desktopClassName: cardStyleClasses[index % cardStyleClasses.length].desktop,
         mobileClassName: cardStyleClasses[index % cardStyleClasses.length].mobile,
       })),
-    [events],
+    [featuredEvents],
   );
   const eventTypeOptions = useMemo(() => eventCards.map((card) => card.titleLines.join(" ")), [eventCards]);
+
+  useEffect(() => {
+    return () => {
+      if (desktopCloseTimeoutRef.current) {
+        clearTimeout(desktopCloseTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const updateMobileHeroScale = () => {
@@ -219,11 +272,32 @@ export default function Events() {
   };
 
   const openDesktopCard = (cardId: string) => {
+    if (desktopCloseTimeoutRef.current) {
+      clearTimeout(desktopCloseTimeoutRef.current);
+      desktopCloseTimeoutRef.current = null;
+    }
+    setClosingDesktopCardId(null);
     setActiveDesktopCardId(cardId);
   };
 
   const closeDesktopCard = () => {
-    setActiveDesktopCardId(null);
+    if (!activeDesktopCardId) return;
+
+    setClosingDesktopCardId(activeDesktopCardId);
+    desktopCloseTimeoutRef.current = setTimeout(() => {
+      setActiveDesktopCardId(null);
+      setClosingDesktopCardId(null);
+      desktopCloseTimeoutRef.current = null;
+    }, 300);
+  };
+
+  const reserveDesktopCard = (card: EventCard) => {
+    setFormData((current) => ({
+      ...current,
+      eventType: card.titleLines.join(" "),
+    }));
+    closeDesktopCard();
+    desktopFormSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const openMobileCard = (cardId: string) => {
@@ -245,6 +319,12 @@ export default function Events() {
 
   const activeMobileCard = activeMobileCardId
     ? eventCards.find((card) => card.id === activeMobileCardId) ?? null
+    : null;
+  const activeDesktopCard = activeDesktopCardId
+    ? eventCards.find((card) => card.id === activeDesktopCardId) ?? null
+    : null;
+  const desktopExpandedCopy = activeDesktopCard
+    ? splitExpandedDescription(activeDesktopCard.expandedDescription ?? activeDesktopCard.description)
     : null;
 
   return (
@@ -273,54 +353,96 @@ export default function Events() {
             Eventos en La Toma
           </h2>
 
-          <div className={styles.desktopCardsGrid}>
-            {eventCards.map((card) => {
-              const isOpen = activeDesktopCardId === card.id;
+          <div className={styles.desktopCardsStage}>
+            <div className={styles.desktopCardsGrid}>
+              {eventCards.map((card) => {
+                const isOpen = activeDesktopCardId === card.id;
 
-              return (
-                <article
-                  key={card.id}
+                return (
+                  <article
+                    key={card.id}
+                    className={[
+                      styles.desktopCard,
+                      card.desktopClassName,
+                      isOpen ? styles.desktopCardOpen : "",
+                    ].join(" ")}
+                  >
+                    <button
+                      type="button"
+                      className={styles.desktopCardTrigger}
+                      onClick={() => openDesktopCard(card.id)}
+                      aria-expanded={isOpen}
+                      aria-controls={`desktop-event-card-${card.id}`}
+                      aria-label={`Abrir información de ${card.titleLines.join(" ")}`}
+                    />
+
+                    <div className={styles.desktopCardFront} aria-hidden={isOpen}>
+                      <span className={styles.desktopCardDate}>{card.date}</span>
+                      <span className={styles.desktopCardTitle}>
+                        {card.titleLines.map((line) => (
+                          <span key={line} className={styles.desktopCardTitleLine}>
+                            {line}
+                          </span>
+                        ))}
+                      </span>
+                      <span className={styles.desktopCardInfo}>+ info</span>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+
+            {activeDesktopCard && desktopExpandedCopy ? (
+              <article
+                id={`desktop-event-card-${activeDesktopCard.id}`}
+                className={[
+                  styles.desktopExpandedPanel,
+                  closingDesktopCardId === activeDesktopCard.id ? styles.desktopExpandedPanelClosing : "",
+                ].join(" ")}
+                aria-label={`Información ampliada de ${activeDesktopCard.titleLines.join(" ")}`}
+              >
+                <div
                   className={[
-                    styles.desktopCard,
-                    card.desktopClassName,
-                    isOpen ? styles.desktopCardOpen : "",
+                    styles.desktopExpandedMedia,
+                    activeDesktopCard.desktopClassName,
                   ].join(" ")}
                 >
-                  <button
-                    type="button"
-                    className={styles.desktopCardTrigger}
-                    onClick={() => openDesktopCard(card.id)}
-                    disabled={isOpen}
-                    aria-expanded={isOpen}
-                    aria-controls={`desktop-event-card-${card.id}`}
-                    aria-label={`Abrir información de ${card.titleLines.join(" ")}`}
-                  />
-
-                  <div className={styles.desktopCardFront} aria-hidden={isOpen}>
-                    <span className={styles.desktopCardDate}>{card.date}</span>
-                    <span className={styles.desktopCardTitle}>
-                      {card.titleLines.map((line) => (
-                        <span key={line} className={styles.desktopCardTitleLine}>
+                  <div className={styles.desktopExpandedMediaContent}>
+                    <span className={styles.desktopExpandedDate}>{activeDesktopCard.date}</span>
+                    <span className={styles.desktopExpandedTitle}>
+                      {activeDesktopCard.titleLines.map((line) => (
+                        <span key={line} className={styles.desktopExpandedTitleLine}>
                           {line}
                         </span>
                       ))}
                     </span>
-                    <span className={styles.desktopCardInfo}>+ info</span>
-                  </div>
 
-                  <div
-                    id={`desktop-event-card-${card.id}`}
-                    className={styles.desktopCardDetails}
-                    aria-hidden={!isOpen}
-                  >
-                    <p className={styles.desktopCardDescription}>{card.description}</p>
-                    <button type="button" className={styles.desktopCardClose} onClick={closeDesktopCard}>
-                      X Cerrar
+                    <button type="button" className={styles.desktopExpandedCloseButton} onClick={closeDesktopCard}>
+                      Cerrar
                     </button>
                   </div>
-                </article>
-              );
-            })}
+                </div>
+
+                <div className={styles.desktopExpandedBody}>
+                  <div className={styles.desktopExpandedCopy}>
+                    <p className={styles.desktopExpandedLead}>{desktopExpandedCopy.lead}</p>
+                    {desktopExpandedCopy.paragraphs.map((paragraph) => (
+                      <p key={paragraph} className={styles.desktopExpandedParagraph}>
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    className={styles.desktopExpandedReserveButton}
+                    onClick={() => reserveDesktopCard(activeDesktopCard)}
+                  >
+                    Reservar
+                  </button>
+                </div>
+              </article>
+            ) : null}
           </div>
         </section>
 
@@ -339,7 +461,11 @@ export default function Events() {
           <div className={styles.desktopDivider} />
         </section>
 
-        <section className={styles.desktopFormSection} aria-labelledby="events-form-title-desktop">
+        <section
+          ref={desktopFormSectionRef}
+          className={styles.desktopFormSection}
+          aria-labelledby="events-form-title-desktop"
+        >
           <h2 id="events-form-title-desktop" className={styles.desktopFormTitle}>
             Dejanos tus datos y te contactaremos
           </h2>
@@ -559,7 +685,7 @@ export default function Events() {
                 aria-live="polite"
               >
                 <p className={styles.mobileExpandedDescription}>
-                  {activeMobileCard.mobileExpandedDescription ?? activeMobileCard.description}
+                  {activeMobileCard.expandedDescription ?? activeMobileCard.description}
                 </p>
                 <div className={styles.mobileExpandedActions}>
                   <button type="button" className={styles.mobileExpandedButton} onClick={closeMobileCard}>

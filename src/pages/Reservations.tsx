@@ -90,11 +90,7 @@ export default function Reservations() {
 
             <div className={styles.desktopHeroBand}>
               <p className={styles.desktopHeroText}>
-                Estamos a disposición para gestionar tu
-                <br />
-                reserva en nuestro restobar de manera
-                <br />
-                directa y personalizada.
+                Estamos a disposición para gestionar tu reserva de manera directa y personalizada.
               </p>
             </div>
           </div>

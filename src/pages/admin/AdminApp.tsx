@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { isSupabaseConfigured } from "../../lib/supabaseClient";
 import { useAuth } from "../../hooks/useAuth";
-import CartaManager from "./CartaManager";
 import EventsManager from "./EventsManager";
 import GalleryManager from "./GalleryManager";
 import Login from "./Login";
 import styles from "./Admin.module.css";
 
-type Tab = "carta" | "eventos" | "galeria";
+type Tab = "eventos" | "galeria";
 
 export default function AdminApp() {
   const { session, loading, signIn, signOut } = useAuth();
-  const [tab, setTab] = useState<Tab>("carta");
+  const [tab, setTab] = useState<Tab>("eventos");
 
   // El panel no debe indexarse.
   useEffect(() => {
@@ -65,9 +64,6 @@ export default function AdminApp() {
       </div>
 
       <nav className={styles.tabs}>
-        <button className={`${styles.tab} ${tab === "carta" ? styles.tabActive : ""}`} onClick={() => setTab("carta")}>
-          Carta
-        </button>
         <button className={`${styles.tab} ${tab === "eventos" ? styles.tabActive : ""}`} onClick={() => setTab("eventos")}>
           Eventos
         </button>
@@ -77,7 +73,6 @@ export default function AdminApp() {
       </nav>
 
       <main className={styles.main}>
-        {tab === "carta" ? <CartaManager /> : null}
         {tab === "eventos" ? <EventsManager /> : null}
         {tab === "galeria" ? <GalleryManager /> : null}
       </main>

@@ -4,13 +4,13 @@
   left: 0;
   right: 0;
   z-index: 50;
-  height: 100px;
+  height: 80px;
   background: #dad4cb;
 }
 
 .desktopInner {
   width: 100%;
-  height: 100px;
+  height: 80px;
   margin: 0 auto;
   padding: 0 24px;
   box-sizing: border-box;
@@ -19,26 +19,25 @@
 .desktopNav {
   position: relative;
   width: min(1920px, 100%);
-  height: 100px;
+  height: 80px;
   margin: 0 auto;
   white-space: nowrap;
 }
 
 .desktopLogoLink {
-  position: relative;
-  display: block;
   position: absolute;
-  top: 31px;
+  display: block;
+  top: 50%;
   left: 50%;
-  width: 252px;
-  height: 38px;
-  transform: translateX(-50%);
+  width: clamp(158px, 15vw, 252px);
+  height: auto;
+  transform: translate(-50%, -50%);
 }
 
 .desktopLogo {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 .desktopLogoHover {
@@ -57,12 +56,12 @@
 
 .desktopTextItem {
   position: absolute;
-  top: 42px;
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  height: 58px;
+  justify-content: center;
+  height: 100%;
   text-decoration: none;
   overflow: visible;
   transform: translateX(-50%);
@@ -107,13 +106,15 @@
 }
 
 .desktopNavUnderline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
   min-width: 100%;
   height: 5px;
   background: #b76856;
   opacity: 0;
   transition: opacity 180ms ease;
-  margin-top: 30px;
 }
 
 .desktopTextItem:hover .desktopNavLabel,
@@ -364,24 +365,10 @@
 }
 
 @media (--bp-desktop-down) {
-  .desktopLogoLink {
-    top: 33px;
-    width: 220px;
-    height: 33px;
-  }
-
-  .desktopTextItem {
-    top: 42px;
-  }
-
   .desktopNavLabel {
     min-height: 21px;
     font-size: 18px;
     line-height: 21px;
-  }
-
-  .desktopNavUnderline {
-    margin-top: 26px;
   }
 }
 
@@ -391,23 +378,9 @@
     padding-left: 24px;
   }
 
-  .desktopLogoLink {
-    top: 35px;
-    width: 196px;
-    height: 30px;
-  }
-
-  .desktopTextItem {
-    top: 42px;
-  }
-
   .desktopNavLabel {
     font-size: 16px;
     line-height: 19px;
-  }
-
-  .desktopNavUnderline {
-    margin-top: 24px;
   }
 }
 

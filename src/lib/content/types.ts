@@ -15,6 +15,7 @@ export interface EventItem {
   id: string;
   slug: string;
   title: string;
+  createdAt?: string | null;
   dateLabel?: string;
   startsAt?: string | null;
   description: string;

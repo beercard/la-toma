@@ -14,7 +14,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col relative bg-background text-foreground">
       <Header />
-      <main className={`flex-1 w-full ${isHome ? "pt-0" : "pt-[64px] lg:pt-[100px]"}`}>
+      <main className={`flex-1 w-full ${isHome ? "pt-0" : "pt-[64px] lg:pt-[80px]"}`}>
         {children}
       </main>
       <Footer />

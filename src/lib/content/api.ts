@@ -45,9 +45,9 @@ export async function getEvents(): Promise<EventItem[]> {
 
   const { data, error } = await supabase
     .from("events")
-    .select("id, slug, title, date_label, starts_at, description, expanded_description, image_url, sort_order")
+    .select("id, slug, title, created_at, date_label, starts_at, description, expanded_description, image_url")
     .eq("is_published", true)
-    .order("sort_order", { ascending: true });
+    .order("created_at", { ascending: false });
 
   if (error || !data || data.length === 0) return fallbackEvents;
 
@@ -55,6 +55,7 @@ export async function getEvents(): Promise<EventItem[]> {
     id: row.id,
     slug: row.slug,
     title: row.title,
+    createdAt: row.created_at,
     dateLabel: row.date_label ?? undefined,
     startsAt: row.starts_at,
     description: row.description,
