@@ -300,9 +300,13 @@
   row-gap: 12px;
 }
 
+.mobileFieldLayer > * {
+  min-width: 0;
+}
+
 .mobileField {
   position: static;
-  width: auto;
+  width: 100%;
   min-width: 0;
   display: block;
 }
@@ -318,8 +322,12 @@
 }
 
 .mobileInput {
+  display: block;
   width: 100%;
   min-width: 0;
+  max-width: 100%;
+  inline-size: 100%;
+  max-inline-size: 100%;
   height: 28px;
   border: 1px solid #000000;
   border-radius: 2px;
@@ -330,6 +338,32 @@
   font-family: "Roboto Serif", serif;
   font-size: 12px;
   box-sizing: border-box;
+}
+
+.mobileInput[type="date"] {
+  overflow: hidden;
+}
+
+.mobileInput[type="date"]::-webkit-date-and-time-value {
+  min-width: 0;
+  text-align: left;
+}
+
+.mobileInput:where(select) {
+  padding: 0 26px 0 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #232323 50%),
+    linear-gradient(135deg, #232323 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) calc(50% - 2px),
+    calc(100% - 9px) calc(50% - 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
 }
 
 .mobileButtonRow {

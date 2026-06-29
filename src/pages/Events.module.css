@@ -900,11 +900,16 @@
   gap: 18px 16px;
 }
 
+.mobileFieldGrid > * {
+  min-width: 0;
+}
+
 .mobileField,
 .mobileCommentsField {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  width: 100%;
 }
 
 .mobileLabel {
@@ -919,8 +924,12 @@
 .mobileInput,
 .mobileSelect,
 .mobileTextarea {
+  display: block;
   width: 100%;
   min-width: 0;
+  max-width: 100%;
+  inline-size: 100%;
+  max-inline-size: 100%;
   border: 1px solid #000000;
   border-radius: 2px;
   background: transparent;
@@ -933,12 +942,22 @@
 .mobileInput {
   height: 28px;
   padding: 0 8px;
+  overflow: hidden;
+}
+
+.mobileInput[type="date"]::-webkit-date-and-time-value {
+  min-width: 0;
+  text-align: left;
 }
 
 .mobileSelect {
   height: 28px;
   padding: 0 26px 0 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   appearance: none;
+  -webkit-appearance: none;
   background-image:
     linear-gradient(45deg, transparent 50%, #232323 50%),
     linear-gradient(135deg, #232323 50%, transparent 50%);
