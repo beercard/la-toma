@@ -1,13 +1,14 @@
 import emailjs from "@emailjs/browser";
 import { CSSProperties, ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { getAvailableTimeOptions } from "../lib/businessHours";
+import { getEventsComingSoonEnabled } from "../lib/content/api";
 import {
   buildEventsEmailHtml,
   buildEventsEmailSubject,
   buildEventsWhatsappMessage,
   type EventsEmailData,
 } from "../lib/eventsEmailTemplate";
-import { SITE_EVENTS_EMAIL, SITE_WHATSAPP_NUMBER } from "../lib/siteConfig";
+import { SITE_EVENTS_EMAIL, SITE_INSTAGRAM_LINK, SITE_WHATSAPP_NUMBER } from "../lib/siteConfig";
 import { useEvents } from "../hooks/useContent";
 import styles from "./Events.module.css";
 
@@ -112,6 +113,7 @@ const getCreatedAtValue = (createdAt?: string | null) => {
 export default function Events() {
   const [formData, setFormData] = useState<EventFormData>(initialFormData);
   const [mobileHeroScale, setMobileHeroScale] = useState(1);
+  const [eventsComingSoon, setEventsComingSoon] = useState(true);
   const [activeDesktopCardId, setActiveDesktopCardId] = useState<string | null>(null);
   const [closingDesktopCardId, setClosingDesktopCardId] = useState<string | null>(null);
   const [activeMobileCardId, setActiveMobileCardId] = useState<string | null>(null);
@@ -155,6 +157,7 @@ export default function Events() {
     [featuredEvents],
   );
   const eventTypeOptions = useMemo(() => eventCards.map((card) => card.titleLines.join(" ")), [eventCards]);
+  const shouldShowEventsPlaceholder = eventsComingSoon || eventCards.length === 0;
 
   useEffect(() => {
     return () => {
@@ -180,6 +183,20 @@ export default function Events() {
     window.addEventListener("resize", updateMobileHeroScale);
 
     return () => window.removeEventListener("resize", updateMobileHeroScale);
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+
+    getEventsComingSoonEnabled()
+      .then((value) => {
+        if (active) setEventsComingSoon(value);
+      })
+      .catch(() => undefined);
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -350,100 +367,118 @@ export default function Events() {
 
         <section className={styles.desktopEventsSection} aria-labelledby="events-desktop-list-title">
           <h2 id="events-desktop-list-title" className={styles.desktopSectionTitle}>
-            Eventos en La Toma
+            Viví La Toma
           </h2>
 
-          <div className={styles.desktopCardsStage}>
-            <div className={styles.desktopCardsGrid}>
-              {eventCards.map((card) => {
-                const isOpen = activeDesktopCardId === card.id;
+          {shouldShowEventsPlaceholder ? (
+            <div className={styles.desktopPlaceholder}>
+              <p className={styles.desktopPlaceholderText}>
+                Próximamente...
+                <br />
+                Más novedades desde nuestro{" "}
+                <a
+                  href={SITE_INSTAGRAM_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.placeholderInstagramLink}
+                >
+                  Instagram
+                </a>
+              </p>
+            </div>
+          ) : (
+            <div className={styles.desktopCardsStage}>
+              <div className={styles.desktopCardsGrid}>
+                {eventCards.map((card) => {
+                  const isOpen = activeDesktopCardId === card.id;
 
-                return (
-                  <article
-                    key={card.id}
+                  return (
+                    <article
+                      key={card.id}
+                      className={[
+                        styles.desktopCard,
+                        card.desktopClassName,
+                        isOpen ? styles.desktopCardOpen : "",
+                      ].join(" ")}
+                    >
+                      <button
+                        type="button"
+                        className={styles.desktopCardTrigger}
+                        onClick={() => openDesktopCard(card.id)}
+                        aria-expanded={isOpen}
+                        aria-controls={`desktop-event-card-${card.id}`}
+                        aria-label={`Abrir información de ${card.titleLines.join(" ")}`}
+                      />
+
+                      <div className={styles.desktopCardFront} aria-hidden={isOpen}>
+                        <span className={styles.desktopCardDate}>{card.date}</span>
+                        <span className={styles.desktopCardTitle}>
+                          {card.titleLines.map((line) => (
+                            <span key={line} className={styles.desktopCardTitleLine}>
+                              {line}
+                            </span>
+                          ))}
+                        </span>
+                        <span className={styles.desktopCardInfo}>+ info</span>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+
+              {activeDesktopCard && desktopExpandedCopy ? (
+                <article
+                  id={`desktop-event-card-${activeDesktopCard.id}`}
+                  className={[
+                    styles.desktopExpandedPanel,
+                    closingDesktopCardId === activeDesktopCard.id ? styles.desktopExpandedPanelClosing : "",
+                  ].join(" ")}
+                  aria-label={`Información ampliada de ${activeDesktopCard.titleLines.join(" ")}`}
+                >
+                  <div
                     className={[
-                      styles.desktopCard,
-                      card.desktopClassName,
-                      isOpen ? styles.desktopCardOpen : "",
+                      styles.desktopExpandedMedia,
+                      activeDesktopCard.desktopClassName,
                     ].join(" ")}
                   >
-                    <button
-                      type="button"
-                      className={styles.desktopCardTrigger}
-                      onClick={() => openDesktopCard(card.id)}
-                      aria-expanded={isOpen}
-                      aria-controls={`desktop-event-card-${card.id}`}
-                      aria-label={`Abrir información de ${card.titleLines.join(" ")}`}
-                    />
-
-                    <div className={styles.desktopCardFront} aria-hidden={isOpen}>
-                      <span className={styles.desktopCardDate}>{card.date}</span>
-                      <span className={styles.desktopCardTitle}>
-                        {card.titleLines.map((line) => (
-                          <span key={line} className={styles.desktopCardTitleLine}>
+                    <div className={styles.desktopExpandedMediaContent}>
+                      <span className={styles.desktopExpandedDate}>{activeDesktopCard.date}</span>
+                      <span className={styles.desktopExpandedTitle}>
+                        {activeDesktopCard.titleLines.map((line) => (
+                          <span key={line} className={styles.desktopExpandedTitleLine}>
                             {line}
                           </span>
                         ))}
                       </span>
-                      <span className={styles.desktopCardInfo}>+ info</span>
+
+                      <button type="button" className={styles.desktopExpandedCloseButton} onClick={closeDesktopCard}>
+                        Cerrar
+                      </button>
                     </div>
-                  </article>
-                );
-              })}
-            </div>
+                  </div>
 
-            {activeDesktopCard && desktopExpandedCopy ? (
-              <article
-                id={`desktop-event-card-${activeDesktopCard.id}`}
-                className={[
-                  styles.desktopExpandedPanel,
-                  closingDesktopCardId === activeDesktopCard.id ? styles.desktopExpandedPanelClosing : "",
-                ].join(" ")}
-                aria-label={`Información ampliada de ${activeDesktopCard.titleLines.join(" ")}`}
-              >
-                <div
-                  className={[
-                    styles.desktopExpandedMedia,
-                    activeDesktopCard.desktopClassName,
-                  ].join(" ")}
-                >
-                  <div className={styles.desktopExpandedMediaContent}>
-                    <span className={styles.desktopExpandedDate}>{activeDesktopCard.date}</span>
-                    <span className={styles.desktopExpandedTitle}>
-                      {activeDesktopCard.titleLines.map((line) => (
-                        <span key={line} className={styles.desktopExpandedTitleLine}>
-                          {line}
-                        </span>
+                  <div className={styles.desktopExpandedBody}>
+                    <div className={styles.desktopExpandedCopy}>
+                      <p className={styles.desktopExpandedLead}>{desktopExpandedCopy.lead}</p>
+                      {desktopExpandedCopy.paragraphs.map((paragraph) => (
+                        <p key={paragraph} className={styles.desktopExpandedParagraph}>
+                          {paragraph}
+                        </p>
                       ))}
-                    </span>
+                    </div>
 
-                    <button type="button" className={styles.desktopExpandedCloseButton} onClick={closeDesktopCard}>
-                      Cerrar
+                    <button
+                      type="button"
+                      className={styles.desktopExpandedReserveButton}
+                      onClick={() => reserveDesktopCard(activeDesktopCard)}
+                    >
+                      Reservar
                     </button>
                   </div>
-                </div>
-
-                <div className={styles.desktopExpandedBody}>
-                  <div className={styles.desktopExpandedCopy}>
-                    <p className={styles.desktopExpandedLead}>{desktopExpandedCopy.lead}</p>
-                    {desktopExpandedCopy.paragraphs.map((paragraph) => (
-                      <p key={paragraph} className={styles.desktopExpandedParagraph}>
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-
-                  <button
-                    type="button"
-                    className={styles.desktopExpandedReserveButton}
-                    onClick={() => reserveDesktopCard(activeDesktopCard)}
-                  >
-                    Reservar
-                  </button>
-                </div>
-              </article>
-            ) : null}
-          </div>
+                </article>
+              ) : null}
+            </div>
+          )}
         </section>
 
         <section className={styles.desktopExperienceSection} aria-labelledby="events-experience-title">
@@ -641,67 +676,85 @@ export default function Events() {
             Próximos eventos
           </h2>
 
-          <div className={styles.mobileCardsStage}>
-            <div
-              className={[
-                styles.mobileCardsGrid,
-                activeMobileCard ? styles.mobileCardsGridHidden : "",
-              ].join(" ")}
-            >
-            {eventCards.map((card) => {
-              return (
-                <article
-                  key={card.id}
-                  className={[styles.mobileCard, card.mobileClassName].join(" ")}
+          {shouldShowEventsPlaceholder ? (
+            <div className={styles.mobilePlaceholder}>
+              <p className={styles.mobilePlaceholderText}>
+                Próximamente...
+                <br />
+                Más novedades desde nuestro{" "}
+                <a
+                  href={SITE_INSTAGRAM_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.placeholderInstagramLink}
                 >
-                  <button
-                    type="button"
-                    className={styles.mobileCardTrigger}
-                    onClick={() => openMobileCard(card.id)}
-                    aria-expanded={activeMobileCardId === card.id}
-                    aria-controls={`mobile-event-card-${card.id}`}
-                    aria-label={`Abrir información de ${card.titleLines.join(" ")}`}
-                  />
-
-                  <div className={styles.mobileCardFront} aria-hidden={activeMobileCardId === card.id}>
-                    <span className={styles.mobileCardDate}>{card.date}</span>
-                    <span className={styles.mobileCardTitle}>
-                      {card.titleLines.map((line) => (
-                        <span key={line} className={styles.mobileCardTitleLine}>
-                          {line}
-                        </span>
-                      ))}
-                    </span>
-                    <span className={styles.mobileCardInfo}>+ info</span>
-                  </div>
-                </article>
-              );
-            })}
+                  Instagram
+                </a>
+              </p>
             </div>
-            {activeMobileCard ? (
+          ) : (
+            <div className={styles.mobileCardsStage}>
               <div
-                id={`mobile-event-card-${activeMobileCard.id}`}
-                className={styles.mobileExpandedCard}
-                aria-live="polite"
+                className={[
+                  styles.mobileCardsGrid,
+                  activeMobileCard ? styles.mobileCardsGridHidden : "",
+                ].join(" ")}
               >
-                <p className={styles.mobileExpandedDescription}>
-                  {activeMobileCard.expandedDescription ?? activeMobileCard.description}
-                </p>
-                <div className={styles.mobileExpandedActions}>
-                  <button type="button" className={styles.mobileExpandedButton} onClick={closeMobileCard}>
-                    Cerrar
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.mobileExpandedButton}
-                    onClick={() => reserveMobileCard(activeMobileCard)}
-                  >
-                    Reservar
-                  </button>
-                </div>
+                {eventCards.map((card) => {
+                  return (
+                    <article
+                      key={card.id}
+                      className={[styles.mobileCard, card.mobileClassName].join(" ")}
+                    >
+                      <button
+                        type="button"
+                        className={styles.mobileCardTrigger}
+                        onClick={() => openMobileCard(card.id)}
+                        aria-expanded={activeMobileCardId === card.id}
+                        aria-controls={`mobile-event-card-${card.id}`}
+                        aria-label={`Abrir información de ${card.titleLines.join(" ")}`}
+                      />
+
+                      <div className={styles.mobileCardFront} aria-hidden={activeMobileCardId === card.id}>
+                        <span className={styles.mobileCardDate}>{card.date}</span>
+                        <span className={styles.mobileCardTitle}>
+                          {card.titleLines.map((line) => (
+                            <span key={line} className={styles.mobileCardTitleLine}>
+                              {line}
+                            </span>
+                          ))}
+                        </span>
+                        <span className={styles.mobileCardInfo}>+ info</span>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
-            ) : null}
-          </div>
+              {activeMobileCard ? (
+                <div
+                  id={`mobile-event-card-${activeMobileCard.id}`}
+                  className={styles.mobileExpandedCard}
+                  aria-live="polite"
+                >
+                  <p className={styles.mobileExpandedDescription}>
+                    {activeMobileCard.expandedDescription ?? activeMobileCard.description}
+                  </p>
+                  <div className={styles.mobileExpandedActions}>
+                    <button type="button" className={styles.mobileExpandedButton} onClick={closeMobileCard}>
+                      Cerrar
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.mobileExpandedButton}
+                      onClick={() => reserveMobileCard(activeMobileCard)}
+                    >
+                      Reservar
+                    </button>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          )}
         </section>
 
         <section className={styles.mobileExperienceSection} aria-labelledby="events-mobile-experience-title">

@@ -81,6 +81,40 @@
   margin-top: 0;
 }
 
+.desktopPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 315px;
+  margin-top: 69px;
+  padding: 24px 0;
+  box-sizing: border-box;
+}
+
+.desktopPlaceholderText {
+  width: 634px;
+  min-height: 72px;
+  margin: 0;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  text-align: center;
+}
+
+.placeholderInstagramLink {
+  color: #232323;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.placeholderInstagramLink:hover,
+.placeholderInstagramLink:focus-visible {
+  color: #b76856;
+}
+
 .desktopCard {
   position: relative;
   width: 232px;
@@ -631,6 +665,28 @@
   width: 100%;
 }
 
+.mobilePlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 271px;
+  margin-top: 22px;
+  padding: 91px 0 90px;
+  box-sizing: border-box;
+}
+
+.mobilePlaceholderText {
+  width: 228px;
+  min-height: 90px;
+  margin: 0;
+  color: #232323;
+  font-family: "Roboto Serif", serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+  text-align: center;
+}
+
 .mobileCardsGridHidden {
   opacity: 0;
   transform: scale(0.985);
@@ -1042,6 +1098,15 @@
     margin-top: 56px;
   }
 
+  .desktopPlaceholder {
+    min-height: 290px;
+    margin-top: 56px;
+  }
+
+  .desktopPlaceholderText {
+    width: min(634px, calc(100% - 48px));
+  }
+
   .desktopCardsGrid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 20px;
@@ -1164,6 +1229,16 @@
 
   .desktopCardsGrid {
     gap: 16px;
+  }
+
+  .desktopPlaceholder {
+    min-height: 256px;
+  }
+
+  .desktopPlaceholderText {
+    width: min(520px, calc(100% - 40px));
+    font-size: 21px;
+    line-height: 32px;
   }
 
   .desktopCard {
@@ -1340,6 +1415,11 @@
     row-gap: 20px;
   }
 
+  .mobilePlaceholder {
+    min-height: 320px;
+    margin-top: 28px;
+  }
+
   .mobileCard {
     max-width: 220px;
     min-height: 240px;
@@ -1397,6 +1477,10 @@
     height: 500px;
   }
 
+  .mobilePlaceholderText {
+    width: 228px;
+  }
+
   .mobileExpandedDescription {
     font-size: 22px;
     line-height: 22px;
@@ -1450,6 +1534,10 @@
 
   .mobileDivider {
     width: min(271px, 100%);
+  }
+
+  .mobilePlaceholder {
+    padding: 91px 0 90px;
   }
 
   .mobileExperienceText,

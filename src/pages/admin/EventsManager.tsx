@@ -2,7 +2,9 @@ import { FormEvent, useEffect, useState } from "react";
 import {
   adminCreateEvent,
   adminDeleteEvent,
+  adminGetEventsComingSoonEnabled,
   adminListEvents,
+  adminSetEventsComingSoonEnabled,
   adminUpdateEvent,
 } from "../../lib/content/api";
 import styles from "./Admin.module.css";
@@ -45,11 +47,27 @@ export default function EventsManager() {
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [eventsComingSoon, setEventsComingSoon] = useState(true);
+  const [eventsComingSoonDraft, setEventsComingSoonDraft] = useState(true);
+  const [savingComingSoon, setSavingComingSoon] = useState(false);
+  const [eventsComingSoonJustSaved, setEventsComingSoonJustSaved] = useState(false);
 
   const load = async () => {
     try {
+      setError(null);
       const data = (await adminListEvents()) as EventRow[];
       setRows(data);
+      try {
+        const eventsComingSoonEnabled = await adminGetEventsComingSoonEnabled();
+        setEventsComingSoon(eventsComingSoonEnabled);
+        setEventsComingSoonDraft(eventsComingSoonEnabled);
+      } catch {
+        setEventsComingSoon(true);
+        setEventsComingSoonDraft(true);
+        setError(
+          "Para controlar el modo “Próximamente” de eventos, aplicá la actualización de supabase/schema.sql en Supabase.",
+        );
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al cargar eventos.");
     }
@@ -119,6 +137,34 @@ export default function EventsManager() {
     }
   };
 
+  const handleEventsComingSoonChange = (value: boolean) => {
+    setError(null);
+    setEventsComingSoonDraft(value);
+  };
+
+  const saveEventsComingSoon = async () => {
+    if (eventsComingSoonDraft === eventsComingSoon) return;
+
+    setSavingComingSoon(true);
+    try {
+      await adminSetEventsComingSoonEnabled(eventsComingSoonDraft);
+      setEventsComingSoon(eventsComingSoonDraft);
+      setEventsComingSoonJustSaved(true);
+      window.setTimeout(() => setEventsComingSoonJustSaved(false), 1800);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "No se pudo actualizar el modo de eventos.");
+    } finally {
+      setSavingComingSoon(false);
+    }
+  };
+
+  const resetEventsComingSoon = () => {
+    setError(null);
+    setEventsComingSoonDraft(eventsComingSoon);
+  };
+
+  const eventsComingSoonDirty = eventsComingSoonDraft !== eventsComingSoon;
+
   return (
     <div>
       <div className={styles.sectionHead}>
@@ -131,6 +177,51 @@ export default function EventsManager() {
       </div>
 
       {error ? <div className={`${styles.notice} ${styles.noticeError}`}>{error}</div> : null}
+
+      <div className={styles.card}>
+        <div className={styles.cardHead}>
+          <h3 className={styles.cardTitle}>Estado público</h3>
+        </div>
+        <label className={styles.toggleRow}>
+          <input
+            type="checkbox"
+            checked={eventsComingSoonDraft}
+            onChange={(event) => handleEventsComingSoonChange(event.target.checked)}
+            disabled={savingComingSoon}
+          />
+          <span>
+            Mostrar el mensaje <strong>&quot;Próximamente... Más novedades desde nuestro Instagram&quot;</strong> y
+            ocultar los eventos activos en la web pública.
+          </span>
+        </label>
+        {eventsComingSoonDirty ? (
+          <div className={styles.actions}>
+            <button
+              type="button"
+              className={`${styles.btn} ${styles.btnPrimary} ${styles.btnSmall}`}
+              onClick={saveEventsComingSoon}
+              disabled={savingComingSoon}
+            >
+              {savingComingSoon ? "Guardando…" : "Guardar"}
+            </button>
+            <button
+              type="button"
+              className={`${styles.btn} ${styles.btnGhost} ${styles.btnSmall}`}
+              onClick={resetEventsComingSoon}
+              disabled={savingComingSoon}
+            >
+              Deshacer
+            </button>
+          </div>
+        ) : eventsComingSoonJustSaved ? (
+          <span className={styles.savedTag}>✓ Guardado</span>
+        ) : null}
+        <p className={styles.toggleHint}>
+          {eventsComingSoonDraft
+            ? "Ahora la página pública de Eventos muestra el bloque de “Próximamente”."
+            : "Ahora la página pública de Eventos muestra los eventos publicados. Si no hay eventos cargados, seguirá apareciendo el mensaje de “Próximamente”."}
+        </p>
+      </div>
 
       {editing ? (
         <form className={styles.card} onSubmit={handleSubmit}>

@@ -63,7 +63,8 @@ Entrá a `https://latoma.com.ar/admin`, iniciá sesión y gestioná:
 
 - **Carta** — categorías e ítems (nombre, descripción, precio).
 - **Eventos** — alta/edición/baja, fecha visible y fecha real, descripción y
-  descripción ampliada, orden y visibilidad.
+  descripción ampliada, orden, visibilidad y un checkbox para alternar la
+  grilla pública con el modo **“Próximamente”**.
 - **Galería** — subí imágenes (se guardan en Supabase Storage), editá su texto
   alternativo y etiqueta, ordená y ocultá/mostrá. También podés activar o desactivar
   con un checkbox el modo **“Próximamente”** para ocultar la grilla pública hasta que

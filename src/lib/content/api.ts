@@ -4,6 +4,7 @@ import { optimizeImageToWebp } from "./image";
 import type { CartaCategory, CartaItem, EventItem, GalleryItem } from "./types";
 
 const GALLERY_COMING_SOON_SETTING_KEY = "gallery_coming_soon_enabled";
+const EVENTS_COMING_SOON_SETTING_KEY = "events_coming_soon_enabled";
 
 // ----------------------------------------------------------------------------
 // LECTURA pública (con respaldo estático)
@@ -99,6 +100,20 @@ export async function getGalleryComingSoonEnabled(): Promise<boolean> {
   return data?.value_boolean ?? true;
 }
 
+export async function getEventsComingSoonEnabled(): Promise<boolean> {
+  if (!supabase) return true;
+
+  const { data, error } = await supabase
+    .from("site_settings")
+    .select("value_boolean")
+    .eq("setting_key", EVENTS_COMING_SOON_SETTING_KEY)
+    .maybeSingle();
+
+  if (error) return true;
+
+  return data?.value_boolean ?? true;
+}
+
 // ----------------------------------------------------------------------------
 // ESCRITURA (panel /admin — requiere sesión autenticada)
 // ----------------------------------------------------------------------------
@@ -176,6 +191,30 @@ export const adminSetGalleryComingSoonEnabled = (value: boolean) =>
       .from("site_settings")
       .upsert(
         { setting_key: GALLERY_COMING_SOON_SETTING_KEY, value_boolean: value },
+        { onConflict: "setting_key" },
+      )
+      .select()
+      .single(),
+  );
+
+export async function adminGetEventsComingSoonEnabled(): Promise<boolean> {
+  const data = await run(
+    requireClient()
+      .from("site_settings")
+      .select("value_boolean")
+      .eq("setting_key", EVENTS_COMING_SOON_SETTING_KEY)
+      .maybeSingle(),
+  );
+
+  return data?.value_boolean ?? true;
+}
+
+export const adminSetEventsComingSoonEnabled = (value: boolean) =>
+  run(
+    requireClient()
+      .from("site_settings")
+      .upsert(
+        { setting_key: EVENTS_COMING_SOON_SETTING_KEY, value_boolean: value },
         { onConflict: "setting_key" },
       )
       .select()

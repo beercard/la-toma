@@ -128,7 +128,9 @@ export default function GalleryManager() {
   const [error, setError] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [galleryComingSoon, setGalleryComingSoon] = useState(true);
+  const [galleryComingSoonDraft, setGalleryComingSoonDraft] = useState(true);
   const [savingComingSoon, setSavingComingSoon] = useState(false);
+  const [galleryComingSoonJustSaved, setGalleryComingSoonJustSaved] = useState(false);
 
   const load = async () => {
     try {
@@ -138,8 +140,10 @@ export default function GalleryManager() {
       try {
         const galleryComingSoonEnabled = await adminGetGalleryComingSoonEnabled();
         setGalleryComingSoon(galleryComingSoonEnabled);
+        setGalleryComingSoonDraft(galleryComingSoonEnabled);
       } catch {
         setGalleryComingSoon(true);
+        setGalleryComingSoonDraft(true);
         setError(
           "Para controlar el modo “Próximamente” de la galería, aplicá la actualización de supabase/schema.sql en Supabase.",
         );
@@ -200,19 +204,32 @@ export default function GalleryManager() {
   };
 
   const handleGalleryComingSoonChange = async (value: boolean) => {
-    const previousValue = galleryComingSoon;
     setError(null);
-    setGalleryComingSoon(value);
+    setGalleryComingSoonDraft(value);
+  };
+
+  const saveGalleryComingSoon = async () => {
+    if (galleryComingSoonDraft === galleryComingSoon) return;
+
     setSavingComingSoon(true);
     try {
-      await adminSetGalleryComingSoonEnabled(value);
+      await adminSetGalleryComingSoonEnabled(galleryComingSoonDraft);
+      setGalleryComingSoon(galleryComingSoonDraft);
+      setGalleryComingSoonJustSaved(true);
+      window.setTimeout(() => setGalleryComingSoonJustSaved(false), 1800);
     } catch (err) {
-      setGalleryComingSoon(previousValue);
       setError(err instanceof Error ? err.message : "No se pudo actualizar el modo de galería.");
     } finally {
       setSavingComingSoon(false);
     }
   };
+
+  const resetGalleryComingSoon = () => {
+    setError(null);
+    setGalleryComingSoonDraft(galleryComingSoon);
+  };
+
+  const galleryComingSoonDirty = galleryComingSoonDraft !== galleryComingSoon;
 
   return (
     <div>
@@ -239,7 +256,7 @@ export default function GalleryManager() {
         <label className={styles.toggleRow}>
           <input
             type="checkbox"
-            checked={galleryComingSoon}
+            checked={galleryComingSoonDraft}
             onChange={(event) => handleGalleryComingSoonChange(event.target.checked)}
             disabled={savingComingSoon}
           />
@@ -248,8 +265,30 @@ export default function GalleryManager() {
             ocultar las imágenes en la web pública.
           </span>
         </label>
+        {galleryComingSoonDirty ? (
+          <div className={styles.actions}>
+            <button
+              type="button"
+              className={`${styles.btn} ${styles.btnPrimary} ${styles.btnSmall}`}
+              onClick={saveGalleryComingSoon}
+              disabled={savingComingSoon}
+            >
+              {savingComingSoon ? "Guardando…" : "Guardar"}
+            </button>
+            <button
+              type="button"
+              className={`${styles.btn} ${styles.btnGhost} ${styles.btnSmall}`}
+              onClick={resetGalleryComingSoon}
+              disabled={savingComingSoon}
+            >
+              Deshacer
+            </button>
+          </div>
+        ) : galleryComingSoonJustSaved ? (
+          <span className={styles.savedTag}>✓ Guardado</span>
+        ) : null}
         <p className={styles.toggleHint}>
-          {galleryComingSoon
+          {galleryComingSoonDraft
             ? "Ahora la página pública de Galería muestra el bloque de “Próximamente”."
             : "Ahora la página pública de Galería muestra las imágenes publicadas. Si no hay imágenes, seguirá apareciendo el mensaje de “Próximamente”."}
         </p>

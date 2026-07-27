@@ -181,5 +181,7 @@ insert into public.events (slug, title, date_label, starts_at, description, expa
 on conflict (slug) do nothing;
 
 insert into public.site_settings (setting_key, value_boolean)
-values ('gallery_coming_soon_enabled', true)
+values
+  ('gallery_coming_soon_enabled', true),
+  ('events_coming_soon_enabled', true)
 on conflict (setting_key) do nothing;
