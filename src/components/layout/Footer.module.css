@@ -244,20 +244,24 @@
 }
 
 .mobileLegalLinks {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, 163px);
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 18px;
 }
 
 .mobileLegalLink {
-  opacity: 0.7;
-  letter-spacing: 0.1px;
+  width: 163px;
+  min-height: 14px;
+  opacity: 0.5;
+  letter-spacing: 0.01em;
   color: #232323;
   font-family: "Roboto Serif", serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
+  line-height: 12px;
+  text-align: center;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -332,6 +336,15 @@
   .mobileCopyright {
     width: 100%;
   }
+
+  .mobileLegalLinks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 12px;
+  }
+
+  .mobileLegalLink {
+    width: 100%;
+  }
 }
 
 @media (--bp-tablet-wide) {
@@ -356,6 +369,12 @@
 
   .mobileCopyright {
     font-size: 11px;
+  }
+
+  .mobileLegalLinks {
+    width: min(343px, 100%);
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 
