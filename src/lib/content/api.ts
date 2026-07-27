@@ -3,6 +3,8 @@ import { fallbackCarta, fallbackEvents, fallbackGallery } from "./fallback";
 import { optimizeImageToWebp } from "./image";
 import type { CartaCategory, CartaItem, EventItem, GalleryItem } from "./types";
 
+const GALLERY_COMING_SOON_SETTING_KEY = "gallery_coming_soon_enabled";
+
 // ----------------------------------------------------------------------------
 // LECTURA pública (con respaldo estático)
 // ----------------------------------------------------------------------------
@@ -83,6 +85,20 @@ export async function getGallery(): Promise<GalleryItem[]> {
   }));
 }
 
+export async function getGalleryComingSoonEnabled(): Promise<boolean> {
+  if (!supabase) return true;
+
+  const { data, error } = await supabase
+    .from("site_settings")
+    .select("value_boolean")
+    .eq("setting_key", GALLERY_COMING_SOON_SETTING_KEY)
+    .maybeSingle();
+
+  if (error) return true;
+
+  return data?.value_boolean ?? true;
+}
+
 // ----------------------------------------------------------------------------
 // ESCRITURA (panel /admin — requiere sesión autenticada)
 // ----------------------------------------------------------------------------
@@ -141,6 +157,30 @@ export const adminUpdateGalleryImage = (id: string, patch: Record<string, unknow
   run(requireClient().from("gallery_images").update(patch).eq("id", id).select().single());
 export const adminDeleteGalleryImage = (id: string) =>
   run(requireClient().from("gallery_images").delete().eq("id", id).select());
+
+export async function adminGetGalleryComingSoonEnabled(): Promise<boolean> {
+  const data = await run(
+    requireClient()
+      .from("site_settings")
+      .select("value_boolean")
+      .eq("setting_key", GALLERY_COMING_SOON_SETTING_KEY)
+      .maybeSingle(),
+  );
+
+  return data?.value_boolean ?? true;
+}
+
+export const adminSetGalleryComingSoonEnabled = (value: boolean) =>
+  run(
+    requireClient()
+      .from("site_settings")
+      .upsert(
+        { setting_key: GALLERY_COMING_SOON_SETTING_KEY, value_boolean: value },
+        { onConflict: "setting_key" },
+      )
+      .select()
+      .single(),
+  );
 
 // Storage — subida de imágenes (optimizadas a WebP + resize en el navegador)
 export async function uploadMedia(file: File, folder = "gallery"): Promise<string> {

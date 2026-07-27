@@ -1,8 +1,10 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import {
   adminCreateGalleryImage,
+  adminGetGalleryComingSoonEnabled,
   adminDeleteGalleryImage,
   adminListGallery,
+  adminSetGalleryComingSoonEnabled,
   adminUpdateGalleryImage,
   removeMediaByUrl,
   uploadMedia,
@@ -125,10 +127,23 @@ export default function GalleryManager() {
   const [rows, setRows] = useState<GalleryRow[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [galleryComingSoon, setGalleryComingSoon] = useState(true);
+  const [savingComingSoon, setSavingComingSoon] = useState(false);
 
   const load = async () => {
     try {
-      setRows((await adminListGallery()) as GalleryRow[]);
+      setError(null);
+      const galleryRows = (await adminListGallery()) as GalleryRow[];
+      setRows(galleryRows);
+      try {
+        const galleryComingSoonEnabled = await adminGetGalleryComingSoonEnabled();
+        setGalleryComingSoon(galleryComingSoonEnabled);
+      } catch {
+        setGalleryComingSoon(true);
+        setError(
+          "Para controlar el modo “Próximamente” de la galería, aplicá la actualización de supabase/schema.sql en Supabase.",
+        );
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al cargar la galería.");
     }
@@ -184,6 +199,21 @@ export default function GalleryManager() {
     }
   };
 
+  const handleGalleryComingSoonChange = async (value: boolean) => {
+    const previousValue = galleryComingSoon;
+    setError(null);
+    setGalleryComingSoon(value);
+    setSavingComingSoon(true);
+    try {
+      await adminSetGalleryComingSoonEnabled(value);
+    } catch (err) {
+      setGalleryComingSoon(previousValue);
+      setError(err instanceof Error ? err.message : "No se pudo actualizar el modo de galería.");
+    } finally {
+      setSavingComingSoon(false);
+    }
+  };
+
   return (
     <div>
       <div className={styles.sectionHead}>
@@ -201,6 +231,29 @@ export default function GalleryManager() {
       </p>
 
       {error ? <div className={`${styles.notice} ${styles.noticeError}`}>{error}</div> : null}
+
+      <div className={styles.card}>
+        <div className={styles.cardHead}>
+          <h3 className={styles.cardTitle}>Estado público</h3>
+        </div>
+        <label className={styles.toggleRow}>
+          <input
+            type="checkbox"
+            checked={galleryComingSoon}
+            onChange={(event) => handleGalleryComingSoonChange(event.target.checked)}
+            disabled={savingComingSoon}
+          />
+          <span>
+            Mostrar el mensaje <strong>&quot;Próximamente... Más novedades desde nuestro Instagram&quot;</strong> y
+            ocultar las imágenes en la web pública.
+          </span>
+        </label>
+        <p className={styles.toggleHint}>
+          {galleryComingSoon
+            ? "Ahora la página pública de Galería muestra el bloque de “Próximamente”."
+            : "Ahora la página pública de Galería muestra las imágenes publicadas. Si no hay imágenes, seguirá apareciendo el mensaje de “Próximamente”."}
+        </p>
+      </div>
 
       {rows.length === 0 ? (
         <p className={styles.empty}>Todavía no hay imágenes cargadas.</p>

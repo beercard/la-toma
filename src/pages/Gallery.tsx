@@ -1,5 +1,7 @@
 import { CSSProperties, KeyboardEvent, useEffect, useMemo, useState } from "react";
 import { useGallery } from "../hooks/useContent";
+import { SITE_INSTAGRAM_LINK } from "../lib/siteConfig";
+import { getGalleryComingSoonEnabled } from "../lib/content/api";
 import styles from "./Gallery.module.css";
 
 const DESKTOP_PREVIEW_COUNT = 6;
@@ -8,23 +10,32 @@ const MOBILE_PREVIEW_COUNT = 4;
 export default function Gallery() {
   const galleryImages = useGallery();
   const [mobileHeroScale, setMobileHeroScale] = useState(1);
+  const [galleryComingSoon, setGalleryComingSoon] = useState(true);
   const [showMoreDesktopImages, setShowMoreDesktopImages] = useState(false);
   const [showMoreMobileImages, setShowMoreMobileImages] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [lightboxGallery, setLightboxGallery] = useState<"desktop" | "mobile" | null>(null);
+  const shouldShowGalleryPlaceholder = galleryComingSoon || galleryImages.length === 0;
+  const visibleGalleryImages = shouldShowGalleryPlaceholder ? [] : galleryImages;
 
   const allDesktopGalleryImages = useMemo(
-    () => (showMoreDesktopImages ? galleryImages : galleryImages.slice(0, DESKTOP_PREVIEW_COUNT)),
-    [showMoreDesktopImages, galleryImages],
+    () =>
+      showMoreDesktopImages
+        ? visibleGalleryImages
+        : visibleGalleryImages.slice(0, DESKTOP_PREVIEW_COUNT),
+    [showMoreDesktopImages, visibleGalleryImages],
   );
 
   const allMobileGalleryImages = useMemo(
-    () => (showMoreMobileImages ? galleryImages : galleryImages.slice(0, MOBILE_PREVIEW_COUNT)),
-    [showMoreMobileImages, galleryImages],
+    () =>
+      showMoreMobileImages
+        ? visibleGalleryImages
+        : visibleGalleryImages.slice(0, MOBILE_PREVIEW_COUNT),
+    [showMoreMobileImages, visibleGalleryImages],
   );
 
-  const hasMoreDesktop = galleryImages.length > DESKTOP_PREVIEW_COUNT;
-  const hasMoreMobile = galleryImages.length > MOBILE_PREVIEW_COUNT;
+  const hasMoreDesktop = visibleGalleryImages.length > DESKTOP_PREVIEW_COUNT;
+  const hasMoreMobile = visibleGalleryImages.length > MOBILE_PREVIEW_COUNT;
 
   const activeLightboxImages = lightboxGallery === "mobile" ? allMobileGalleryImages : allDesktopGalleryImages;
 
@@ -44,6 +55,20 @@ export default function Gallery() {
     window.addEventListener("resize", updateMobileHeroScale);
 
     return () => window.removeEventListener("resize", updateMobileHeroScale);
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+
+    getGalleryComingSoonEnabled()
+      .then((value) => {
+        if (active) setGalleryComingSoon(value);
+      })
+      .catch(() => undefined);
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -147,38 +172,58 @@ export default function Gallery() {
           <p className={styles.desktopIntro}>Repasá los momentos de nuestras últimas noches en Corrientes</p>
 
           <div className={styles.desktopTagStrip}>
-            <p className={styles.desktopTag}>APERTURA 11.07</p>
+            <p className={styles.desktopTag}>APERTURA</p>
           </div>
 
-          <div className={styles.desktopGrid}>
-            {allDesktopGalleryImages.map((image, index) => (
-              <button
-                key={image.src}
-                type="button"
-                className={styles.desktopGridButton}
-                onClick={() => openLightbox("desktop", index)}
-                aria-label={`Abrir ${image.alt.toLowerCase()} en pantalla completa`}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className={styles.desktopGridImage}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </button>
-            ))}
-          </div>
+          {allDesktopGalleryImages.length > 0 ? (
+            <>
+              <div className={styles.desktopGrid}>
+                {allDesktopGalleryImages.map((image, index) => (
+                  <button
+                    key={image.src}
+                    type="button"
+                    className={styles.desktopGridButton}
+                    onClick={() => openLightbox("desktop", index)}
+                    aria-label={`Abrir ${image.alt.toLowerCase()} en pantalla completa`}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className={styles.desktopGridImage}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </button>
+                ))}
+              </div>
 
-          {hasMoreDesktop && !showMoreDesktopImages ? (
-            <button
-              type="button"
-              className={styles.desktopMoreLink}
-              onClick={() => setShowMoreDesktopImages(true)}
-            >
-              Ver más imagenes
-            </button>
-          ) : null}
+              {hasMoreDesktop && !showMoreDesktopImages ? (
+                <button
+                  type="button"
+                  className={styles.desktopMoreLink}
+                  onClick={() => setShowMoreDesktopImages(true)}
+                >
+                  Ver más imagenes
+                </button>
+              ) : null}
+            </>
+          ) : (
+            <div className={styles.desktopPlaceholder}>
+              <p className={styles.desktopPlaceholderText}>
+                Próximamente...
+                <br />
+                Más novedades desde nuestro{" "}
+                <a
+                  href={SITE_INSTAGRAM_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.placeholderInstagramLink}
+                >
+                  Instagram
+                </a>
+              </p>
+            </div>
+          )}
         </section>
       </div>
 
@@ -215,38 +260,58 @@ export default function Gallery() {
           <p className={styles.mobileIntro}>Repasá los momentos de nuestras últimas noches en Corrientes</p>
 
           <div className={styles.mobileTagStrip}>
-            <p className={styles.mobileTag}>APERTURA 11.07</p>
+            <p className={styles.mobileTag}>APERTURA</p>
           </div>
 
-          <div className={styles.mobileGrid}>
-            {allMobileGalleryImages.map((image, index) => (
-              <button
-                key={image.src}
-                type="button"
-                className={styles.mobileGridButton}
-                onClick={() => openLightbox("mobile", index)}
-                aria-label={`Abrir ${image.alt.toLowerCase()} en pantalla completa`}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className={styles.mobileGridImage}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </button>
-            ))}
-          </div>
+          {allMobileGalleryImages.length > 0 ? (
+            <>
+              <div className={styles.mobileGrid}>
+                {allMobileGalleryImages.map((image, index) => (
+                  <button
+                    key={image.src}
+                    type="button"
+                    className={styles.mobileGridButton}
+                    onClick={() => openLightbox("mobile", index)}
+                    aria-label={`Abrir ${image.alt.toLowerCase()} en pantalla completa`}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className={styles.mobileGridImage}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </button>
+                ))}
+              </div>
 
-          {hasMoreMobile && !showMoreMobileImages ? (
-            <button
-              type="button"
-              className={styles.mobileMoreLink}
-              onClick={() => setShowMoreMobileImages(true)}
-            >
-              Ver más imagenes
-            </button>
-          ) : null}
+              {hasMoreMobile && !showMoreMobileImages ? (
+                <button
+                  type="button"
+                  className={styles.mobileMoreLink}
+                  onClick={() => setShowMoreMobileImages(true)}
+                >
+                  Ver más imagenes
+                </button>
+              ) : null}
+            </>
+          ) : (
+            <div className={styles.mobilePlaceholder}>
+              <p className={styles.mobilePlaceholderText}>
+                Próximamente...
+                <br />
+                Más novedades desde nuestro{" "}
+                <a
+                  href={SITE_INSTAGRAM_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.placeholderInstagramLink}
+                >
+                  Instagram
+                </a>
+              </p>
+            </div>
+          )}
         </section>
       </div>
 

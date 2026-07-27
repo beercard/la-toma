@@ -22,7 +22,7 @@ Mientras Supabase no esté configurado, el sitio funciona igual mostrando el
 En el panel de Supabase: **SQL Editor → New query**, pegá el contenido de
 [`supabase/schema.sql`](../supabase/schema.sql) y dale **Run**.
 Esto crea las tablas (`menu_categories`, `menu_items`, `events`,
-`gallery_images`), las políticas de seguridad (RLS), el bucket de imágenes
+`gallery_images`, `site_settings`), las políticas de seguridad (RLS), el bucket de imágenes
 `media` y carga contenido inicial.
 
 ## 3. Crear el usuario administrador
@@ -65,7 +65,9 @@ Entrá a `https://latoma.com.ar/admin`, iniciá sesión y gestioná:
 - **Eventos** — alta/edición/baja, fecha visible y fecha real, descripción y
   descripción ampliada, orden y visibilidad.
 - **Galería** — subí imágenes (se guardan en Supabase Storage), editá su texto
-  alternativo y etiqueta, ordená y ocultá/mostrá.
+  alternativo y etiqueta, ordená y ocultá/mostrá. También podés activar o desactivar
+  con un checkbox el modo **“Próximamente”** para ocultar la grilla pública hasta que
+  haya fotos reales cargadas.
 
 ---
 

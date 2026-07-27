@@ -71,6 +71,15 @@ create table if not exists public.gallery_images (
   created_at   timestamptz not null default now()
 );
 
+-- =====================================================================
+-- CONFIGURACIÓN DEL SITIO
+-- =====================================================================
+create table if not exists public.site_settings (
+  setting_key   text primary key,
+  value_boolean boolean not null default false,
+  updated_at    timestamptz not null default now()
+);
+
 -- ---------- Triggers updated_at ----------
 drop trigger if exists trg_menu_categories_updated on public.menu_categories;
 create trigger trg_menu_categories_updated before update on public.menu_categories
@@ -81,6 +90,9 @@ create trigger trg_menu_items_updated before update on public.menu_items
 drop trigger if exists trg_events_updated on public.events;
 create trigger trg_events_updated before update on public.events
   for each row execute function public.set_updated_at();
+drop trigger if exists trg_site_settings_updated on public.site_settings;
+create trigger trg_site_settings_updated before update on public.site_settings
+  for each row execute function public.set_updated_at();
 
 -- =====================================================================
 -- ROW LEVEL SECURITY
@@ -90,6 +102,7 @@ alter table public.menu_categories enable row level security;
 alter table public.menu_items      enable row level security;
 alter table public.events          enable row level security;
 alter table public.gallery_images  enable row level security;
+alter table public.site_settings   enable row level security;
 
 -- Lectura pública (anon) de lo publicado
 drop policy if exists "public read published categories" on public.menu_categories;
@@ -104,6 +117,9 @@ create policy "public read published events" on public.events
 drop policy if exists "public read published gallery" on public.gallery_images;
 create policy "public read published gallery" on public.gallery_images
   for select using (is_published = true);
+drop policy if exists "public read site settings" on public.site_settings;
+create policy "public read site settings" on public.site_settings
+  for select using (true);
 
 -- Acceso total para usuarios autenticados (admin)
 drop policy if exists "auth full categories" on public.menu_categories;
@@ -117,6 +133,9 @@ create policy "auth full events" on public.events
   for all to authenticated using (true) with check (true);
 drop policy if exists "auth full gallery" on public.gallery_images;
 create policy "auth full gallery" on public.gallery_images
+  for all to authenticated using (true) with check (true);
+drop policy if exists "auth full site settings" on public.site_settings;
+create policy "auth full site settings" on public.site_settings
   for all to authenticated using (true) with check (true);
 
 -- =====================================================================
@@ -160,3 +179,7 @@ insert into public.events (slug, title, date_label, starts_at, description, expa
   ('ceramica-de-autor', 'Cerámica de Autor', '11|07', '2026-07-11T18:00:00-03:00',
    'Un encuentro entre diseño, oficio y sobremesa. Presentamos piezas de cerámica de autor en una noche donde la estética, el detalle y la experiencia van de la mano.', null, 4)
 on conflict (slug) do nothing;
+
+insert into public.site_settings (setting_key, value_boolean)
+values ('gallery_coming_soon_enabled', true)
+on conflict (setting_key) do nothing;

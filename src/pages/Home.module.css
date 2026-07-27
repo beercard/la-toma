@@ -11,6 +11,7 @@
 }
 
 .desktopHome {
+  --home-desktop-header-offset: 80px;
   display: block;
   background: #f7f4ef;
   width: 100%;
@@ -22,7 +23,7 @@
   height: 940px;
   overflow: hidden;
   background: #b76856;
-  margin-top: 100px;
+  margin-top: var(--home-desktop-header-offset);
 }
 
 .desktopHeroImage {
@@ -135,6 +136,7 @@
 }
 
 .mobileHome {
+  --home-mobile-header-offset: 64px;
   display: none;
   background: #f7f4ef;
   width: 100%;
@@ -149,7 +151,7 @@
   margin: 0 auto;
   overflow: hidden;
   background: #b76856;
-  margin-top: 64px;
+  margin-top: var(--home-mobile-header-offset);
 }
 
 .mobileHeroCanvas {
@@ -272,7 +274,7 @@
 @media (--bp-desktop-down) {
   .desktopHero {
     height: 760px;
-    margin-top: 100px;
+    margin-top: var(--home-desktop-header-offset);
   }
 
   .desktopHeroOverlay {

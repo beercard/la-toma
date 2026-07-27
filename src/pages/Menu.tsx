@@ -1,10 +1,6 @@
 import { CSSProperties, useEffect, useState } from "react";
+import { SITE_INSTAGRAM_LINK } from "../lib/siteConfig";
 import styles from "./Menu.module.css";
-
-// URL del menú digital de FUDO para incrustar.
-// Pegá acá el enlace que te da FUDO (ej. https://menu.fu.do/la-toma) y el iframe
-// se muestra automáticamente. Mientras esté vacío se ve un aviso de "próximamente".
-const FUDO_MENU_URL = "";
 
 export default function Menu() {
   const [mobileHeroScale, setMobileHeroScale] = useState(1);
@@ -80,29 +76,20 @@ export default function Menu() {
         </section>
       </div>
 
-      <section className={styles.menuSection} aria-labelledby="menu-title">
-        <div className={styles.menuInner}>
-          <p className={styles.menuEyebrow}>Café Bar · Costanera de Corrientes</p>
-          <h2 id="menu-title" className={styles.menuTitle}>
-            Nuestra Carta
-          </h2>
-
-          {FUDO_MENU_URL ? (
-            <div className={styles.menuFrameWrap}>
-              <iframe
-                src={FUDO_MENU_URL}
-                title="Menú de La Toma"
-                className={styles.menuFrame}
-                loading="lazy"
-              />
-            </div>
-          ) : (
-            <div className={styles.menuPlaceholder} role="status">
-              <p className={styles.menuPlaceholderText}>Estamos preparando nuestra carta digital.</p>
-              <p className={styles.menuPlaceholderHint}>Muy pronto vas a poder verla acá.</p>
-            </div>
-          )}
-        </div>
+      <section className={styles.updatesSection} aria-label="Novedades de Café Bar">
+        <p className={styles.updatesText}>
+          Próximamente...
+          <br />
+          Más novedades desde nuestro{" "}
+          <a
+            href={SITE_INSTAGRAM_LINK}
+            target="_blank"
+            rel="noreferrer"
+            className={styles.instagramLink}
+          >
+            Instagram
+          </a>
+        </p>
       </section>
     </>
   );
