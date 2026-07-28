@@ -673,7 +673,7 @@ export default function Events() {
 
         <section className={styles.mobileEventsSection} aria-labelledby="events-mobile-list-title">
           <h2 id="events-mobile-list-title" className={styles.mobileSectionTitle}>
-            Próximos eventos
+            Viví la Toma
           </h2>
 
           {shouldShowEventsPlaceholder ? (

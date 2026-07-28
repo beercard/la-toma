@@ -79,25 +79,17 @@
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
-  padding: 72px 24px 60px;
+  padding: 59px 24px 60px;
   box-sizing: border-box;
 }
 
-.desktopIntro {
-  width: min(892px, 100%);
-  margin: 0 0 0 max(0px, calc(50% - 576px));
-  color: #232323;
-  font-family: "Roboto Serif", serif;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 36px;
-  text-align: left;
-}
-
 .desktopTagStrip {
-  width: calc(100% + 41px);
-  margin: 61px -4px 0 -37px;
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin: 0;
   background: #c3903f;
+  transform: translateX(-50%);
 }
 
 .desktopTag {
@@ -177,9 +169,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 410px;
-  margin-top: 56px;
-  padding: 24px 0 18px;
+  min-height: auto;
+  margin-top: 85px;
+  padding: clamp(40px, 5vw, 48px) 0;
   box-sizing: border-box;
 }
 
@@ -394,21 +386,13 @@
   box-sizing: border-box;
 }
 
-.mobileIntro {
-  width: 228px;
-  margin: 0 auto;
-  color: #232323;
-  font-family: "Roboto Serif", serif;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 18px;
-  text-align: center;
-}
-
 .mobileTagStrip {
-  width: 100%;
-  margin-top: 25px;
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-top: 0;
   background: #c3903f;
+  transform: translateX(-50%);
 }
 
 .mobileTag {
@@ -483,9 +467,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 271px;
-  margin-top: 16px;
-  padding: 91px 0 90px;
+  min-height: auto;
+  margin-top: 52px;
+  padding: clamp(40px, 10vw, 48px) 0;
   box-sizing: border-box;
 }
 
@@ -540,19 +524,14 @@
   }
 
   .desktopContentSection {
+    padding-top: 48px;
     padding-right: 48px;
     padding-left: 48px;
   }
 
-  .desktopIntro {
-    width: min(892px, 100%);
-    margin: 0 auto;
-    text-align: center;
-  }
-
   .desktopTagStrip {
-    width: 100%;
-    margin: 48px 0 0;
+    width: 100vw;
+    margin: 0;
   }
 
   .desktopTag {
@@ -581,7 +560,7 @@
   }
 
   .desktopPlaceholder {
-    min-height: 360px;
+    margin-top: 72px;
   }
 
   .desktopPlaceholderText {
@@ -633,7 +612,7 @@
   }
 
   .desktopPlaceholder {
-    min-height: 320px;
+    margin-top: 64px;
   }
 
   .desktopPlaceholderText {
@@ -684,13 +663,9 @@
     box-sizing: border-box;
   }
 
-  .mobileIntro {
-    width: 260px;
-  }
-
   .mobileTagStrip {
-    width: calc(100% + 64px);
-    margin: 32px -32px 0;
+    width: 100vw;
+    margin: 0;
   }
 
   .mobileTag {
@@ -720,10 +695,7 @@
   }
 
   .mobilePlaceholder {
-    min-height: 300px;
-    margin-top: 20px;
-    padding-top: 96px;
-    padding-bottom: 96px;
+    margin-top: 64px;
   }
 
   .mobilePlaceholderText {
@@ -773,10 +745,7 @@
   }
 
   .mobilePlaceholder {
-    min-height: 271px;
-    margin-top: 16px;
-    padding-top: 91px;
-    padding-bottom: 90px;
+    margin-top: 52px;
   }
 }
 

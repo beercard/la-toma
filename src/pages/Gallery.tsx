@@ -169,8 +169,6 @@ export default function Gallery() {
         </section>
 
         <section className={styles.desktopContentSection}>
-          <p className={styles.desktopIntro}>Repasá los momentos de nuestras últimas noches en Corrientes</p>
-
           <div className={styles.desktopTagStrip}>
             <p className={styles.desktopTag}>APERTURA</p>
           </div>
@@ -257,8 +255,6 @@ export default function Gallery() {
         </section>
 
         <section className={styles.mobileContentSection}>
-          <p className={styles.mobileIntro}>Repasá los momentos de nuestras últimas noches en Corrientes</p>
-
           <div className={styles.mobileTagStrip}>
             <p className={styles.mobileTag}>APERTURA</p>
           </div>
