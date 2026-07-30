@@ -1,3 +1,4 @@
+import { spawnSync } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -5,6 +6,7 @@ const rootDir = resolve(process.cwd());
 const distDir = resolve(rootDir, "dist");
 const deployDir = resolve(rootDir, "deploy");
 const targetDir = resolve(deployDir, "donweb-public_html");
+const zipPath = resolve(deployDir, "latoma-donweb-public_html.zip");
 const notesPath = resolve(deployDir, "DONWEB-README.txt");
 
 if (!existsSync(distDir)) {
@@ -14,6 +16,29 @@ if (!existsSync(distDir)) {
 rmSync(targetDir, { recursive: true, force: true });
 mkdirSync(targetDir, { recursive: true });
 cpSync(distDir, targetDir, { recursive: true });
+
+const zipPayloadGlob = resolve(targetDir, "*");
+
+if (process.platform === "win32") {
+  const zip = spawnSync(
+    "powershell",
+    [
+      "-NoProfile",
+      "-Command",
+      [
+        `if (Test-Path "${zipPath}") { Remove-Item "${zipPath}" -Force }`,
+        `Compress-Archive -Path "${zipPayloadGlob}" -DestinationPath "${zipPath}" -Force`,
+      ].join("; "),
+    ],
+    { stdio: "inherit" },
+  );
+
+  if (zip.status !== 0) {
+    console.warn("No se pudo generar el ZIP automaticamente. Comprime manualmente deploy/donweb-public_html.");
+  }
+} else {
+  console.log("ZIP automatico disponible solo en Windows. Comprime manualmente deploy/donweb-public_html.");
+}
 
 writeFileSync(
   notesPath,
@@ -31,4 +56,5 @@ writeFileSync(
 );
 
 console.log(`Paquete DonWeb preparado en: ${targetDir}`);
+console.log(`ZIP listo en: ${zipPath}`);
 console.log(`Instrucciones rápidas en: ${notesPath}`);
