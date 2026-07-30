@@ -5,25 +5,24 @@ import styles from "./Project.module.css";
 
 const PROJECT_IMAGE_ALT = "Vista del proyecto gastronómico de La Toma en Corrientes Capital";
 
-const desktopSlides = [
-  "/figma/mqk7ns47-64iua53.png",
-  "/figma/mqk7o90b-9w6vzsg.png",
-  "/figma/mqk7o90b-ft3rc1l.png",
+const projectSlides = [
+  "/images/project-01.jpeg",
+  "/images/project-02.jpeg",
+  "/images/project-03.jpeg",
+  "/images/project-04.jpeg",
+  "/images/project-05.jpeg",
+  "/images/project-06.jpeg",
+  "/images/project-07.jpeg",
+  "/images/project-08.jpeg",
 ];
 
-const mobileSlides = [
-  "/figma/mqk7o90b-6n812il.png",
-  "/figma/mqk7o90b-9w6vzsg.png",
-  "/figma/mqk7o90b-ft3rc1l.png",
-];
-
-const desktopLightboxImages = desktopSlides.map((src) => ({ src, alt: PROJECT_IMAGE_ALT }));
-const mobileLightboxImages = mobileSlides.map((src) => ({ src, alt: PROJECT_IMAGE_ALT }));
+const desktopLightboxImages = projectSlides.map((src) => ({ src, alt: PROJECT_IMAGE_ALT }));
+const mobileLightboxImages = projectSlides.map((src) => ({ src, alt: PROJECT_IMAGE_ALT }));
 
 export default function Project() {
   const [mobileHeroScale, setMobileHeroScale] = useState(1);
   const [desktopSlideIndex, setDesktopSlideIndex] = useState(0);
-  const [mobileSlideIndex, setMobileSlideIndex] = useState(1);
+  const [mobileSlideIndex, setMobileSlideIndex] = useState(0);
   const [lightbox, setLightbox] = useState<{ gallery: "desktop" | "mobile"; index: number } | null>(null);
 
   useEffect(() => {
@@ -49,32 +48,33 @@ export default function Project() {
     if (lightbox) return;
 
     const intervalId = window.setInterval(() => {
-      setDesktopSlideIndex((current) => (current + 1) % desktopSlides.length);
-      setMobileSlideIndex((current) => (current + 1) % mobileSlides.length);
+      setDesktopSlideIndex((current) => (current + 1) % projectSlides.length);
+      setMobileSlideIndex((current) => (current + 1) % projectSlides.length);
     }, 4500);
 
     return () => window.clearInterval(intervalId);
   }, [lightbox]);
 
   const previousDesktopSlide = () => {
-    setDesktopSlideIndex((current) => (current - 1 + desktopSlides.length) % desktopSlides.length);
+    setDesktopSlideIndex((current) => (current - 1 + projectSlides.length) % projectSlides.length);
   };
 
   const nextDesktopSlide = () => {
-    setDesktopSlideIndex((current) => (current + 1) % desktopSlides.length);
+    setDesktopSlideIndex((current) => (current + 1) % projectSlides.length);
   };
 
   const previousMobileSlide = () => {
-    setMobileSlideIndex((current) => (current - 1 + mobileSlides.length) % mobileSlides.length);
+    setMobileSlideIndex((current) => (current - 1 + projectSlides.length) % projectSlides.length);
   };
 
   const nextMobileSlide = () => {
-    setMobileSlideIndex((current) => (current + 1) % mobileSlides.length);
+    setMobileSlideIndex((current) => (current + 1) % projectSlides.length);
   };
 
-  const mobilePreviousPreview = mobileSlides[(mobileSlideIndex - 1 + mobileSlides.length) % mobileSlides.length];
-  const mobileCurrentSlide = mobileSlides[mobileSlideIndex];
-  const mobileNextPreview = mobileSlides[(mobileSlideIndex + 1) % mobileSlides.length];
+  const mobilePreviousPreview =
+    projectSlides[(mobileSlideIndex - 1 + projectSlides.length) % projectSlides.length];
+  const mobileCurrentSlide = projectSlides[mobileSlideIndex];
+  const mobileNextPreview = projectSlides[(mobileSlideIndex + 1) % projectSlides.length];
 
   return (
     <>
@@ -145,7 +145,7 @@ export default function Project() {
                 >
                   <img
                     key={`desktop-slide-${desktopSlideIndex}`}
-                    src={desktopSlides[desktopSlideIndex]}
+                    src={projectSlides[desktopSlideIndex]}
                     alt={PROJECT_IMAGE_ALT}
                     className={[styles.desktopGalleryImage, styles.desktopGalleryImageAnimated].join(" ")}
                   />
@@ -166,7 +166,7 @@ export default function Project() {
               </div>
 
               <div className={styles.desktopDots}>
-                {desktopSlides.map((_, index) => (
+                {projectSlides.map((_, index) => (
                   <button
                     key={`desktop-dot-${index}`}
                     type="button"
