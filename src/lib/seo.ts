@@ -47,12 +47,7 @@ const SEO_EVENTS = [
   },
 ];
 
-const SEO_GALLERY_IMAGES = [
-  "/figma/mqlhuvgt-3xn5tnq.png",
-  "/figma/mqlhuvgt-zqt1bq4.png",
-  "/figma/mqlhuvgt-clulxvl.png",
-  "/figma/mqlhuvgt-9dlduqh.png",
-];
+const SEO_GALLERY_IMAGES: string[] = [];
 
 export interface RouteSeoData {
   path: string;
@@ -79,8 +74,8 @@ export const routeSeoMap: Record<string, RouteSeoData> = {
       "reservas restobar Corrientes",
     ],
   },
-  "/menu": {
-    path: "/menu",
+  "/cafe-bar": {
+    path: "/cafe-bar",
     title: "Café Bar en la Costanera de Corrientes | La Toma",
     description:
       "Descubrí el Café Bar de La Toma en la Costanera de Corrientes Capital: desayunos, meriendas, encuentros y momentos frente al río Paraná.",
@@ -291,7 +286,7 @@ const buildRestaurantSchema = (origin: string) => ({
   areaServed: "Corrientes Capital y alrededores",
   sameAs: [SITE_INSTAGRAM_LINK, SITE_MAP_LINK],
   hasMap: SITE_MAP_LINK,
-  hasMenu: toAbsoluteUrl(origin, "/menu"),
+  hasMenu: toAbsoluteUrl(origin, "/cafe-bar"),
   address: {
     "@type": "PostalAddress",
     streetAddress: `${SITE_ADDRESS_LINE} 1214`,

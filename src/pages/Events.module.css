@@ -373,25 +373,25 @@
 }
 
 .desktopCardVinilos {
-  background-image: url("/figma/mqmo4e5z-hk22slb.png");
+  background-image: url("/images/eventos-card-vinilos-desktop.png");
   background-position: center top;
   background-size: 111.64% 100.11%;
 }
 
 .desktopCardFiltrados {
-  background-image: url("/figma/mqmo4e5z-t1vj83r.png");
+  background-image: url("/images/eventos-card-filtrados-desktop.png");
   background-position: center top;
   background-size: 101.83% 100%;
 }
 
 .desktopCardAfterOffice {
-  background-image: url("/figma/mqmo4e5z-q1p619u.png");
+  background-image: url("/images/eventos-card-after-office-desktop.png");
   background-position: center 38%;
   background-size: 148.12% 163.34%;
 }
 
 .desktopCardCeramica {
-  background-image: url("/figma/mqmo4e5z-54fuz1b.png");
+  background-image: url("/images/eventos-card-ceramica-desktop.png");
   background-position: center top;
   background-size: 100% 110.85%;
 }
@@ -863,25 +863,25 @@
 }
 
 .mobileCardVinilos {
-  background-image: url("/figma/mqmo4t3p-778eb4p.png");
+  background-image: url("/images/eventos-card-vinilos-mobile.png");
   background-position: center top;
   background-size: 111.64% 101.02%;
 }
 
 .mobileCardFiltrados {
-  background-image: url("/figma/mqmo4t3p-63eq9jj.png");
+  background-image: url("/images/eventos-card-filtrados-mobile.png");
   background-position: center top;
   background-size: 102.46% 101.83%;
 }
 
 .mobileCardAfterOffice {
-  background-image: url("/figma/mqmo4t3p-er12kx7.png");
+  background-image: url("/images/eventos-card-after-office-mobile.png");
   background-position: center 38%;
   background-size: 148.14% 164.82%;
 }
 
 .mobileCardCeramica {
-  background-image: url("/figma/mqmo4t3p-gs6n8mr.png");
+  background-image: url("/images/eventos-card-ceramica-mobile.png");
   background-position: center top;
   background-size: 100% 110.85%;
 }

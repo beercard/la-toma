@@ -5,7 +5,6 @@
   font-family: "Roboto Serif", serif;
 }
 
-/* ---------- Top bar ---------- */
 .topbar {
   display: flex;
   align-items: center;
@@ -42,7 +41,6 @@
 }
 .signOut:hover { background: rgba(247, 244, 239, 0.12); }
 
-/* ---------- Tabs ---------- */
 .tabs {
   display: flex;
   gap: 4px;
@@ -70,7 +68,6 @@
 .tab:hover { color: #232323; }
 .tabActive { color: #5d6849; border-bottom-color: #5d6849; }
 
-/* ---------- Layout ---------- */
 .main {
   max-width: 1100px;
   margin: 0 auto;
@@ -120,7 +117,6 @@
   line-height: 1.5;
 }
 
-/* ---------- Cards / rows ---------- */
 .card {
   background: #fff;
   border: 1px solid rgba(35, 35, 35, 0.1);
@@ -190,7 +186,6 @@
   }
 }
 
-/* ---------- Form controls ---------- */
 .field {
   display: flex;
   flex-direction: column;
@@ -230,7 +225,6 @@
 }
 @media (max-width: 620px) { .formGrid { grid-template-columns: 1fr; } }
 
-/* ---------- Buttons ---------- */
 .btn {
   appearance: none;
   border: 0;
@@ -252,7 +246,6 @@
 
 .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
 
-/* ---------- Feedback ---------- */
 .notice {
   border-radius: 6px;
   padding: 12px 14px;
@@ -263,7 +256,6 @@
 .noticeOk { background: #e7f0e3; color: #4c5740; }
 .noticeWarn { background: #fdf3e2; color: #8a5a18; }
 
-/* ---------- Gallery grid ---------- */
 .galleryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -280,7 +272,6 @@
 .thumbBar { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; gap: 8px; }
 .thumbTag { font-size: 12px; color: #6b6b6b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-/* ---------- Login ---------- */
 .loginWrap {
   min-height: 100vh;
   display: flex;

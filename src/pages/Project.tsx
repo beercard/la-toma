@@ -43,7 +43,6 @@ export default function Project() {
     return () => window.removeEventListener("resize", updateMobileHeroScale);
   }, []);
 
-  // Auto-avance en desktop y mobile; se pausa mientras el visor está abierto.
   useEffect(() => {
     if (lightbox) return;
 
@@ -87,7 +86,7 @@ export default function Project() {
         <section className={styles.desktopHero} aria-labelledby="project-desktop-title">
           <div className={styles.desktopHeroFrame}>
             <img
-              src="/figma/mqk7ns4c-vgwje34.png"
+              src="/images/proyecto-hero-desktop.png"
               alt="Arquitectura de La Toma en la Costanera de Corrientes Capital"
               className={styles.desktopHeroImage}
             />
@@ -131,7 +130,7 @@ export default function Project() {
                   onClick={previousDesktopSlide}
                 >
                   <img
-                    src="/figma/mqk7ns48-trbfd24.png"
+                    src="/images/icon-flecha-izquierda.png"
                     alt=""
                     className={[styles.desktopArrow, styles.desktopArrowLeft].join(" ")}
                   />
@@ -158,7 +157,7 @@ export default function Project() {
                   onClick={nextDesktopSlide}
                 >
                   <img
-                    src="/figma/mqk7ns48-p8snc42.png"
+                    src="/images/icon-flecha-derecha.png"
                     alt=""
                     className={[styles.desktopArrow, styles.desktopArrowRight].join(" ")}
                   />
@@ -203,7 +202,7 @@ export default function Project() {
           <div className={styles.mobileHeroCanvas}>
             <div className={styles.mobileHeroBackground} />
             <img
-              src="/figma/mqk7o90h-3iuvyqb.png"
+              src="/images/proyecto-hero-mobile.png"
               alt="Arquitectura de La Toma en la Costanera de Corrientes Capital"
               className={styles.mobileHeroImage}
             />

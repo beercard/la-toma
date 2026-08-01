@@ -44,7 +44,7 @@ export default function Contact() {
           <div className={styles.desktopHeroFrame}>
             <div className={styles.desktopHeroBackground} />
             <img
-              src="/figma/mqmr107o-mtd2kux.png"
+              src="/images/contacto-hero-desktop.png"
               alt="Exterior de La Toma en la Costanera de Corrientes Capital"
               className={styles.desktopHeroImage}
             />
@@ -113,7 +113,7 @@ export default function Contact() {
           <div className={styles.mobileHeroCanvas}>
             <div className={styles.mobileHeroBackground} />
             <img
-              src="/figma/mqmr1ipq-hcb5qeh.png"
+              src="/images/contacto-hero-mobile.png"
               alt="Exterior de La Toma en la Costanera de Corrientes Capital"
               className={styles.mobileHeroImage}
             />

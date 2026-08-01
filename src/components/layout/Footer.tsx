@@ -18,7 +18,7 @@ export default function Footer() {
         <div className={styles.desktopInner}>
           <div className={styles.desktopBrandColumn}>
             <img
-              src="/figma/mqiw30lw-y7bu4mh.webp"
+              src="/images/footer-logo.webp"
               alt="La Toma"
               className={styles.logo}
               loading="lazy"
@@ -137,7 +137,7 @@ export default function Footer() {
                   aria-label={`WhatsApp ${SITE_WHATSAPP_DISPLAY}`}
                   className={styles.mobileIconLink}
                 >
-                  <img src="/figma/mqiw4743-qw026m5.svg" alt="" className={styles.mobileIcon} />
+                  <img src="/images/icon-whatsapp.svg" alt="" className={styles.mobileIcon} />
                 </a>
                 <a
                   href={SITE_INSTAGRAM_LINK}
@@ -146,7 +146,7 @@ export default function Footer() {
                   aria-label="Instagram La Toma Multiespacio"
                   className={styles.mobileIconLink}
                 >
-                  <img src="/figma/mqiw474t-eeiyuvu.svg" alt="" className={styles.mobileIcon} />
+                  <img src="/images/icon-instagram.svg" alt="" className={styles.mobileIcon} />
                 </a>
               </div>
             </div>

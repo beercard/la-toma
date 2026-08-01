@@ -53,8 +53,6 @@ const initialFormData: EventFormData = {
   comments: "",
 };
 
-// Paleta de estilos de tarjeta (fondos del diseño Figma) que se reutiliza por
-// orden de evento, de modo que la galería de eventos sea dinámica sin perder el diseño.
 const cardStyleClasses = [
   { desktop: styles.desktopCardVinilos, mobile: styles.mobileCardVinilos },
   { desktop: styles.desktopCardFiltrados, mobile: styles.mobileCardFiltrados },
@@ -62,7 +60,6 @@ const cardStyleClasses = [
   { desktop: styles.desktopCardCeramica, mobile: styles.mobileCardCeramica },
 ];
 
-// Divide el título en hasta dos líneas para el diseño apilado de la tarjeta.
 const splitTitleLines = (title: string): string[] => {
   const words = title.trim().split(/\s+/);
   if (words.length <= 1) return [title];
@@ -144,7 +141,6 @@ export default function Events() {
   );
   const eventCards = useMemo<EventCard[]>(
     () =>
-      // Desktop y mobile comparten siempre los mismos 4 destacados.
       featuredEvents.map((event, index) => ({
         id: event.id,
         date: event.dateLabel ?? "",
@@ -231,7 +227,7 @@ export default function Events() {
     time: data.time,
     guests: data.guests,
     comments: data.comments || "-",
-    email_html: buildEventsEmailHtml(data, `${window.location.origin}/figma/mqmo4e5z-95ukdsa.png`),
+    email_html: buildEventsEmailHtml(data, `${window.location.origin}/images/eventos-hero-desktop.png`),
     message_text: buildEventsWhatsappMessage(data),
   });
 
@@ -355,7 +351,7 @@ export default function Events() {
         <section className={styles.desktopHero} aria-labelledby="events-desktop-title">
           <div className={styles.desktopHeroFrame}>
             <img
-              src="/figma/mqmo4e5z-4x7ony1.png"
+              src="/images/eventos-hero-desktop.png"
               alt="Brindis durante un evento en La Toma, Corrientes Capital"
               className={styles.desktopHeroImage}
             />
@@ -661,7 +657,7 @@ export default function Events() {
           <div className={styles.mobileHeroCanvas}>
             <div className={styles.mobileHeroBackground} />
             <img
-              src="/figma/mqmo4t3p-h9p7b3y.png"
+              src="/images/eventos-hero-mobile.png"
               alt="Brindis durante un evento en La Toma, Corrientes Capital"
               className={styles.mobileHeroImage}
             />

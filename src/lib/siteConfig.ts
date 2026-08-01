@@ -1,4 +1,4 @@
-export const SITE_MENU_PATH = "/menu";
+export const SITE_MENU_PATH = "/cafe-bar";
 
 export const SITE_NAV_LINKS = [
   { name: "Café Bar", path: SITE_MENU_PATH },

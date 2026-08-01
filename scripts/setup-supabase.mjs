@@ -1,10 +1,3 @@
-/**
- * Configura la base de Supabase: corre el esquema, siembra carta + galería
- * y crea el usuario admin. NO contiene secretos: lee todo de variables de entorno.
- *
- * Uso:
- *   PG_CONN="postgresql://..." ADMIN_EMAIL="..." ADMIN_PASSWORD="..." node scripts/setup-supabase.mjs
- */
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -48,17 +41,7 @@ join public.menu_categories c on c.title = v.cat
 where not exists (select 1 from public.menu_items mi where mi.name = v.name and mi.category_id = c.id);
 `;
 
-const galleryImages = [
-  ["/figma/mqlhuvgt-3xn5tnq.png", "Invitados compartiendo una apertura en La Toma"],
-  ["/figma/mqlhuvgt-zqt1bq4.png", "Escena social durante una noche en La Toma"],
-  ["/figma/mqlhuvgt-clulxvl.png", "Vista superior de la pista y el público en La Toma"],
-  ["/figma/mqlhuvgt-9dlduqh.png", "Grupo de amigos posando en una noche de apertura"],
-  ["/figma/mqlhuvgt-pggchf9.png", "Cabina y público durante una jornada de música en vivo"],
-  ["/figma/mqlhuvgt-wxum5ld.png", "Asistentes registrando el momento con una cámara analógica"],
-  ["/figma/mqli5prz-vm64pk2.png", "Retrato de asistentes celebrando en La Toma"],
-  ["/figma/mqli5pry-dg04of5.png", "Encuentro entre invitados en uno de los espacios de La Toma"],
-  ["/figma/mqli5prz-xn3sjlt.png", "Momento íntimo de la galería capturado durante la apertura"],
-];
+const galleryImages: Array<[string, string]> = [];
 
 async function main() {
   await client.connect();
@@ -88,10 +71,8 @@ async function main() {
     console.log(`• Galería ya tenía ${galleryCount[0].n} imágenes, no se sembró.`);
   }
 
-  // Usuario admin (idempotente)
   if (adminEmail && adminPassword) {
     try {
-      // Limpieza de cualquier estado parcial previo para este email.
       await client.query(
         "delete from auth.identities where user_id in (select id from auth.users where email = $1)",
         [adminEmail],
@@ -125,7 +106,6 @@ async function main() {
     }
   }
 
-  // Resumen
   const summary = await client.query(`
     select 'categorías' as t, count(*)::int n from public.menu_categories
     union all select 'ítems', count(*) from public.menu_items

@@ -18,9 +18,6 @@ const replaceMetaContent = (html: string, attr: 'name' | 'property', key: string
   return html.replace(re, `$1${escapeAttr(content)}$2`)
 }
 
-// Generates a static index.html per route with route-specific meta + JSON-LD,
-// so crawlers that do not execute JavaScript (WhatsApp, Facebook, Twitter) read
-// the correct title, description, canonical and structured data for each page.
 const staticRouteSeoPlugin = (): Plugin => {
   let config: ResolvedConfig
   return {
@@ -69,10 +66,9 @@ const staticRouteSeoPlugin = (): Plugin => {
   }
 }
 
-// https://vite.dev/config/
 export default defineConfig({
   build: {
-    sourcemap: 'hidden',
+    sourcemap: false,
   },
   plugins: [
     react(),
@@ -87,7 +83,7 @@ export default defineConfig({
         quality: 80,
       },
       webp: {
-        lossless: true,
+        quality: 80,
       },
     }),
     tsconfigPaths(),

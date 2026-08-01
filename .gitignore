@@ -1,4 +1,3 @@
-# Logs
 logs
 *.log
 npm-debug.log*
@@ -13,21 +12,15 @@ dist-ssr
 deploy
 *.local
 
-# Variables de entorno (claves)
 .env
 .env.*
 !.env.example
 
-# Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .trae
 .idea
 
-# Metadata de export de Figma (no la usa la app)
-.figma/
-
-# Configuración local de Claude Code
 .claude/settings.local.json
 .DS_Store
 *.suo

@@ -6,10 +6,6 @@ import type { CartaCategory, CartaItem, EventItem, GalleryItem } from "./types";
 const GALLERY_COMING_SOON_SETTING_KEY = "gallery_coming_soon_enabled";
 const EVENTS_COMING_SOON_SETTING_KEY = "events_coming_soon_enabled";
 
-// ----------------------------------------------------------------------------
-// LECTURA pública (con respaldo estático)
-// ----------------------------------------------------------------------------
-
 export async function getCarta(): Promise<CartaCategory[]> {
   if (!supabase) return fallbackCarta;
 
@@ -114,10 +110,6 @@ export async function getEventsComingSoonEnabled(): Promise<boolean> {
   return data?.value_boolean ?? true;
 }
 
-// ----------------------------------------------------------------------------
-// ESCRITURA (panel /admin — requiere sesión autenticada)
-// ----------------------------------------------------------------------------
-
 function requireClient() {
   if (!supabase) {
     throw new Error("Supabase no está configurado. Cargá VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY.");
@@ -132,8 +124,6 @@ async function run<T>(promise: PromiseLike<{ data: T; error: { message: string }
 }
 
 export const isAdminEnabled = isSupabaseConfigured;
-
-// Carta — categorías
 export const adminListCategories = () =>
   run(requireClient().from("menu_categories").select("*").order("sort_order"));
 export const adminCreateCategory = (title: string, sortOrder = 0) =>
@@ -142,8 +132,6 @@ export const adminUpdateCategory = (id: string, patch: Record<string, unknown>) 
   run(requireClient().from("menu_categories").update(patch).eq("id", id).select().single());
 export const adminDeleteCategory = (id: string) =>
   run(requireClient().from("menu_categories").delete().eq("id", id).select());
-
-// Carta — ítems
 export const adminListItems = () =>
   run(requireClient().from("menu_items").select("*").order("sort_order"));
 export const adminCreateItem = (payload: Record<string, unknown>) =>
@@ -152,8 +140,6 @@ export const adminUpdateItem = (id: string, patch: Record<string, unknown>) =>
   run(requireClient().from("menu_items").update(patch).eq("id", id).select().single());
 export const adminDeleteItem = (id: string) =>
   run(requireClient().from("menu_items").delete().eq("id", id).select());
-
-// Eventos
 export const adminListEvents = () =>
   run(requireClient().from("events").select("*").order("sort_order"));
 export const adminCreateEvent = (payload: Record<string, unknown>) =>
@@ -162,8 +148,6 @@ export const adminUpdateEvent = (id: string, patch: Record<string, unknown>) =>
   run(requireClient().from("events").update(patch).eq("id", id).select().single());
 export const adminDeleteEvent = (id: string) =>
   run(requireClient().from("events").delete().eq("id", id).select());
-
-// Galería
 export const adminListGallery = () =>
   run(requireClient().from("gallery_images").select("*").order("sort_order"));
 export const adminCreateGalleryImage = (payload: Record<string, unknown>) =>
@@ -220,8 +204,6 @@ export const adminSetEventsComingSoonEnabled = (value: boolean) =>
       .select()
       .single(),
   );
-
-// Storage — subida de imágenes (optimizadas a WebP + resize en el navegador)
 export async function uploadMedia(file: File, folder = "gallery"): Promise<string> {
   const client = requireClient();
   const { blob, ext, contentType } = await optimizeImageToWebp(file);
@@ -238,8 +220,6 @@ export async function uploadMedia(file: File, folder = "gallery"): Promise<strin
   return data.publicUrl;
 }
 
-// Elimina del Storage el archivo correspondiente a una URL pública del bucket.
-// Ignora URLs que no sean del bucket (ej. imágenes de respaldo en /figma/...).
 export async function removeMediaByUrl(url: string): Promise<void> {
   if (!supabase) return;
   const marker = `/object/public/${MEDIA_BUCKET}/`;

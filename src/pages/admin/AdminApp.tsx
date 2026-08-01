@@ -12,7 +12,6 @@ export default function AdminApp() {
   const { session, loading, signIn, signOut } = useAuth();
   const [tab, setTab] = useState<Tab>("eventos");
 
-  // El panel no debe indexarse.
   useEffect(() => {
     const meta = document.createElement("meta");
     meta.name = "robots";

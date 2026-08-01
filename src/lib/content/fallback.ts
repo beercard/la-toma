@@ -1,11 +1,5 @@
 import type { CartaCategory, EventItem, GalleryItem } from "./types";
 
-/**
- * Contenido de respaldo (el mismo que mostraba el sitio antes de Supabase).
- * Se usa cuando Supabase no está configurado o todavía no hay registros,
- * de modo que el sitio público nunca quede vacío.
- */
-
 export const fallbackCarta: CartaCategory[] = [
   {
     id: "cat-cafe",
@@ -94,13 +88,4 @@ export const fallbackEvents: EventItem[] = [
 ];
 
 export const fallbackGallery: GalleryItem[] = [
-  { id: "g1", src: "/figma/mqlhuvgt-3xn5tnq.png", alt: "Invitados compartiendo una apertura en La Toma" },
-  { id: "g2", src: "/figma/mqlhuvgt-zqt1bq4.png", alt: "Escena social durante una noche en La Toma" },
-  { id: "g3", src: "/figma/mqlhuvgt-clulxvl.png", alt: "Vista superior de la pista y el público en La Toma" },
-  { id: "g4", src: "/figma/mqlhuvgt-9dlduqh.png", alt: "Grupo de amigos posando en una noche de apertura" },
-  { id: "g5", src: "/figma/mqlhuvgt-pggchf9.png", alt: "Cabina y público durante una jornada de música en vivo" },
-  { id: "g6", src: "/figma/mqlhuvgt-wxum5ld.png", alt: "Asistentes registrando el momento con una cámara analógica" },
-  { id: "g7", src: "/figma/mqli5prz-vm64pk2.png", alt: "Retrato de asistentes celebrando en La Toma" },
-  { id: "g8", src: "/figma/mqli5pry-dg04of5.png", alt: "Encuentro entre invitados en uno de los espacios de La Toma" },
-  { id: "g9", src: "/figma/mqli5prz-xn3sjlt.png", alt: "Momento íntimo de la galería capturado durante la apertura" },
 ];

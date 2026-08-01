@@ -79,7 +79,7 @@ export default function Reservations() {
         <section className={styles.desktopHero} aria-labelledby="reservas-heading-desktop">
           <div className={styles.desktopHeroFrame}>
             <img
-              src="/figma/mqjy0b1r-16uejlf.png"
+              src="/images/reservas-hero-desktop.png"
               alt="Mesa servida en La Toma, restobar en Corrientes Capital"
               className={styles.desktopHeroImage}
             />
@@ -180,7 +180,7 @@ export default function Reservations() {
         >
           <div className={styles.mobileHeroCanvas}>
             <img
-              src="/figma/mqjybg8o-4ennzii.png"
+              src="/images/reservas-hero-mobile.png"
               alt="Mesa servida en La Toma, restobar en Corrientes Capital"
               className={styles.mobileHeroImage}
             />

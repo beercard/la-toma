@@ -35,12 +35,12 @@ export default function Menu() {
           <div className={styles.desktopHeroFrame}>
             <div className={styles.desktopHeroBackground} />
             <img
-              src="/figma/mqmruuq4-02y5vq5.png"
+              src="/images/cafe-hero-desktop.png"
               alt=""
               className={styles.desktopHeroImage}
             />
             <img
-              src="/figma/mqmruuq4-a2xv23f.png"
+              src="/images/cafe-logo-desktop.png"
               alt="La Toma"
               className={styles.desktopHeroLogo}
             />
@@ -60,12 +60,12 @@ export default function Menu() {
           <div className={styles.mobileHeroCanvas}>
             <div className={styles.mobileHeroBackground} />
             <img
-              src="/figma/mqmrvea4-vn3fpu8.png"
+              src="/images/cafe-hero-mobile.png"
               alt=""
               className={styles.mobileHeroImage}
             />
             <img
-              src="/figma/mqmrvea4-vrqjny0.png"
+              src="/images/cafe-logo-mobile.png"
               alt="La Toma"
               className={styles.mobileHeroLogo}
             />

@@ -1,14 +1,6 @@
-/**
- * Optimiza imágenes antes de subirlas: redimensiona y convierte a WebP en el
- * navegador. WebP tiene soporte universal y se puede codificar del lado del
- * cliente (a diferencia de AVIF), por lo que es el formato ideal para el panel.
- */
-
 const MAX_WIDTH = 2000;
 const WEBP_QUALITY = 0.82;
 
-// Solo rasterizamos formatos de mapa de bits. SVG (vector) y GIF (animado) se
-// suben sin tocar para no romperlos.
 const CONVERTIBLE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/bmp"];
 
 export interface PreparedUpload {

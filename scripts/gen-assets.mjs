@@ -1,10 +1,3 @@
-/**
- * Genera assets estáticos de marca:
- *  - public/og-image.jpg  (1200x630, para compartir en redes)
- *  - public/apple-touch-icon.png (180), public/icon-192.png, public/icon-512.png
- *
- * Uso: node scripts/gen-assets.mjs
- */
 import sharp from "sharp";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,8 +5,8 @@ import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const p = (...x) => resolve(root, ...x);
 
-const HERO = p("public/figma/mqiuwd26-732cdi8.webp");
-const WORDMARK = p("public/figma/mqiuwbfe-phnukur.webp");
+const HERO = p("public/images/home-hero-desktop.webp");
+const WORDMARK = p("public/images/home-logo-desktop.webp");
 const FAVICON = p("public/favicon.svg");
 
 async function buildOg() {
@@ -22,7 +15,6 @@ async function buildOg() {
 
   const bg = await sharp(HERO).resize(W, H, { fit: "cover", position: "centre" }).toBuffer();
 
-  // Capa oscura para legibilidad del texto blanco.
   const overlay = Buffer.from(
     `<svg width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="#231f1c" fill-opacity="0.34"/></svg>`,
   );

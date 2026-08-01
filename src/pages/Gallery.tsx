@@ -149,7 +149,7 @@ export default function Gallery() {
         <section className={styles.desktopHero} aria-labelledby="gallery-desktop-title">
           <div className={styles.desktopHeroFrame}>
             <img
-              src="/figma/mqlhuvgx-vc6gkez.png"
+              src="/images/galeria-hero-desktop.png"
               alt="Fotografías de encuentros en La Toma, restobar en Corrientes Capital"
               className={styles.desktopHeroImage}
             />
@@ -243,7 +243,7 @@ export default function Gallery() {
             </div>
 
             <img
-              src="/figma/mqli5ps1-f7cozb3.png"
+              src="/images/galeria-hero-mobile.png"
               alt="Fotografías de encuentros en La Toma, restobar en Corrientes Capital"
               className={styles.mobileHeroImage}
             />

@@ -34,7 +34,7 @@ export default function Home() {
       <div className={styles.desktopHome}>
         <section className={styles.desktopHero}>
           <img
-            src="/figma/mqiuwd26-732cdi8.webp"
+            src="/images/home-hero-desktop.webp"
             alt="Atardecer en La Toma sobre la Costanera de Corrientes Capital"
             className={styles.desktopHeroImage}
             decoding="async"
@@ -42,7 +42,7 @@ export default function Home() {
 
           <div className={styles.desktopHeroOverlay}>
             <img
-              src="/figma/mqiuwbfe-phnukur.webp"
+              src="/images/home-logo-desktop.webp"
               alt="La Toma"
               className={styles.desktopHeroWordmark}
             />
@@ -76,7 +76,7 @@ export default function Home() {
         >
           <div className={styles.mobileHeroCanvas}>
             <img
-              src="/figma/mqiuzhmp-lbbiz0u.webp"
+              src="/images/home-hero-mobile.webp"
               alt="Atardecer en La Toma sobre la Costanera de Corrientes Capital"
               className={styles.mobileHeroImage}
               decoding="async"
@@ -84,7 +84,7 @@ export default function Home() {
 
             <div className={styles.mobileHeroOverlay}>
               <img
-                src="/figma/mqiuzhmo-uqbgbzi.webp"
+                src="/images/home-logo-mobile.webp"
                 alt="La Toma"
                 className={styles.mobileHeroWordmark}
               />

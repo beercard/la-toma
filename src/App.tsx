@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import RouteSeo from "@/components/seo/RouteSeo";
 import Home from "@/pages/Home";
@@ -20,7 +20,8 @@ function PublicSite() {
     <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu />} />
+        <Route path="/cafe-bar" element={<Menu />} />
+        <Route path="/menu" element={<Navigate to="/cafe-bar" replace />} />
         <Route path="/proyecto" element={<Project />} />
         <Route path="/galeria" element={<Gallery />} />
         <Route path="/eventos" element={<Events />} />

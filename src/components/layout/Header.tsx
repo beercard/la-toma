@@ -11,7 +11,7 @@ export default function Header() {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
   const desktopNavItems = [
-    { label: "CAfé bar", path: SITE_NAV_LINKS[0].path, itemClass: styles.desktopCafe },
+    { label: "Café bar", path: SITE_NAV_LINKS[0].path, itemClass: styles.desktopCafe },
     { label: "RESERVAS", path: SITE_NAV_LINKS[1].path, itemClass: styles.desktopReservas },
     { label: "EL PROYECTO", path: SITE_NAV_LINKS[2].path, itemClass: styles.desktopProyecto },
     { label: "galería", path: SITE_NAV_LINKS[3].path, itemClass: styles.desktopGaleria },
@@ -39,8 +39,8 @@ export default function Header() {
             ))}
 
             <Link to="/" aria-label="Ir al inicio" className={styles.desktopLogoLink}>
-              <img src="/figma/mqitymz6-fnopbgn.webp" alt="La Toma" className={styles.desktopLogo} />
-              <img src="/figma/mqiu0p6w-csa514q.svg" alt="" className={styles.desktopLogoHover} />
+              <img src="/images/header-logo-desktop.webp" alt="La Toma" className={styles.desktopLogo} />
+              <img src="/images/header-logo-hover.svg" alt="" className={styles.desktopLogoHover} />
             </Link>
           </nav>
         </div>
@@ -50,7 +50,7 @@ export default function Header() {
         <div className={styles.mobileInner}>
           <Link to="/" aria-label="Ir al inicio" className={styles.mobileLogoLink}>
             <img
-              src={isMobileMenuOpen ? "/figma/mqiryjto-xkdx3i0.svg" : "/figma/mqit719o-e5u7cs4.svg"}
+              src={isMobileMenuOpen ? "/images/header-logo-mobile-open.svg" : "/images/header-logo-mobile.svg"}
               alt="La Toma"
               className={styles.mobileLogo}
             />
@@ -78,7 +78,7 @@ export default function Header() {
         >
           <div className={styles.mobileMenuHeader}>
             <Link to="/" aria-label="Ir al inicio" className={styles.mobileLogoLink}>
-              <img src="/figma/mqiryjto-xkdx3i0.svg" alt="La Toma" className={styles.mobileLogo} />
+              <img src="/images/header-logo-mobile-open.svg" alt="La Toma" className={styles.mobileLogo} />
             </Link>
             <button
               type="button"

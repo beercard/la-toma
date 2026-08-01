@@ -43,12 +43,10 @@ export default function RouteSeo() {
   }, [location.pathname]);
 
   useEffect(() => {
-    // El panel /admin no se indexa ni gestiona meta pública.
     if (location.pathname.startsWith("/admin")) {
       return;
     }
 
-    // Ruta desconocida (404): título propio + noindex, sin datos estructurados.
     if (!(location.pathname in routeSeoMap)) {
       document.documentElement.lang = SEO_LANGUAGE;
       document.title = "Página no encontrada | La Toma Multiespacio";

@@ -18,7 +18,7 @@ export default function NotFound() {
       </Link>
 
       <nav className={styles.links} aria-label="Enlaces útiles">
-        <Link to="/menu">Café Bar</Link>
+        <Link to="/cafe-bar">Café Bar</Link>
         <Link to="/reservas">Reservas</Link>
         <Link to="/eventos">Eventos</Link>
         <Link to="/contacto">Contacto</Link>
