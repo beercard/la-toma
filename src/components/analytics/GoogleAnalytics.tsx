@@ -12,7 +12,7 @@ declare global {
 
 export default function GoogleAnalytics() {
   const location = useLocation();
-  const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+  const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID ?? "G-LE25KKP5WC";
 
   useEffect(() => {
     if (!measurementId) return;
@@ -51,4 +51,3 @@ export default function GoogleAnalytics() {
 
   return null;
 }
-
