@@ -67,6 +67,7 @@ const staticRouteSeoPlugin = (): Plugin => {
 }
 
 export default defineConfig({
+  base: '/latoma/',
   build: {
     sourcemap: false,
   },
