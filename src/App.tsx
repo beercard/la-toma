@@ -36,8 +36,11 @@ function PublicSite() {
 }
 
 export default function App() {
+  const pathname = window.location.pathname;
+  const basename = pathname === "/latoma" || pathname.startsWith("/latoma/") ? "/latoma" : "";
+
   return (
-    <Router>
+    <Router basename={basename}>
       <RouteSeo />
       <Routes>
         <Route

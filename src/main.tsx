@@ -6,8 +6,12 @@ import './index.css'
 const applyUiZoomCompensation = () => {
   const dpr = window.devicePixelRatio || 1
   const isDesktop = window.innerWidth >= 1024
-  const shouldCompensate = isDesktop && dpr > 1 && dpr < 2
-  const zoom = shouldCompensate ? Number((1 / dpr).toFixed(3)) : 1
+
+  const roundedBaseDpr = dpr >= 2 ? 2 : 1
+  const isZoomed = isDesktop && dpr > roundedBaseDpr
+  const shouldCompensate = isDesktop && (dpr > 1 && dpr < 2) || isZoomed
+
+  const zoom = shouldCompensate ? Number((roundedBaseDpr / dpr).toFixed(3)) : 1
   document.documentElement.style.setProperty('--ui-zoom', String(zoom))
 }
 

@@ -278,6 +278,24 @@
   font-size: 10px;
 }
 
+@media (min-width: 1440px) and (max-width: 1680px) {
+  .desktopInner {
+    grid-template-columns: minmax(300px, 1.2fr) repeat(3, minmax(200px, 1fr));
+    gap: 32px;
+    padding: 72px 96px 64px;
+    min-height: auto;
+  }
+
+  .logo {
+    width: 220px;
+    height: auto;
+  }
+
+  .stack104 {
+    margin-top: 72px;
+  }
+}
+
 @media (--bp-desktop-down) {
   .desktopInner {
     grid-template-columns: minmax(260px, 1.2fr) repeat(3, minmax(180px, 1fr));
