@@ -29,7 +29,7 @@
   display: block;
   top: 50%;
   left: 50%;
-  width: clamp(158px, 15vw, 252px);
+  width: 252px;
   height: auto;
   transform: translate(-50%, -50%);
 }

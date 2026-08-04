@@ -9,6 +9,7 @@ import {
   SITE_WHATSAPP_DISPLAY,
   SITE_WHATSAPP_LINK,
 } from "../../lib/siteConfig";
+import { withPublicBaseUrl } from "../../lib/publicBaseUrl";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -18,7 +19,7 @@ export default function Footer() {
         <div className={styles.desktopInner}>
           <div className={styles.desktopBrandColumn}>
             <img
-              src="/images/footer-logo.webp"
+              src={withPublicBaseUrl("images/footer-logo.webp")}
               alt="La Toma"
               className={styles.logo}
               loading="lazy"
@@ -137,7 +138,7 @@ export default function Footer() {
                   aria-label={`WhatsApp ${SITE_WHATSAPP_DISPLAY}`}
                   className={styles.mobileIconLink}
                 >
-                  <img src="/images/icon-whatsapp.svg" alt="" className={styles.mobileIcon} />
+                  <img src={withPublicBaseUrl("images/icon-whatsapp.svg")} alt="" className={styles.mobileIcon} />
                 </a>
                 <a
                   href={SITE_INSTAGRAM_LINK}
@@ -146,7 +147,7 @@ export default function Footer() {
                   aria-label="Instagram La Toma Multiespacio"
                   className={styles.mobileIconLink}
                 >
-                  <img src="/images/icon-instagram.svg" alt="" className={styles.mobileIcon} />
+                  <img src={withPublicBaseUrl("images/icon-instagram.svg")} alt="" className={styles.mobileIcon} />
                 </a>
               </div>
             </div>

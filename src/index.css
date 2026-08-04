@@ -2,21 +2,21 @@
 
 @font-face {
   font-family: "Mundial";
-  src: url("/fonts/MundialRegular.otf") format("opentype");
+  src: url("/latoma/fonts/MundialRegular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Mundial";
-  src: url("/fonts/MundialDemibold.otf") format("opentype");
+  src: url("/latoma/fonts/MundialDemibold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Mundial";
-  src: url("/fonts/MundialBold.otf") format("opentype");
+  src: url("/latoma/fonts/MundialBold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }
@@ -28,15 +28,20 @@
 @layer base {
   :root {
     --border: 0 0% 85%;
+    --ui-zoom: 1;
   }
   
   html {
     scroll-behavior: smooth;
+    zoom: var(--ui-zoom);
   }
 
   body {
     @apply antialiased;
     margin: 0;
+    width: calc(100vw / var(--ui-zoom));
+    min-height: calc(100vh / var(--ui-zoom));
+    overflow-x: hidden;
     background-color: #F7F4EF;
     color: #232323;
     font-family: 'Roboto Serif', serif;

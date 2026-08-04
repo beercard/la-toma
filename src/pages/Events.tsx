@@ -8,6 +8,7 @@ import {
   buildEventsWhatsappMessage,
   type EventsEmailData,
 } from "../lib/eventsEmailTemplate";
+import { withPublicBaseUrl } from "../lib/publicBaseUrl";
 import { SITE_EVENTS_EMAIL, SITE_INSTAGRAM_LINK, SITE_WHATSAPP_NUMBER } from "../lib/siteConfig";
 import { useEvents } from "../hooks/useContent";
 import styles from "./Events.module.css";
@@ -222,9 +223,9 @@ export default function Events() {
     guests: data.guests,
     comments: data.comments || "-",
     admin_subject: buildEventsEmailSubject(data),
-    admin_html: buildEventsEmailHtml(data, `${window.location.origin}/images/footer-logo.webp`),
+    admin_html: buildEventsEmailHtml(data, `${window.location.origin}${withPublicBaseUrl("images/footer-logo.webp")}`),
     client_subject: "Recibimos tu consulta de eventos | La Toma",
-    client_html: buildEventsClientEmailHtml(data, `${window.location.origin}/images/footer-logo.webp`),
+    client_html: buildEventsClientEmailHtml(data, `${window.location.origin}${withPublicBaseUrl("images/footer-logo.webp")}`),
   });
 
   const openWhatsapp = (data: EventsEmailData) => {
@@ -244,7 +245,7 @@ export default function Events() {
     try {
       setIsSubmitting(true);
 
-      const response = await fetch("/api/enviar-evento.php", {
+      const response = await fetch(withPublicBaseUrl("api/enviar-evento.php"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(buildEmailRequestPayload(currentData)),
@@ -346,7 +347,7 @@ export default function Events() {
         <section className={styles.desktopHero} aria-labelledby="events-desktop-title">
           <div className={styles.desktopHeroFrame}>
             <img
-              src="/images/eventos-hero-desktop.png"
+              src={withPublicBaseUrl("images/eventos-hero-desktop.png")}
               alt="Brindis durante un evento en La Toma, Corrientes Capital"
               className={styles.desktopHeroImage}
             />
@@ -652,7 +653,7 @@ export default function Events() {
           <div className={styles.mobileHeroCanvas}>
             <div className={styles.mobileHeroBackground} />
             <img
-              src="/images/eventos-hero-mobile.png"
+              src={withPublicBaseUrl("images/eventos-hero-mobile.png")}
               alt="Brindis durante un evento en La Toma, Corrientes Capital"
               className={styles.mobileHeroImage}
             />
