@@ -111,3 +111,59 @@ export const buildEventsEmailHtml = (data: EventsEmailData, logoUrl: string) => 
   </body>
 </html>
 `;
+
+export const buildEventsClientEmailHtml = (data: EventsEmailData, logoUrl: string) => `
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recibimos tu consulta de eventos | La Toma</title>
+  </head>
+  <body style="margin: 0; padding: 24px; background: #f7f4ef;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse;">
+      <tr>
+        <td align="center">
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 720px; border-collapse: collapse; background: #ffffff;">
+            <tr>
+              <td style="padding: 32px 32px 20px; background: #dad4cb;" align="center">
+                <img src="${escapeHtml(logoUrl)}" alt="La Toma" style="display: block; width: 252px; max-width: 100%; height: auto;" />
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 32px; background: #ffffff;">
+                <p style="margin: 0 0 8px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 16px; letter-spacing: 0.12em; text-transform: uppercase; color: #b76856;">
+                  Consulta recibida
+                </p>
+                <h1 style="margin: 0 0 18px; font-family: Georgia, 'Times New Roman', serif; font-size: 30px; line-height: 34px; font-weight: 600; color: #232323;">
+                  Gracias por escribirnos
+                </h1>
+                <p style="margin: 0 0 18px; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; line-height: 24px; color: #232323;">
+                  Hola ${escapeHtml(data.fullName)}. Recibimos tu consulta para eventos en La Toma. En breve el equipo se va a comunicar con vos.
+                </p>
+                <p style="margin: 0 0 24px; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; line-height: 24px; color: #232323;">
+                  Este es el resumen de tu solicitud:
+                </p>
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse;">
+                  ${buildRow("Tipo de evento", data.eventType)}
+                  ${buildRow("Fecha", data.date)}
+                  ${buildRow("Hora", data.time)}
+                  ${buildRow("Cantidad de personas", data.guests)}
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 24px 32px 32px; background: #f4eee6;">
+                <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px; color: #6c6257;">
+                  La Toma Multiespacio<br />
+                  ${escapeHtml(SITE_LOCATION_TITLE)}, ${escapeHtml(SITE_ADDRESS_FULL)}
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+`;

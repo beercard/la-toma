@@ -15,10 +15,6 @@ import NotFound from "@/pages/NotFound";
 
 const AdminApp = lazy(() => import("@/pages/admin/AdminApp"));
 
-// El sitio se sirve bajo un subdirectorio en DonWeb (/latoma/). Vite expone esa
-// ruta base en BASE_URL; el router la descuenta para que las rutas matcheen.
-const ROUTER_BASENAME = import.meta.env.BASE_URL.replace(/\/$/, "");
-
 function PublicSite() {
   return (
     <Layout>
@@ -41,7 +37,7 @@ function PublicSite() {
 
 export default function App() {
   return (
-    <Router basename={ROUTER_BASENAME}>
+    <Router>
       <RouteSeo />
       <Routes>
         <Route

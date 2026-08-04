@@ -1,20 +1,21 @@
 import { CSSProperties, useEffect, useState } from "react";
 import { SITE_INSTAGRAM_LINK } from "../lib/siteConfig";
+import { withPublicBaseUrl } from "../lib/publicBaseUrl";
 import Lightbox from "../components/Lightbox";
 import styles from "./Project.module.css";
 
 const PROJECT_IMAGE_ALT = "Vista del proyecto gastronómico de La Toma en Corrientes Capital";
 
 const projectSlides = [
-  "/images/project-01.jpeg",
-  "/images/project-02.jpeg",
-  "/images/project-03.jpeg",
-  "/images/project-04.jpeg",
-  "/images/project-05.jpeg",
-  "/images/project-06.jpeg",
-  "/images/project-07.jpeg",
-  "/images/project-08.jpeg",
-];
+  "images/project-01.jpeg",
+  "images/project-02.jpeg",
+  "images/project-03.jpeg",
+  "images/project-04.jpeg",
+  "images/project-05.jpeg",
+  "images/project-06.jpeg",
+  "images/project-07.jpeg",
+  "images/project-08.jpeg",
+].map(withPublicBaseUrl);
 
 const desktopLightboxImages = projectSlides.map((src) => ({ src, alt: PROJECT_IMAGE_ALT }));
 const mobileLightboxImages = projectSlides.map((src) => ({ src, alt: PROJECT_IMAGE_ALT }));
@@ -86,7 +87,7 @@ export default function Project() {
         <section className={styles.desktopHero} aria-labelledby="project-desktop-title">
           <div className={styles.desktopHeroFrame}>
             <img
-              src="/images/proyecto-hero-desktop.png"
+              src={withPublicBaseUrl("images/proyecto-hero-desktop.png")}
               alt="Arquitectura de La Toma en la Costanera de Corrientes Capital"
               className={styles.desktopHeroImage}
             />
@@ -130,7 +131,7 @@ export default function Project() {
                   onClick={previousDesktopSlide}
                 >
                   <img
-                    src="/images/icon-flecha-izquierda.png"
+                    src={withPublicBaseUrl("images/icon-flecha-izquierda.png")}
                     alt=""
                     className={[styles.desktopArrow, styles.desktopArrowLeft].join(" ")}
                   />
@@ -157,7 +158,7 @@ export default function Project() {
                   onClick={nextDesktopSlide}
                 >
                   <img
-                    src="/images/icon-flecha-derecha.png"
+                    src={withPublicBaseUrl("images/icon-flecha-derecha.png")}
                     alt=""
                     className={[styles.desktopArrow, styles.desktopArrowRight].join(" ")}
                   />
@@ -202,7 +203,7 @@ export default function Project() {
           <div className={styles.mobileHeroCanvas}>
             <div className={styles.mobileHeroBackground} />
             <img
-              src="/images/proyecto-hero-mobile.png"
+              src={withPublicBaseUrl("images/proyecto-hero-mobile.png")}
               alt="Arquitectura de La Toma en la Costanera de Corrientes Capital"
               className={styles.mobileHeroImage}
             />

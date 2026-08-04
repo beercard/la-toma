@@ -2,21 +2,21 @@
 
 @font-face {
   font-family: "Mundial";
-  src: url("/fonts/MundialRegular.otf") format("opentype");
+  src: url("/latoma/fonts/MundialRegular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Mundial";
-  src: url("/fonts/MundialDemibold.otf") format("opentype");
+  src: url("/latoma/fonts/MundialDemibold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Mundial";
-  src: url("/fonts/MundialBold.otf") format("opentype");
+  src: url("/latoma/fonts/MundialBold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }
@@ -28,15 +28,20 @@
 @layer base {
   :root {
     --border: 0 0% 85%;
+    --ui-zoom: 1;
   }
   
   html {
     scroll-behavior: smooth;
+    zoom: var(--ui-zoom);
   }
 
   body {
     @apply antialiased;
     margin: 0;
+    width: calc(100vw / var(--ui-zoom));
+    min-height: calc(100vh / var(--ui-zoom));
+    overflow-x: hidden;
     background-color: #F7F4EF;
     color: #232323;
     font-family: 'Roboto Serif', serif;
@@ -54,33 +59,6 @@
   a {
     color: inherit;
   }
-}
-
-/**
- * Escalado del SO en laptops (110% / 125% / 150% / 175%): el navegador reporta
- * un viewport más chico y la UI se ve "agrandada". Aplicamos el zoom inverso a
- * cada nivel de escala (zoom ≈ 1 / devicePixelRatio) para que la vista se vea
- * uniforme —como a 100%— en todos los casos.
- * - Monitores normales (devicePixelRatio 1): sin cambios.
- * - Pantallas retina / móviles (devicePixelRatio ≥ 2): sin cambios.
- * Gateado en min-width (que el zoom-out sólo aumenta → sin loop) y en resolution
- * (que el zoom no altera).
- */
-/* 110% */
-@media screen and (min-width: 1024px) and (min-resolution: 1.05dppx) and (max-resolution: 1.17dppx) {
-  :root { zoom: 0.91; }
-}
-/* 125% */
-@media screen and (min-width: 1024px) and (min-resolution: 1.18dppx) and (max-resolution: 1.37dppx) {
-  :root { zoom: 0.8; }
-}
-/* 150% */
-@media screen and (min-width: 1024px) and (min-resolution: 1.38dppx) and (max-resolution: 1.62dppx) {
-  :root { zoom: 0.667; }
-}
-/* 175% */
-@media screen and (min-width: 1024px) and (min-resolution: 1.63dppx) and (max-resolution: 1.9dppx) {
-  :root { zoom: 0.571; }
 }
 
 @layer utilities {

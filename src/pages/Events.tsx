@@ -1,13 +1,14 @@
-import emailjs from "@emailjs/browser";
 import { CSSProperties, ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { getAvailableTimeOptions } from "../lib/businessHours";
 import { getEventsComingSoonEnabled } from "../lib/content/api";
 import {
   buildEventsEmailHtml,
   buildEventsEmailSubject,
+  buildEventsClientEmailHtml,
   buildEventsWhatsappMessage,
   type EventsEmailData,
 } from "../lib/eventsEmailTemplate";
+import { withPublicBaseUrl } from "../lib/publicBaseUrl";
 import { SITE_EVENTS_EMAIL, SITE_INSTAGRAM_LINK, SITE_WHATSAPP_NUMBER } from "../lib/siteConfig";
 import { useEvents } from "../hooks/useContent";
 import styles from "./Events.module.css";
@@ -36,9 +37,6 @@ interface EventFormData {
 }
 
 const EVENTS_EMAIL = SITE_EVENTS_EMAIL;
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const initialFormData: EventFormData = {
   fullName: "",
@@ -213,10 +211,7 @@ export default function Events() {
       }));
     };
 
-  const buildEmailTemplateParams = (data: EventsEmailData) => ({
-    to_email: EVENTS_EMAIL,
-    reply_to: data.email,
-    subject: buildEventsEmailSubject(data),
+  const buildEmailRequestPayload = (data: EventsEmailData) => ({
     full_name: data.fullName,
     company: data.company || "-",
     email: data.email,
@@ -227,8 +222,10 @@ export default function Events() {
     time: data.time,
     guests: data.guests,
     comments: data.comments || "-",
-    email_html: buildEventsEmailHtml(data, `${window.location.origin}/images/eventos-hero-desktop.png`),
-    message_text: buildEventsWhatsappMessage(data),
+    admin_subject: buildEventsEmailSubject(data),
+    admin_html: buildEventsEmailHtml(data, `${window.location.origin}${withPublicBaseUrl("images/footer-logo.webp")}`),
+    client_subject: "Recibimos tu consulta de eventos | La Toma",
+    client_html: buildEventsClientEmailHtml(data, `${window.location.origin}${withPublicBaseUrl("images/footer-logo.webp")}`),
   });
 
   const openWhatsapp = (data: EventsEmailData) => {
@@ -240,15 +237,6 @@ export default function Events() {
     event.preventDefault();
     setFormFeedback(null);
 
-    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
-      setFormFeedback({
-        type: "error",
-        message:
-          "Falta configurar EmailJS. Carga VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID y VITE_EMAILJS_PUBLIC_KEY.",
-      });
-      return;
-    }
-
     const currentData: EventsEmailData = {
       ...formData,
       date: formatDateForDisplay(formData.date),
@@ -257,9 +245,17 @@ export default function Events() {
     try {
       setIsSubmitting(true);
 
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, buildEmailTemplateParams(currentData), {
-        publicKey: EMAILJS_PUBLIC_KEY,
+      const response = await fetch(withPublicBaseUrl("api/enviar-evento.php"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(buildEmailRequestPayload(currentData)),
       });
+
+      const data = (await response.json().catch(() => null)) as { ok?: boolean; message?: string } | null;
+
+      if (!response.ok || !data?.ok) {
+        throw new Error(data?.message || "No pudimos enviar la solicitud.");
+      }
 
       setFormData(initialFormData);
       setFormFeedback({
@@ -277,7 +273,7 @@ export default function Events() {
     } catch {
       setFormFeedback({
         type: "error",
-        message: "No pudimos enviar la solicitud. Verifica la configuracion de EmailJS e intenta nuevamente.",
+        message: "No pudimos enviar la solicitud. Podes continuar por WhatsApp y nos comunicamos con vos.",
       });
     } finally {
       setIsSubmitting(false);
@@ -351,7 +347,7 @@ export default function Events() {
         <section className={styles.desktopHero} aria-labelledby="events-desktop-title">
           <div className={styles.desktopHeroFrame}>
             <img
-              src="/images/eventos-hero-desktop.png"
+              src={withPublicBaseUrl("images/eventos-hero-desktop.png")}
               alt="Brindis durante un evento en La Toma, Corrientes Capital"
               className={styles.desktopHeroImage}
             />
@@ -657,7 +653,7 @@ export default function Events() {
           <div className={styles.mobileHeroCanvas}>
             <div className={styles.mobileHeroBackground} />
             <img
-              src="/images/eventos-hero-mobile.png"
+              src={withPublicBaseUrl("images/eventos-hero-mobile.png")}
               alt="Brindis durante un evento en La Toma, Corrientes Capital"
               className={styles.mobileHeroImage}
             />
