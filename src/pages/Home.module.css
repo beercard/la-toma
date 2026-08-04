@@ -328,6 +328,30 @@
   }
 }
 
+@media (min-width: 1024px) and (max-height: 820px) {
+  .desktopHero {
+    height: 700px;
+  }
+
+  .desktopHeroOverlay {
+    top: 160px;
+    transform: translateX(-50%) scale(0.92);
+    transform-origin: top center;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 760px) {
+  .desktopHero {
+    height: 660px;
+  }
+
+  .desktopHeroOverlay {
+    top: 148px;
+    transform: translateX(-50%) scale(0.88);
+    transform-origin: top center;
+  }
+}
+
 @media (--bp-mobile) {
   .mobileHero {
     height: calc(594px * min(100vw / 390, 1.08));
