@@ -143,7 +143,7 @@
   }
 
   .desktopLogoLink {
-    position: static;
+    position: relative;
     transform: none;
     order: 4;
     width: clamp(150px, 12vw, 210px);
