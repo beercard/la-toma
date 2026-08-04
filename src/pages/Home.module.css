@@ -57,8 +57,8 @@
 .desktopHeroSubbrand {
   position: absolute;
   top: 157px;
-  left: 0;
-  width: 576px;
+  left: 9px;
+  width: 892px;
   height: 84px;
   line-height: 80px;
   letter-spacing: 0;
@@ -66,7 +66,7 @@
   font-family: Mundial, system-ui, sans-serif;
   font-size: 80px;
   text-transform: uppercase;
-  text-align: center;
+  text-align: left;
 }
 
 .desktopHeroText {
@@ -291,7 +291,8 @@
 
   .desktopHeroSubbrand {
     top: calc(157px * (min(1314px, calc(100vw - 96px)) / 1314px));
-    width: calc(576px * (min(1314px, calc(100vw - 96px)) / 1314px));
+    left: calc(9px * (min(1314px, calc(100vw - 96px)) / 1314px));
+    width: calc(892px * (min(1314px, calc(100vw - 96px)) / 1314px));
     height: auto;
     line-height: 1;
     font-size: clamp(54px, 4.4vw, 80px);

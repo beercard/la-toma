@@ -365,6 +365,10 @@
 }
 
 @media (--bp-desktop-down) {
+  .desktopLogoLink {
+    width: 210px;
+  }
+
   .desktopNavLabel {
     min-height: 21px;
     font-size: 18px;
@@ -373,6 +377,10 @@
 }
 
 @media (min-width: 1024px) and (max-width: 1180px) {
+  .desktopLogoLink {
+    width: 190px;
+  }
+
   .desktopInner {
     padding-right: 24px;
     padding-left: 24px;
