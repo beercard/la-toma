@@ -15,8 +15,6 @@ import NotFound from "@/pages/NotFound";
 
 const AdminApp = lazy(() => import("@/pages/admin/AdminApp"));
 
-const ROUTER_BASENAME = import.meta.env.BASE_URL.replace(/\/$/, "");
-
 function PublicSite() {
   return (
     <Layout>
@@ -39,7 +37,7 @@ function PublicSite() {
 
 export default function App() {
   return (
-    <Router basename={ROUTER_BASENAME}>
+    <Router>
       <RouteSeo />
       <Routes>
         <Route
