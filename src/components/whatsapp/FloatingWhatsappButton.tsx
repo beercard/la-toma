@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import { SITE_WHATSAPP_NUMBER } from "../../lib/siteConfig";
-import { withPublicBaseUrl } from "../../lib/publicBaseUrl";
 import styles from "./FloatingWhatsappButton.module.css";
 
 export default function FloatingWhatsappButton() {
@@ -21,7 +20,8 @@ export default function FloatingWhatsappButton() {
       aria-label="WhatsApp La Toma: reservar una mesa"
       className={styles.button}
     >
-      <img src={withPublicBaseUrl("images/icon-whatsapp.svg")} alt="" className={styles.icon} />
+      <img src="/images/icon-whatsapp.svg" alt="" className={styles.icon} />
     </a>
   );
 }
+

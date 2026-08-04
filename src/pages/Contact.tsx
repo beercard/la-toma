@@ -9,7 +9,6 @@ import {
   SITE_WHATSAPP_LINK,
   SITE_WHATSAPP_NUMBER,
 } from "../lib/siteConfig";
-import { withPublicBaseUrl } from "../lib/publicBaseUrl";
 import styles from "./Contact.module.css";
 
 export default function Contact() {
@@ -45,7 +44,7 @@ export default function Contact() {
           <div className={styles.desktopHeroFrame}>
             <div className={styles.desktopHeroBackground} />
             <img
-              src={withPublicBaseUrl("images/contacto-hero-desktop.png")}
+              src="/images/contacto-hero-desktop.png"
               alt="Exterior de La Toma en la Costanera de Corrientes Capital"
               className={styles.desktopHeroImage}
             />
@@ -114,7 +113,7 @@ export default function Contact() {
           <div className={styles.mobileHeroCanvas}>
             <div className={styles.mobileHeroBackground} />
             <img
-              src={withPublicBaseUrl("images/contacto-hero-mobile.png")}
+              src="/images/contacto-hero-mobile.png"
               alt="Exterior de La Toma en la Costanera de Corrientes Capital"
               className={styles.mobileHeroImage}
             />

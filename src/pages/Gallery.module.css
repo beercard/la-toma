@@ -85,10 +85,11 @@
 
 .desktopTagStrip {
   position: relative;
-  width: calc(100vw / var(--ui-zoom));
+  left: 50%;
+  width: 100vw;
   margin: 0;
-  margin-left: calc(50% - (50vw / var(--ui-zoom)));
   background: #c3903f;
+  transform: translateX(-50%);
 }
 
 .desktopTag {
@@ -387,10 +388,11 @@
 
 .mobileTagStrip {
   position: relative;
-  width: calc(100vw / var(--ui-zoom));
+  left: 50%;
+  width: 100vw;
   margin-top: 0;
-  margin-left: calc(50% - (50vw / var(--ui-zoom)));
   background: #c3903f;
+  transform: translateX(-50%);
 }
 
 .mobileTag {
@@ -528,9 +530,8 @@
   }
 
   .desktopTagStrip {
-    width: calc(100vw / var(--ui-zoom));
+    width: 100vw;
     margin: 0;
-    margin-left: calc(50% - (50vw / var(--ui-zoom)));
   }
 
   .desktopTag {
@@ -663,9 +664,8 @@
   }
 
   .mobileTagStrip {
-    width: calc(100vw / var(--ui-zoom));
+    width: 100vw;
     margin: 0;
-    margin-left: calc(50% - (50vw / var(--ui-zoom)));
   }
 
   .mobileTag {

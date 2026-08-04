@@ -1,6 +1,5 @@
 import { CSSProperties, useEffect, useState } from "react";
 import { SITE_INSTAGRAM_LINK } from "../lib/siteConfig";
-import { withPublicBaseUrl } from "../lib/publicBaseUrl";
 import styles from "./Menu.module.css";
 
 export default function Menu() {
@@ -36,12 +35,12 @@ export default function Menu() {
           <div className={styles.desktopHeroFrame}>
             <div className={styles.desktopHeroBackground} />
             <img
-              src={withPublicBaseUrl("images/cafe-hero-desktop.png")}
+              src="/images/cafe-hero-desktop.png"
               alt=""
               className={styles.desktopHeroImage}
             />
             <img
-              src={withPublicBaseUrl("images/cafe-logo-desktop.png")}
+              src="/images/cafe-logo-desktop.png"
               alt="La Toma"
               className={styles.desktopHeroLogo}
             />
@@ -61,12 +60,12 @@ export default function Menu() {
           <div className={styles.mobileHeroCanvas}>
             <div className={styles.mobileHeroBackground} />
             <img
-              src={withPublicBaseUrl("images/cafe-hero-mobile.png")}
+              src="/images/cafe-hero-mobile.png"
               alt=""
               className={styles.mobileHeroImage}
             />
             <img
-              src={withPublicBaseUrl("images/cafe-logo-mobile.png")}
+              src="/images/cafe-logo-mobile.png"
               alt="La Toma"
               className={styles.mobileHeroLogo}
             />

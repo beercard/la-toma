@@ -29,7 +29,7 @@
   display: block;
   top: 50%;
   left: 50%;
-  width: 252px;
+  width: clamp(158px, 15vw, 252px);
   height: auto;
   transform: translate(-50%, -50%);
 }
@@ -80,15 +80,15 @@
 }
 
 .desktopGaleria {
-  left: 63.5156%;
+  left: 64.8177%;
 }
 
 .desktopEventos {
-  left: 75.2083%;
+  left: 76.849%;
 }
 
 .desktopContacto {
-  left: 87.526%;
+  left: 87.9167%;
 }
 
 .desktopNavLabel {
@@ -365,10 +365,6 @@
 }
 
 @media (--bp-desktop-down) {
-  .desktopLogoLink {
-    width: 210px;
-  }
-
   .desktopNavLabel {
     min-height: 21px;
     font-size: 18px;
@@ -377,10 +373,6 @@
 }
 
 @media (min-width: 1024px) and (max-width: 1180px) {
-  .desktopLogoLink {
-    width: 190px;
-  }
-
   .desktopInner {
     padding-right: 24px;
     padding-left: 24px;

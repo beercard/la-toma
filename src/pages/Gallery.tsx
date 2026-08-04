@@ -2,7 +2,6 @@ import { CSSProperties, KeyboardEvent, useEffect, useMemo, useState } from "reac
 import { useGallery } from "../hooks/useContent";
 import { SITE_INSTAGRAM_LINK } from "../lib/siteConfig";
 import { getGalleryComingSoonEnabled } from "../lib/content/api";
-import { withPublicBaseUrl } from "../lib/publicBaseUrl";
 import styles from "./Gallery.module.css";
 
 const DESKTOP_PREVIEW_COUNT = 6;
@@ -150,7 +149,7 @@ export default function Gallery() {
         <section className={styles.desktopHero} aria-labelledby="gallery-desktop-title">
           <div className={styles.desktopHeroFrame}>
             <img
-              src={withPublicBaseUrl("images/galeria-hero-desktop.png")}
+              src="/images/galeria-hero-desktop.png"
               alt="Fotografías de encuentros en La Toma, restobar en Corrientes Capital"
               className={styles.desktopHeroImage}
             />
@@ -244,7 +243,7 @@ export default function Gallery() {
             </div>
 
             <img
-              src={withPublicBaseUrl("images/galeria-hero-mobile.png")}
+              src="/images/galeria-hero-mobile.png"
               alt="Fotografías de encuentros en La Toma, restobar en Corrientes Capital"
               className={styles.mobileHeroImage}
             />

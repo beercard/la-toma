@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { SITE_NAV_LINKS } from "../../lib/siteConfig";
-import { withPublicBaseUrl } from "../../lib/publicBaseUrl";
 import styles from "./Header.module.css";
 
 export default function Header() {
@@ -40,12 +39,8 @@ export default function Header() {
             ))}
 
             <Link to="/" aria-label="Ir al inicio" className={styles.desktopLogoLink}>
-              <img
-                src={withPublicBaseUrl("images/header-logo-desktop.webp")}
-                alt="La Toma"
-                className={styles.desktopLogo}
-              />
-              <img src={withPublicBaseUrl("images/header-logo-hover.svg")} alt="" className={styles.desktopLogoHover} />
+              <img src="/images/header-logo-desktop.webp" alt="La Toma" className={styles.desktopLogo} />
+              <img src="/images/header-logo-hover.svg" alt="" className={styles.desktopLogoHover} />
             </Link>
           </nav>
         </div>
@@ -55,11 +50,7 @@ export default function Header() {
         <div className={styles.mobileInner}>
           <Link to="/" aria-label="Ir al inicio" className={styles.mobileLogoLink}>
             <img
-              src={
-                isMobileMenuOpen
-                  ? withPublicBaseUrl("images/header-logo-mobile-open.svg")
-                  : withPublicBaseUrl("images/header-logo-mobile.svg")
-              }
+              src={isMobileMenuOpen ? "/images/header-logo-mobile-open.svg" : "/images/header-logo-mobile.svg"}
               alt="La Toma"
               className={styles.mobileLogo}
             />
@@ -87,11 +78,7 @@ export default function Header() {
         >
           <div className={styles.mobileMenuHeader}>
             <Link to="/" aria-label="Ir al inicio" className={styles.mobileLogoLink}>
-              <img
-                src={withPublicBaseUrl("images/header-logo-mobile-open.svg")}
-                alt="La Toma"
-                className={styles.mobileLogo}
-              />
+              <img src="/images/header-logo-mobile-open.svg" alt="La Toma" className={styles.mobileLogo} />
             </Link>
             <button
               type="button"
