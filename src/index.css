@@ -33,14 +33,12 @@
   
   html {
     scroll-behavior: smooth;
-    zoom: var(--ui-zoom);
   }
 
   body {
     @apply antialiased;
     margin: 0;
-    width: calc(100vw / var(--ui-zoom));
-    min-height: calc(100vh / var(--ui-zoom));
+    min-height: 100vh;
     overflow-x: hidden;
     background-color: #F7F4EF;
     color: #232323;

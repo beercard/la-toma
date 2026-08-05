@@ -79,15 +79,14 @@
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
-  padding: 59px 24px 60px;
+  padding: clamp(64px, 4.5vw, 72px) 24px clamp(64px, 4.8vw, 76px);
   box-sizing: border-box;
 }
 
 .desktopTagStrip {
   position: relative;
-  width: calc(100vw / var(--ui-zoom));
-  margin: 0;
-  margin-left: calc(50% - (50vw / var(--ui-zoom)));
+  width: auto;
+  margin: 0 -24px;
   background: #c3903f;
 }
 
@@ -106,7 +105,7 @@
   grid-template-columns: repeat(3, 360.71px);
   justify-content: center;
   gap: 35.4px 35.17px;
-  margin-top: 56px;
+  margin-top: clamp(48px, 4vw, 56px);
 }
 
 .desktopGridButton {
@@ -169,7 +168,7 @@
   align-items: center;
   justify-content: center;
   min-height: auto;
-  margin-top: 85px;
+  margin-top: clamp(72px, 5vw, 85px);
   padding: clamp(40px, 5vw, 48px) 0;
   box-sizing: border-box;
 }
@@ -522,15 +521,15 @@
   }
 
   .desktopContentSection {
-    padding-top: 48px;
+    padding-top: 56px;
     padding-right: 48px;
     padding-left: 48px;
   }
 
   .desktopTagStrip {
-    width: calc(100vw / var(--ui-zoom));
-    margin: 0;
-    margin-left: calc(50% - (50vw / var(--ui-zoom)));
+    width: auto;
+    margin-right: -48px;
+    margin-left: -48px;
   }
 
   .desktopTag {

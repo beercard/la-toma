@@ -5,13 +5,18 @@
 
 .desktopInner {
   display: grid;
-  grid-template-columns: 364px 232px 232px 239px;
+  grid-template-columns: minmax(300px, 364px) repeat(3, minmax(200px, 232px));
   align-items: start;
   justify-content: space-between;
   width: min(1920px, 100%);
   min-height: 384px;
   margin: 0 auto;
-  padding: 85px 176px 70px 184px;
+  gap: clamp(32px, 3vw, 48px);
+  padding:
+    clamp(72px, 5vw, 85px)
+    clamp(96px, 9vw, 176px)
+    clamp(64px, 4.5vw, 70px)
+    clamp(96px, 9.4vw, 184px);
   box-sizing: border-box;
 }
 
@@ -23,8 +28,8 @@
 }
 
 .logo {
-  width: 252px;
-  height: 38px;
+  width: clamp(220px, 13vw, 252px);
+  height: auto;
   display: block;
 }
 
@@ -111,7 +116,7 @@
 }
 
 .stack104 {
-  margin-top: 104px;
+  margin-top: clamp(72px, 6vw, 104px);
 }
 
 .stack18 {
@@ -278,24 +283,6 @@
   font-size: 10px;
 }
 
-@media (min-width: 1440px) and (max-width: 1680px) {
-  .desktopInner {
-    grid-template-columns: minmax(300px, 1.2fr) repeat(3, minmax(200px, 1fr));
-    gap: 32px;
-    padding: 72px 96px 64px;
-    min-height: auto;
-  }
-
-  .logo {
-    width: 220px;
-    height: auto;
-  }
-
-  .stack104 {
-    margin-top: 72px;
-  }
-}
-
 @media (--bp-desktop-down) {
   .desktopInner {
     grid-template-columns: minmax(260px, 1.2fr) repeat(3, minmax(180px, 1fr));
@@ -324,6 +311,27 @@
     width: auto;
     font-size: 13px;
     line-height: 19px;
+  }
+}
+
+@media (--bp-desktop-sm) {
+  .desktopInner {
+    grid-template-columns: minmax(220px, 1.2fr) repeat(3, minmax(140px, 1fr));
+    gap: 24px;
+    padding: 56px 28px 48px;
+  }
+
+  .colTitle {
+    font-size: 16px;
+  }
+
+  .bodyText,
+  .addressLinkBlock,
+  .mapLink,
+  .legalLink,
+  .legalText {
+    font-size: 12px;
+    line-height: 18px;
   }
 }
 

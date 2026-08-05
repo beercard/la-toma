@@ -74,7 +74,7 @@
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
-  padding-top: 113px;
+  padding-top: clamp(96px, 6.4vw, 113px);
   padding-bottom: 0;
 }
 
@@ -82,8 +82,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 132px;
-  width: 1074px;
+  gap: clamp(72px, 7vw, 132px);
+  width: min(1074px, calc(100% - 160px));
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
@@ -457,14 +457,14 @@
   }
 }
 
-@media (max-width: 1499px) {
+@media (--bp-desktop-down) {
   .desktopContentInner {
     gap: 72px;
-    width: min(1014px, calc(100% - 120px));
+    width: min(1014px, calc(100% - 96px));
   }
 }
 
-@media (max-width: 1279px) {
+@media (--bp-desktop-sm) {
   .desktopHeroFrame {
     height: 540px;
   }
@@ -492,12 +492,12 @@
   }
 
   .desktopContentSection {
-    padding-top: 84px;
+    padding-top: 72px;
   }
 
   .desktopContentInner {
     gap: 36px;
-    width: min(816px, calc(100% - 96px));
+    width: min(816px, calc(100% - 80px));
   }
 
   .desktopCopy {
@@ -646,8 +646,3 @@
   }
 }
 
-@media (max-width: 1919px) {
-  .desktopHeroBand {
-    width: 100%;
-  }
-}

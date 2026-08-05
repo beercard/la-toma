@@ -64,14 +64,14 @@
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
-  padding: 103px 24px 83px;
+  padding: clamp(96px, 6vw, 104px) 24px clamp(80px, 5vw, 96px);
   box-sizing: border-box;
 }
 
 .desktopInfoGrid {
   display: grid;
   grid-template-columns: 294px 252px;
-  column-gap: 108px;
+  column-gap: clamp(72px, 7vw, 108px);
   width: 654px;
   margin: 0 auto;
 }
@@ -218,7 +218,7 @@
 .mobileContentSection {
   width: min(390px, 100%);
   margin: 0 auto;
-  padding: 66px 24px 46px;
+  padding: 56px 24px;
   box-sizing: border-box;
 }
 
@@ -351,7 +351,7 @@
 
   .desktopContentSection {
     padding-top: 88px;
-    padding-bottom: 72px;
+    padding-bottom: 80px;
   }
 
   .desktopInfoGrid {
@@ -428,7 +428,7 @@
 
   .mobileContentSection {
     width: 100%;
-    padding: 56px 32px;
+    padding: 56px 32px 64px;
   }
 
   .mobileContentSection {

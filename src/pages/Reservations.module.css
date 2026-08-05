@@ -84,7 +84,7 @@
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
-  padding: 92px 24px;
+  padding: clamp(96px, 6vw, 104px) 24px clamp(88px, 5.5vw, 96px);
   box-sizing: border-box;
 }
 
@@ -101,7 +101,7 @@
 
 .desktopForm {
   width: min(1025px, calc(100% - 48px));
-  margin-top: 61px;
+  margin-top: clamp(56px, 4vw, 61px);
 }
 
 .desktopFieldGrid {
@@ -484,7 +484,7 @@
   }
 }
 
-@media (max-width: 1279px) {
+@media (--bp-desktop-sm) {
   .desktopHeroFrame {
     height: 540px;
   }
@@ -512,7 +512,7 @@
   }
 
   .desktopFormSection {
-    padding-top: 76px;
+    padding-top: 72px;
   }
 
   .desktopForm {

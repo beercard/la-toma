@@ -5,23 +5,26 @@ import styles from "./Home.module.css";
 
 export default function Home() {
   const [mobileHeroScale, setMobileHeroScale] = useState(1);
+  const [desktopHeroScale, setDesktopHeroScale] = useState(1);
 
   useEffect(() => {
-    const updateMobileHeroScale = () => {
+    const updateHeroScales = () => {
       const width = window.innerWidth;
 
       if (width >= 1024) {
         setMobileHeroScale(1);
+        setDesktopHeroScale(Math.min(Number((width / 1920).toFixed(3)), 1));
         return;
       }
 
+      setDesktopHeroScale(1);
       setMobileHeroScale(Math.min(width / 390, 1.18));
     };
 
-    updateMobileHeroScale();
-    window.addEventListener("resize", updateMobileHeroScale);
+    updateHeroScales();
+    window.addEventListener("resize", updateHeroScales);
 
-    return () => window.removeEventListener("resize", updateMobileHeroScale);
+    return () => window.removeEventListener("resize", updateHeroScales);
   }, []);
 
   return (
@@ -33,28 +36,29 @@ export default function Home() {
       </p>
 
       <div className={styles.desktopHome}>
-        <section className={styles.desktopHero}>
+        <section
+          className={styles.desktopHero}
+          style={{ "--desktop-hero-scale": desktopHeroScale } as CSSProperties}
+        >
           <img
             src={withPublicBaseUrl("images/home-hero-desktop.webp")}
             alt="Atardecer en La Toma sobre la Costanera de Corrientes Capital"
             className={styles.desktopHeroImage}
             decoding="async"
           />
-
-          <div className={styles.desktopHeroOverlay}>
-            <img
-              src={withPublicBaseUrl("images/home-logo-desktop.webp")}
-              alt="La Toma"
-              className={styles.desktopHeroWordmark}
-            />
-            <div className={styles.desktopHeroSubbrand}>multiespacio</div>
-            <p className={styles.desktopHeroText}>
-              El ritual del atardecer
-              <br />
-              correntino, en el lugar
-              <br />
-              donde nació la ciudad
-            </p>
+          <div className={styles.desktopHeroCanvas}>
+            <div className={styles.desktopHeroBackground} />
+            <div className={styles.desktopHeroOverlay}>
+              <img
+                src={withPublicBaseUrl("images/home-logo-desktop.webp")}
+                alt="La Toma"
+                className={styles.desktopHeroWordmark}
+              />
+              <div className={styles.desktopHeroSubbrand}>multiespacio</div>
+              <p className={styles.desktopHeroText}>
+                El ritual del atardecer correntino, en el lugar donde nació la ciudad
+              </p>
+            </div>
           </div>
         </section>
 
@@ -75,14 +79,13 @@ export default function Home() {
           className={styles.mobileHero}
           style={{ "--mobile-hero-scale": mobileHeroScale } as CSSProperties}
         >
+          <img
+            src={withPublicBaseUrl("images/home-hero-mobile.webp")}
+            alt="Atardecer en La Toma sobre la Costanera de Corrientes Capital"
+            className={styles.mobileHeroImage}
+            decoding="async"
+          />
           <div className={styles.mobileHeroCanvas}>
-            <img
-              src={withPublicBaseUrl("images/home-hero-mobile.webp")}
-              alt="Atardecer en La Toma sobre la Costanera de Corrientes Capital"
-              className={styles.mobileHeroImage}
-              decoding="async"
-            />
-
             <div className={styles.mobileHeroOverlay}>
               <img
                 src={withPublicBaseUrl("images/home-logo-mobile.webp")}
@@ -90,17 +93,7 @@ export default function Home() {
                 className={styles.mobileHeroWordmark}
               />
               <div className={styles.mobileHeroSubbrand}>multiespacio</div>
-              <p className={styles.mobileHeroText}>
-                El ritual del atardecer
-                <br />
-                correntino,
-                <br />
-                en el lugar
-                <br />
-                donde nació
-                <br />
-                la ciudad.
-              </p>
+              <p className={styles.mobileHeroText}>El ritual del atardecer correntino, en el lugar donde nació la ciudad.</p>
             </div>
           </div>
         </section>

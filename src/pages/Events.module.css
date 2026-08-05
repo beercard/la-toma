@@ -46,7 +46,7 @@
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
-  padding: 93px 24px 0;
+  padding: clamp(96px, 6vw, 104px) 24px 0;
   box-sizing: border-box;
 }
 
@@ -67,13 +67,13 @@
   justify-content: center;
   gap: 32px;
   width: min(1025px, calc(100vw - 96px));
-  margin: 69px auto 0;
+  margin: clamp(56px, 4.6vw, 69px) auto 0;
 }
 
 .desktopCardsStage {
   position: relative;
   width: min(1025px, calc(100vw - 96px));
-  margin: 69px auto 0;
+  margin: clamp(56px, 4.6vw, 69px) auto 0;
 }
 
 .desktopCardsStage .desktopCardsGrid {
@@ -400,7 +400,7 @@
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
-  padding: 134px 24px 0;
+  padding: clamp(104px, 7vw, 134px) 24px 0;
   box-sizing: border-box;
 }
 
@@ -442,7 +442,7 @@
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
-  padding: 103px 24px 85px;
+  padding: clamp(96px, 6vw, 104px) 24px clamp(80px, 5vw, 88px);
   box-sizing: border-box;
 }
 
@@ -1208,7 +1208,7 @@
   }
 
   .desktopExperienceSection {
-    padding-top: 104px;
+    padding-top: 96px;
   }
 
   .desktopDivider {
@@ -1251,7 +1251,7 @@
   }
 
   .desktopEventsSection {
-    padding-top: 72px;
+    padding-top: 80px;
   }
 
   .desktopSectionTitle,
@@ -1260,8 +1260,13 @@
     line-height: 30px;
   }
 
+  .desktopCardsStage {
+    width: min(620px, calc(100vw - 80px));
+  }
+
   .desktopCardsGrid {
-    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 24px;
   }
 
   .desktopPlaceholder {
@@ -1340,7 +1345,7 @@
   }
 
   .desktopExperienceSection {
-    padding-top: 84px;
+    padding-top: 80px;
   }
 
   .desktopDivider {
