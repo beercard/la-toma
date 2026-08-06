@@ -28,3 +28,6 @@ deploy
 *.njsproj
 *.sln
 *.sw?
+
+# Config local de deploy (credenciales SMTP) - NUNCA se commitea
+.htaccess-env

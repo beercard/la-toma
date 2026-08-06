@@ -11,10 +11,13 @@
   width: 100%;
 }
 
+/* Hero fluido: interpola linealmente entre los valores de 1024px y los de
+   1440px, de modo que a 1440 coincide exacto con el diseño de Figma y por
+   debajo baja de forma continua (sin saltos al cruzar un breakpoint). */
 .desktopHeroFrame {
   position: relative;
   width: 100%;
-  height: 603px;
+  height: clamp(468px, calc(32.45vw + 135.7px), 603px);
   margin: 0 auto;
   overflow: hidden;
   background: #e1c89f;
@@ -25,7 +28,7 @@
   top: 0;
   left: 50%;
   width: max(1920px, 100%);
-  height: 603px;
+  height: 100%;
   transform: translateX(-50%);
   object-fit: cover;
   opacity: 1;
@@ -33,30 +36,30 @@
 
 .desktopHeroTitle {
   position: absolute;
-  top: 238px;
+  top: clamp(182px, calc(13.46vw + 44.2px), 238px);
   left: 50%;
   width: min(576px, calc(100% - 48px));
-  height: 40px;
+  height: auto;
   margin: 0;
   transform: translateX(-50%);
   color: #232323;
   font-family: "Mundial", system-ui, sans-serif;
-  font-size: 48px;
+  font-size: clamp(36px, calc(2.885vw + 6.46px), 48px);
   font-weight: 600;
-  line-height: 48px;
+  line-height: 1;
   text-align: center;
   text-transform: uppercase;
 }
 
 .desktopHeroBand {
   position: absolute;
-  top: 320px;
+  top: clamp(244px, calc(18.27vw + 56.9px), 320px);
   left: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 102px;
+  height: clamp(84px, calc(4.33vw + 39.7px), 102px);
   padding: 25px 24px;
   box-sizing: border-box;
   background: #e1c89f;
@@ -65,13 +68,12 @@
 
 .desktopHeroText {
   width: min(476px, 100%);
-  min-height: 52px;
   margin: 0;
   color: #232323;
   font-family: "Roboto Serif", serif;
-  font-size: 24px;
+  font-size: clamp(18px, calc(1.442vw + 3.23px), 24px);
   font-weight: 500;
-  line-height: 24px;
+  line-height: 1.1;
   text-align: center;
 }
 
@@ -95,9 +97,9 @@
   margin: 0 0 0 max(0px, calc(50% - 576px));
   color: #f7f4ef;
   font-family: "Mundial", system-ui, sans-serif;
-  font-size: 36px;
+  font-size: clamp(24px, calc(2.885vw - 5.54px), 36px);
   font-weight: 600;
-  line-height: 40px;
+  line-height: clamp(36px, calc(0.96vw + 26.2px), 40px);
 }
 
 .desktopGrid {
@@ -493,33 +495,6 @@
 }
 
 @media (--bp-desktop-down) {
-  .desktopHeroFrame {
-    height: 520px;
-  }
-
-  .desktopHeroImage {
-    width: max(1920px, 100%);
-    height: 520px;
-  }
-
-  .desktopHeroTitle {
-    top: 206px;
-    width: min(520px, calc(100% - 48px));
-    font-size: 42px;
-    line-height: 42px;
-  }
-
-  .desktopHeroBand {
-    top: 276px;
-    height: 92px;
-  }
-
-  .desktopHeroText {
-    width: min(430px, 100%);
-    font-size: 21px;
-    line-height: 21px;
-  }
-
   .desktopContentSection {
     padding-top: 56px;
     padding-right: 48px;
@@ -535,8 +510,6 @@
   .desktopTag {
     margin-left: 0;
     padding-left: 48px;
-    font-size: 28px;
-    line-height: 36px;
   }
 
   .desktopGrid {
@@ -575,38 +548,9 @@
 }
 
 @media (--bp-desktop-sm) {
-  .desktopHeroFrame {
-    height: 468px;
-  }
-
-  .desktopHeroImage {
-    width: max(1920px, 100%);
-    height: 468px;
-  }
-
-  .desktopHeroTitle {
-    top: 182px;
-    width: min(460px, calc(100% - 64px));
-    font-size: 36px;
-    line-height: 36px;
-  }
-
   .desktopHeroBand {
-    top: 244px;
-    height: 84px;
     padding-right: 20px;
     padding-left: 20px;
-  }
-
-  .desktopHeroText {
-    width: min(370px, 100%);
-    font-size: 18px;
-    line-height: 18px;
-  }
-
-  .desktopTag {
-    font-size: 24px;
-    line-height: 40px;
   }
 
   .desktopPlaceholder {

@@ -19,10 +19,12 @@
   border: 0;
 }
 
+/* Hero fluido: interpola entre los valores de 1024px y los de 1440px, así a
+   1440 coincide con Figma y por debajo baja sin saltos de breakpoint. */
 .desktopHeroFrame {
   position: relative;
   width: 100%;
-  height: 603px;
+  height: clamp(468px, calc(32.45vw + 135.7px), 603px);
   overflow: hidden;
   background: #b5a896;
 }
@@ -38,7 +40,7 @@
   top: 0;
   left: 50%;
   width: max(1922px, 100%);
-  height: 603px;
+  height: 100%;
   transform: translateX(-50%);
   object-fit: cover;
   opacity: 1;
@@ -46,16 +48,16 @@
 
 .desktopHeroTitle {
   position: absolute;
-  top: 277px;
+  top: clamp(214px, calc(15.14vw + 58.9px), 277px);
   left: 50%;
   width: min(576px, calc(100% - 48px));
   margin: 0;
   transform: translateX(-50%);
   color: #ffffff;
   font-family: Mundial, system-ui, sans-serif;
-  font-size: 50px;
+  font-size: clamp(36px, calc(3.365vw + 1.54px), 50px);
   font-weight: 600;
-  line-height: 50px;
+  line-height: 1;
   text-align: center;
   text-transform: uppercase;
 }
@@ -99,9 +101,9 @@
   margin: 10px 0 0;
   color: #232323;
   font-family: Mundial, system-ui, sans-serif;
-  font-size: 24px;
+  font-size: clamp(20px, calc(0.962vw + 10.15px), 24px);
   font-weight: 400;
-  line-height: 24px;
+  line-height: 1;
   letter-spacing: 0.24px;
   text-decoration: none;
 }
@@ -110,8 +112,8 @@
   margin-top: 11px;
   color: #232323;
   font-family: "Roboto Serif", serif;
-  font-size: 16px;
-  line-height: 16px;
+  font-size: clamp(15px, calc(0.24vw + 12.54px), 16px);
+  line-height: 1;
   letter-spacing: 0.16px;
   text-decoration: underline;
 }
@@ -148,8 +150,8 @@
   margin: 15px 0 0;
   color: #232323;
   font-family: "Roboto Serif", serif;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: clamp(15px, calc(0.24vw + 12.54px), 16px);
+  line-height: 1.5;
   letter-spacing: 0.16px;
 }
 
@@ -335,20 +337,6 @@
 }
 
 @media (--bp-desktop-down) {
-  .desktopHeroFrame {
-    height: 540px;
-  }
-
-  .desktopHeroImage {
-    height: 540px;
-  }
-
-  .desktopHeroTitle {
-    top: 248px;
-    font-size: 42px;
-    line-height: 42px;
-  }
-
   .desktopContentSection {
     padding-top: 88px;
     padding-bottom: 80px;
@@ -359,43 +347,11 @@
     column-gap: 72px;
     width: min(654px, calc(100vw - 96px));
   }
-
-  .desktopValueLink,
-  .desktopLocationTitle {
-    font-size: 22px;
-    line-height: 22px;
-  }
 }
 
 @media (--bp-desktop-sm) {
-  .desktopHeroFrame {
-    height: 468px;
-  }
-
-  .desktopHeroImage {
-    height: 468px;
-  }
-
-  .desktopHeroTitle {
-    top: 214px;
-    font-size: 36px;
-    line-height: 36px;
-  }
-
   .desktopInfoGrid {
     column-gap: 48px;
-  }
-
-  .desktopValueLink,
-  .desktopLocationTitle {
-    font-size: 20px;
-    line-height: 20px;
-  }
-
-  .desktopActionLink,
-  .desktopAddress {
-    font-size: 15px;
-    line-height: 22px;
   }
 }
 

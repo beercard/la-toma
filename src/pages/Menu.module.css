@@ -8,10 +8,14 @@
   display: none;
 }
 
+/* Hero fluido: interpola entre los valores de 1024px y los de 1440px para que
+   no haya saltos al cruzar breakpoints. La imagen rotada usa el mismo alto que
+   el frame, así el encuadre se mantiene proporcional en todos los anchos. */
 .desktopHeroFrame {
+  --hero-h: clamp(520px, calc(19.95vw + 315.7px), 603px);
   position: relative;
   width: 100%;
-  height: 603px;
+  height: var(--hero-h);
   overflow: hidden;
   background: #5d6849;
 }
@@ -26,7 +30,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 603px;
+  width: var(--hero-h);
   height: 1921px;
   transform: translate(-50%, -50%) rotate(-90deg) scale(1.9);
   transform-origin: center;
@@ -36,25 +40,25 @@
 
 .desktopHeroLogo {
   position: absolute;
-  top: 211px;
+  top: clamp(188px, calc(5.53vw + 131.4px), 211px);
   left: 50%;
-  width: min(651px, calc(100% - 64px));
+  width: min(clamp(520px, calc(31.49vw + 197.5px), 651px), calc(100% - 64px));
   height: auto;
   transform: translateX(-50%);
 }
 
 .desktopHeroTitle {
   position: absolute;
-  top: 344px;
+  top: clamp(286px, calc(13.94vw + 143.2px), 344px);
   left: 50%;
   width: min(576px, calc(100% - 64px));
   margin: 0;
   transform: translateX(-50%);
   color: #ffffff;
   font-family: Mundial, system-ui, sans-serif;
-  font-size: 50px;
+  font-size: clamp(38px, calc(2.885vw + 8.46px), 50px);
   font-weight: 400;
-  line-height: 50px;
+  line-height: 1;
   text-align: center;
   text-transform: uppercase;
 }
@@ -63,7 +67,7 @@
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
-  padding-top: clamp(34px, 2.4vw, 40px);
+  padding-top: clamp(32px, 2.4vw, 40px);
 }
 
 .desktopCartaTitle {
@@ -72,16 +76,16 @@
   margin: 0 auto;
   color: #232323;
   font-family: Mundial, system-ui, sans-serif;
-  font-size: 30px;
+  font-size: clamp(24px, calc(1.442vw + 9.23px), 30px);
   font-weight: 600;
-  line-height: 30px;
+  line-height: 1;
   text-align: center;
   text-transform: uppercase;
 }
 
 .desktopCartaPlaceholder {
   width: 100%;
-  height: 957px;
+  height: clamp(700px, calc(61.78vw + 67.4px), 957px);
 }
 
 .mobilePage {
@@ -180,77 +184,13 @@
   }
 }
 
-@media (--bp-desktop-md) {
-  .desktopHeroFrame {
-    height: 572px;
-  }
-
-  .desktopHeroImage {
-    width: 572px;
-    height: 1824px;
-    transform: translate(-50%, -50%) rotate(-90deg) scale(1.52);
-  }
-
-  .desktopHeroLogo {
-    top: 202px;
-    width: min(600px, calc(100% - 64px));
-  }
-
-  .desktopHeroTitle {
-    top: 316px;
-    font-size: 44px;
-    line-height: 44px;
-  }
-
-  .desktopCartaSection {
-    padding-top: 34px;
-  }
-
-  .desktopCartaTitle {
-    font-size: 28px;
-    line-height: 28px;
-  }
-
-  .desktopCartaPlaceholder {
-    height: 820px;
-  }
-}
-
 @media (--bp-desktop-sm) {
-  .desktopHeroFrame {
-    height: 520px;
-  }
-
-  .desktopHeroImage {
-    width: 520px;
-    height: 1660px;
-    transform: translate(-50%, -50%) rotate(-90deg) scale(1.34);
-  }
-
-  .desktopHeroLogo {
-    top: 188px;
-    width: min(520px, calc(100% - 56px));
-  }
-
   .desktopHeroTitle {
-    top: 286px;
     width: min(480px, calc(100% - 56px));
-    font-size: 38px;
-    line-height: 38px;
-  }
-
-  .desktopCartaSection {
-    padding-top: 32px;
   }
 
   .desktopCartaTitle {
     max-width: calc(100% - 40px);
-    font-size: 24px;
-    line-height: 24px;
-  }
-
-  .desktopCartaPlaceholder {
-    height: 700px;
   }
 }
 
@@ -357,20 +297,20 @@
   justify-content: center;
   width: 100%;
   background: #f7f4ef;
-  padding: clamp(96px, 6vw, 104px) 16px clamp(96px, 6.8vw, 120px);
+  padding: clamp(76px, 6vw, 104px) 16px clamp(88px, 6.8vw, 120px);
   box-sizing: border-box;
 }
 
 .updatesText {
   margin: 0;
-  width: min(634px, calc(100% - 32px));
+  width: min(634px, calc(100% - 48px));
   min-height: 72px;
   text-align: center;
-  line-height: 36px;
+  line-height: 1.5;
   letter-spacing: 0;
   color: #232323;
   font-family: "Roboto Serif", serif;
-  font-size: 24px;
+  font-size: clamp(20px, calc(0.962vw + 10.15px), 24px);
   font-weight: 500;
 }
 
@@ -384,32 +324,6 @@
 .instagramLink:hover,
 .instagramLink:focus-visible {
   color: #b76856;
-}
-
-@media (--bp-desktop-md) {
-  .updatesSection {
-    padding-top: 90px;
-    padding-bottom: 104px;
-  }
-
-  .updatesText {
-    width: min(600px, calc(100% - 48px));
-    font-size: 22px;
-    line-height: 33px;
-  }
-}
-
-@media (--bp-desktop-sm) {
-  .updatesSection {
-    padding-top: 76px;
-    padding-bottom: 92px;
-  }
-
-  .updatesText {
-    width: min(520px, calc(100% - 48px));
-    font-size: 20px;
-    line-height: 30px;
-  }
 }
 
 @media (--bp-tablet) {

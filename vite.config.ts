@@ -68,6 +68,9 @@ const staticRouteSeoPlugin = (): Plugin => {
 
 export default defineConfig({
   base: '/latoma/',
+  server: {
+    port: Number(process.env.PORT) || 5173,
+  },
   build: {
     sourcemap: false,
   },

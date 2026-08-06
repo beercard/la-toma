@@ -7,10 +7,12 @@
   display: none;
 }
 
+/* Hero fluido: interpola entre los valores de 1024px y los de 1440px, así a
+   1440 coincide con Figma y por debajo baja sin saltos de breakpoint. */
 .desktopHeroFrame {
   position: relative;
   width: 100%;
-  height: 603px;
+  height: clamp(468px, calc(32.45vw + 135.7px), 603px);
   overflow: hidden;
   background: #b76856;
 }
@@ -20,7 +22,7 @@
   top: 0;
   left: 50%;
   width: max(1920px, 100%);
-  height: 603px;
+  height: 100%;
   transform: translateX(-50%);
   object-fit: cover;
   opacity: 1;
@@ -28,16 +30,16 @@
 
 .desktopHeroTitle {
   position: absolute;
-  top: 277px;
+  top: clamp(214px, calc(15.14vw + 58.9px), 277px);
   left: 50%;
   width: min(576px, calc(100% - 48px));
   margin: 0;
   transform: translateX(-50%);
   color: #ffffff;
   font-family: Mundial, system-ui, sans-serif;
-  font-size: 50px;
+  font-size: clamp(36px, calc(3.365vw + 1.54px), 50px);
   font-weight: 600;
-  line-height: 50px;
+  line-height: 1;
   text-align: center;
   text-transform: uppercase;
 }
@@ -55,9 +57,9 @@
   margin: 0 auto;
   color: #232323;
   font-family: "Roboto Serif", serif;
-  font-size: 40px;
+  font-size: clamp(30px, calc(2.404vw + 5.38px), 40px);
   font-weight: 600;
-  line-height: 40px;
+  line-height: 1;
   text-align: center;
 }
 
@@ -416,9 +418,9 @@
   margin: 51px auto 0;
   color: #232323;
   font-family: "Roboto Serif", serif;
-  font-size: 40px;
+  font-size: clamp(30px, calc(2.404vw + 5.38px), 40px);
   font-weight: 600;
-  line-height: 40px;
+  line-height: 1;
   text-align: center;
 }
 
@@ -428,9 +430,9 @@
   margin: 27px auto 0;
   color: #232323;
   font-family: Mundial, system-ui, sans-serif;
-  font-size: 25px;
+  font-size: clamp(21px, calc(0.962vw + 11.15px), 25px);
   font-weight: 400;
-  line-height: 25px;
+  line-height: 1.1;
   text-align: center;
 }
 
@@ -1106,26 +1108,6 @@
 }
 
 @media (--bp-desktop-down) {
-  .desktopHeroFrame {
-    height: 540px;
-  }
-
-  .desktopHeroImage {
-    height: 540px;
-  }
-
-  .desktopHeroTitle {
-    top: 248px;
-    font-size: 42px;
-    line-height: 42px;
-  }
-
-  .desktopSectionTitle,
-  .desktopExperienceTitle {
-    font-size: 34px;
-    line-height: 34px;
-  }
-
   .desktopCardsStage {
     width: min(1025px, calc(100vw - 72px));
     margin-top: 56px;
@@ -1215,11 +1197,6 @@
     width: min(720px, calc(100vw - 96px));
   }
 
-  .desktopExperienceText {
-    font-size: 22px;
-    line-height: 22px;
-  }
-
   .desktopForm {
     width: min(1025px, calc(100vw - 72px));
   }
@@ -1236,28 +1213,8 @@
 }
 
 @media (--bp-desktop-sm) {
-  .desktopHeroFrame {
-    height: 468px;
-  }
-
-  .desktopHeroImage {
-    height: 468px;
-  }
-
-  .desktopHeroTitle {
-    top: 214px;
-    font-size: 36px;
-    line-height: 36px;
-  }
-
   .desktopEventsSection {
     padding-top: 80px;
-  }
-
-  .desktopSectionTitle,
-  .desktopExperienceTitle {
-    font-size: 30px;
-    line-height: 30px;
   }
 
   .desktopCardsStage {

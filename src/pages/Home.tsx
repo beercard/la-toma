@@ -9,11 +9,20 @@ export default function Home() {
 
   useEffect(() => {
     const updateHeroScales = () => {
-      const width = window.innerWidth;
+      // clientWidth excluye la barra de scroll: así el canvas de 1920px encaja
+      // exacto con el ancho visible y no se recorta por los costados.
+      const width = document.documentElement.clientWidth || window.innerWidth;
+      // El corte desktop/mobile se decide con matchMedia y no con `width`, para
+      // que coincida siempre con el breakpoint de CSS (que ignora la scrollbar).
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
 
-      if (width >= 1024) {
+      if (isDesktop) {
         setMobileHeroScale(1);
-        setDesktopHeroScale(Math.min(Number((width / 1920).toFixed(3)), 1));
+        // Piso de 0.6 para que en notebooks de ~1024px el hero no quede
+        // demasiado bajo. El canvas se recorta parejo por ambos lados y el
+        // contenido conserva ~100px de aire, así que no se pierde nada.
+        const scale = Math.min(Math.max(width / 1920, 0.6), 1);
+        setDesktopHeroScale(Number(scale.toFixed(3)));
         return;
       }
 

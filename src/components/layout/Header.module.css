@@ -12,17 +12,19 @@
   width: 100%;
   height: 80px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 32px;
   box-sizing: border-box;
 }
 
+/* Tamaños del diseño de Figma (logo 252px, labels 20px). Se mantienen intactos
+   hasta 1280px; el aire entre items es lo único que se reparte según el ancho. */
 .desktopNav {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, max-content) minmax(164px, 252px) repeat(3, max-content);
+  grid-template-columns: repeat(3, max-content) 252px repeat(3, max-content);
   align-items: center;
   justify-content: center;
-  column-gap: clamp(18px, 2vw, 40px);
+  column-gap: clamp(20px, calc((100vw - 1000px) / 6), 104px);
   width: min(1920px, 100%);
   height: 80px;
   margin: 0 auto;
@@ -34,11 +36,12 @@
   display: block;
   top: auto;
   left: auto;
-  width: clamp(164px, 13.2vw, 252px);
+  width: 252px;
   height: auto;
   aspect-ratio: 252 / 38;
   transform: none;
   justify-self: center;
+  order: 4;
 }
 
 .desktopLogo {
@@ -113,10 +116,10 @@
   letter-spacing: 0;
   color: #232323;
   font-family: Mundial, system-ui, sans-serif;
-  font-size: clamp(16px, 1.12vw, 20px);
+  font-size: 20px;
   font-weight: 600;
   text-transform: uppercase;
-  line-height: clamp(19px, 1.25vw, 23px);
+  line-height: 23px;
   white-space: nowrap;
 }
 
@@ -132,15 +135,26 @@
   transition: opacity 180ms ease;
 }
 
-@media (--bp-desktop-down) {
+/* Sólo por debajo de 1280px hace falta comprimir: ahí los 868px de nav + logo
+   ya no dejan aire suficiente dentro del viewport. */
+@media (--bp-desktop-sm) {
+  .desktopInner {
+    padding: 0 24px;
+  }
+
   .desktopNav {
-    grid-template-columns: repeat(3, max-content) minmax(148px, 184px) repeat(3, max-content);
-    column-gap: clamp(14px, 1.7vw, 28px);
+    grid-template-columns: repeat(3, max-content) 200px repeat(3, max-content);
+    column-gap: clamp(18px, calc((100vw - 850px) / 6), 60px);
   }
 
   .desktopLogoLink {
-    order: 4;
-    width: clamp(148px, 10.8vw, 184px);
+    width: 200px;
+  }
+
+  .desktopNavLabel {
+    min-height: 19px;
+    font-size: 16px;
+    line-height: 19px;
   }
 }
 
@@ -388,39 +402,6 @@
 
   .mobileMenuItemLabel {
     width: 100%;
-  }
-}
-
-@media (--bp-desktop-down) {
-  .desktopLogoLink {
-    width: clamp(148px, 10.8vw, 184px);
-  }
-
-  .desktopNavLabel {
-    min-height: 21px;
-    font-size: clamp(15px, 1.18vw, 17px);
-    line-height: 20px;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1180px) {
-  .desktopInner {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-
-  .desktopNav {
-    grid-template-columns: repeat(3, max-content) 136px repeat(3, max-content);
-    column-gap: 10px;
-  }
-
-  .desktopLogoLink {
-    width: 136px;
-  }
-
-  .desktopNavLabel {
-    font-size: 14px;
-    line-height: 17px;
   }
 }
 
