@@ -67,7 +67,10 @@ const staticRouteSeoPlugin = (): Plugin => {
 }
 
 export default defineConfig({
-  base: '/latoma/',
+  // El dominio sirve desde public_html/latoma/, o sea que esa carpeta ES la
+  // raiz web. Con base '/' los assets quedan en /assets/ y alcanza con subir
+  // el build una sola vez. Con '/latoma/' hacia falta una copia anidada.
+  base: '/',
   server: {
     port: Number(process.env.PORT) || 5173,
   },
