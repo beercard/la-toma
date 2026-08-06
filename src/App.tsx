@@ -36,11 +36,11 @@ function PublicSite() {
 }
 
 export default function App() {
-  // El sitio se sirve desde la raiz del dominio (public_html/latoma es el
-  // document root del hosting), asi que no hace falta basename.
-  // Ver base: '/' en vite.config.ts.
+  const pathname = window.location.pathname;
+  const basename = pathname === "/latoma" || pathname.startsWith("/latoma/") ? "/latoma" : "";
+
   return (
-    <Router>
+    <Router basename={basename}>
       <RouteSeo />
       <Routes>
         <Route

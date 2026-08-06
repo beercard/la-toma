@@ -375,25 +375,25 @@
 }
 
 .desktopCardVinilos {
-  background-image: url("/images/eventos-card-vinilos-desktop.png");
+  background-image: url("/latoma/images/eventos-card-vinilos-desktop.png");
   background-position: center top;
   background-size: 111.64% 100.11%;
 }
 
 .desktopCardFiltrados {
-  background-image: url("/images/eventos-card-filtrados-desktop.png");
+  background-image: url("/latoma/images/eventos-card-filtrados-desktop.png");
   background-position: center top;
   background-size: 101.83% 100%;
 }
 
 .desktopCardAfterOffice {
-  background-image: url("/images/eventos-card-after-office-desktop.png");
+  background-image: url("/latoma/images/eventos-card-after-office-desktop.png");
   background-position: center 38%;
   background-size: 148.12% 163.34%;
 }
 
 .desktopCardCeramica {
-  background-image: url("/images/eventos-card-ceramica-desktop.png");
+  background-image: url("/latoma/images/eventos-card-ceramica-desktop.png");
   background-position: center top;
   background-size: 100% 110.85%;
 }
@@ -865,25 +865,25 @@
 }
 
 .mobileCardVinilos {
-  background-image: url("/images/eventos-card-vinilos-mobile.png");
+  background-image: url("/latoma/images/eventos-card-vinilos-mobile.png");
   background-position: center top;
   background-size: 111.64% 101.02%;
 }
 
 .mobileCardFiltrados {
-  background-image: url("/images/eventos-card-filtrados-mobile.png");
+  background-image: url("/latoma/images/eventos-card-filtrados-mobile.png");
   background-position: center top;
   background-size: 102.46% 101.83%;
 }
 
 .mobileCardAfterOffice {
-  background-image: url("/images/eventos-card-after-office-mobile.png");
+  background-image: url("/latoma/images/eventos-card-after-office-mobile.png");
   background-position: center 38%;
   background-size: 148.14% 164.82%;
 }
 
 .mobileCardCeramica {
-  background-image: url("/images/eventos-card-ceramica-mobile.png");
+  background-image: url("/latoma/images/eventos-card-ceramica-mobile.png");
   background-position: center top;
   background-size: 100% 110.85%;
 }

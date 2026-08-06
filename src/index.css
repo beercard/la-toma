@@ -2,21 +2,21 @@
 
 @font-face {
   font-family: "Mundial";
-  src: url("/fonts/MundialRegular.otf") format("opentype");
+  src: url("/latoma/fonts/MundialRegular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Mundial";
-  src: url("/fonts/MundialDemibold.otf") format("opentype");
+  src: url("/latoma/fonts/MundialDemibold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Mundial";
-  src: url("/fonts/MundialBold.otf") format("opentype");
+  src: url("/latoma/fonts/MundialBold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }
